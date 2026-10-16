@@ -1,0 +1,41 @@
+<%
+  attachment = GovukPublishingComponents::Presenters::AttachmentHelper.new(attachment)
+  target ||= nil
+  url_data_attributes ||= {}
+  attributes = []
+  if attachment.content_type_name
+    content = if attachment.content_type_abbr
+                raw tag.abbr(attachment.content_type.abbr,
+                             title: attachment.content_type_name,
+                             class: "gem-c-attachment-link__abbr")
+              else
+                attachment.content_type_name
+              end
+
+    attributes << tag.span(content, class: "gem-c-attachment-link__attribute")
+  end
+
+  if attachment.file_size
+    attributes << tag.span(
+      number_to_human_size(attachment.file_size),
+      class: "gem-c-attachment-link__attribute",
+    )
+  end
+
+  if attachment.number_of_pages
+    attributes << tag.span(
+      I18n.t("components.attachment.page", count: attachment.number_of_pages),
+      class: "gem-c-attachment-link__attribute",
+    )
+  end
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-attachment-link")
+%>
+<%= tag.span(**component_helper.all_attributes) do %>
+  <%= link_to(attachment.title, attachment.url,
+              class: "govuk-link",
+              target: target,
+              data: url_data_attributes) -%>
+  <%= raw("(#{attributes.join(', ')})") if attributes.any? -%>
+<% end %>

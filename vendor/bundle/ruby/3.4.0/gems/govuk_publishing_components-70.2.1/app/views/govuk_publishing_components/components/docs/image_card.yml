@@ -1,0 +1,292 @@
+name: Image card
+description: Image and associated text with a link
+body: |
+  An image and links, meant for use for news articles and people. Includes optional paragraph and additional links.
+
+  The component is generally to be used within a grid column but has no grid of its own, so the text and the images in the examples below may not always line up. This will normally look tidier, for example [on pages like this](https://www.gov.uk/government/organisations/attorney-generals-office).
+
+  Images should have an aspect ratio of 3:2.
+accessibility_criteria: |
+  The component must:
+
+  - include alt text for images when present
+  - not have duplicate links for the image and the text
+  - if the contents of the component are in a different language than the rest of the document, include an appropriate `lang` attribute to correctly identify the language used in the component
+uses_component_wrapper_helper: true
+shared_accessibility_criteria:
+  - link
+embed: |
+  <div class="govuk-!-width-one-third">
+    <%= component %>
+  </div>
+examples:
+  default:
+    data:
+      href: "/not-a-page"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      heading_text: "News headline"
+  with_a_different_heading_level:
+    description: Use a different heading level for the main link title. Defaults to H2 if not passed.
+    data:
+      href: "/really-not-a-page"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      heading_text: "I am a heading level 3"
+      heading_level: 3
+  without_a_heading:
+    description: The heading tag can be removed if the heading_level parameter is passed as 0.
+    data:
+      href: "/really-not-a-page"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      heading_text: "I am not a heading"
+      heading_level: 0
+  with_lazy_loading:
+    description: The image can have an attribute of lazy loading. Defaults to auto if not passed.
+    data:
+      href: "/really-not-a-page"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      image_loading: "lazy"
+      heading_text: "I am not a heading"
+      heading_level: 0
+  with_different_link_size:
+    description: |
+      Set a different font size for the link. Uses the [GOV.UK Frontend heading sizes](https://design-system.service.gov.uk/styles/typography/#headings) but defaults to 19px for legacy reasons. Valid options are `xl`, `l`, `m` and `s`.
+
+      This option is not tied to the `heading_level` option in order to give flexibility.
+    data:
+      href: "/definitely-not-a-page"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      heading_text: "I am a big link"
+      heading_level: 0
+      font_size: 'xl'
+  with_more_information:
+    data:
+      href: "/also-not-a-page"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      context:
+        date: 2016-06-27 10:29:44
+        text: "Press release"
+      heading_text: "Government does things"
+      description: "Following a thorough review of existing procedure, a government body has today announced that further work is necessary."
+  with_extra_details:
+    data:
+      href: "/a-page-no-just-kidding"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      heading_text: "Some more links"
+      description: "Greater transparency across government is at the heart of our commitment to let you hold politicians and public bodies to account."
+      extra_details: [
+        {
+          text: "Single departmental plans",
+          href: "/1"
+        },
+        {
+          text: "Prime Minister's and Cabinet Office ministers' transparency publications relating to freedom of information requests for general consumption and the public interest in general",
+          href: "/2"
+        },
+        {
+          text: "Government transparency data",
+          href: "/3"
+        },
+      ]
+  extra_details_without_indent:
+    description: Don't indent the extra links. Used for links to people pages.
+    data:
+      href: "/government/people/"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      context:
+        text: "The Rt Hon"
+      heading_text: "John Whiskers MP"
+      extra_details: [
+        {
+          text: "Minister for Cats",
+          href: "/government/ministers/"
+        }
+      ]
+      extra_details_no_indent: true
+  extra_details_with_no_links:
+    description: If `extra_details` are passed to the component without `href` attributes, they are displayed as a simple text list.
+    data:
+      href: "/government/people/"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      heading_text: "John Whiskers MP"
+      extra_details: [
+        {
+          text: "Conservative 2010 to 2016",
+        },
+        {
+          text: "Labour 2007 to 2010",
+        }
+      ]
+      extra_details_no_indent: true
+  extra_details_with_no_main_link:
+    description: If extra links are included, the main link is not needed. Note that in this configuration the image is not a link as no link has been supplied.
+    data:
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      heading_text: "John Whiskers MP"
+      extra_details: [
+        {
+          text: "Minister for Cats",
+          href: "/government/ministers/"
+        },
+        {
+          text: "Head of Tuna Operations",
+          href: "/government/ministers/"
+        }
+      ]
+  without_heading_text:
+    description: |
+      The only required parameter to the component is href but if no heading_text is supplied the link will not appear. This is to allow the component to use only extra links as shown.
+
+      In this situation the link could have been applied to the image but having a link on the image like this without text can be confusing.
+    data:
+      href: "/still-not-a-link"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      description: Here are some links to more information about the thing you are reading about.
+      extra_details: [
+        {
+          text: "More information",
+          href: "/1"
+        },
+        {
+          text: "Even more information",
+          href: "/2"
+        },
+        {
+          text: "One final bit of information we forgot to mention",
+          href: "/2"
+        }
+      ]
+  without_an_image:
+    description: Despite the name of the component, it is possible to have it display without an image.
+    data:
+      href: '/no-valid-links-here'
+      heading_text: 'John McJohnson'
+      description: 'Deputy director for Parks and Small Trees'
+  with_number_10_branding:
+    description: Organisation [colour branding](https://github.com/alphagov/govuk_publishing_components/blob/main/docs/component_branding.md) can be added to the component as shown.
+    data:
+      brand: 'prime-ministers-office-10-downing-street'
+      href: "/again-not-a-page"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      heading_text: "Something relating to this"
+      description: "Public reform committee consultation vote department interior minister referendum."
+      extra_details: [
+        {
+          text: "Something",
+          href: "/1"
+        },
+        {
+          text: "Something else",
+          href: "/2"
+        }
+      ]
+  large_version:
+    data:
+      large: true
+      href: "/still-not-a-page"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/91397/s712_SG_Swear_in_1_.jpg"
+      image_alt: "some meaningful alt text please"
+      context:
+        date: 2017-06-14 11:30:00
+        text: "Announcement"
+      heading_text: "Something has happened nearby possibly"
+      description: "Following a news report that something has happened, further details are emerging of the thing that has happened and what that means for you."
+    embed: |
+      <div class="govuk-!-width-full">
+        <%= component %>
+      </div>
+  two_thirds:
+    description: |
+      This variant is used for the featured section on the homepage. The aspect ratio used is 1:1 and the width of the image is constrained to 80px wide.
+
+      Setting `large_font_size_mobile` to `true` will ensure that the font size for the title and description will be 19px on all screen sizes.
+    data:
+      two_thirds: true
+      href: "/still-not-a-page"
+      image_src: "https://www.gov.uk/assets/static/govuk-apple-touch-icon-180x180-026deaa34fa328ae5f1f519a37dbd15e6555c5086e1ba83986cd0827a7209902.png"
+      image_alt: "some meaningful alt text please"
+      heading_text: "Something has happened nearby possibly"
+      description: "Following a news report that something has happened, further details are emerging of the thing that has happened and what that means for you."
+      large_font_size_mobile: true
+    embed: |
+      <div class="govuk-!-width-full">
+        <%= component %>
+      </div>
+  with_ga4_tracking:
+    description: The component does not include an option for GA4 tracking, but data attributes to enable the [GA4 link tracker](https://github.com/alphagov/govuk_publishing_components/blob/main/docs/analytics-ga4/ga4-link-tracker.md) can be passed as shown.
+    data:
+      href: "/not-a-page"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      heading_text: "News headline"
+      data_attributes:
+        module: "ga4-link-tracker"
+        ga4_link:
+          event_name: "navigation"
+          type: "homepage"
+          index_section: 1
+          index_link: 1
+          index_section_count: 1
+          index_total: 1
+          section: "homepage"
+  with_metadata:
+    description: Can be used for links to people pages to indicate payment type
+    data:
+      href: "/government/people/"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      context:
+        text: "The Rt Hon"
+      heading_text: "John Whiskers MP"
+      metadata: "Unpaid"
+      extra_details: [
+        {
+          text: "Minister for Cats",
+          href: "/government/ministers/"
+        }
+      ]
+      extra_details_no_indent: true
+  with_sizes_attribute:
+    description: |
+      `sizes` is an attribute that makes use of html's native responsive images functionality.
+
+      [Read more about responsive images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
+    data:
+      href: "/not-a-page"
+      image_src: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/feature/image/62756/s300_courts-of-justice.JPG"
+      image_alt: "some meaningful alt text please"
+      heading_text: "News headline"
+      sizes: "(max-width: 640px) 100vw, (max-width: 1020px) 33vw, 300px"
+  with_srcset:
+    description: |
+      `srcset` is another responsive images attribute (see `sizes` section above for info on how responsive images work).
+
+      `srcset` strings typically pull from the `asset/images` directory of a repo so use this as a starting point when writing paths for your `srcset` image keys.
+
+      Note that the below example will appear to render incorrectly as we don't want to include `srcset` example images in our component guide as this will get served to frontend apps, adding weight to the user to download.
+    data:
+      href: "/not-a-page"
+      image_src: "/assets/govuk_publishing_components/image-card-srcset/afghan-image-promo.jpg"
+      image_alt: "some meaningful alt text please"
+      heading_text: "News headline"
+      srcset:
+        /assets/govuk_publishing_components/image-card-srcset/cop26.jpg: 610w
+        /assets/govuk_publishing_components/image-card-srcset/cop26-480.jpg: 480w
+        /assets/govuk_publishing_components/image-card-srcset/cop26-320.jpg: 320w
+        /assets/govuk_publishing_components/image-card-srcset/cop26-240.jpg: 240w
+        /assets/govuk_publishing_components/image-card-srcset/cop26-170.jpg: 170w
+    embed: |
+      <div class="govuk-!-width-full">
+        <%= component %>
+      </div>

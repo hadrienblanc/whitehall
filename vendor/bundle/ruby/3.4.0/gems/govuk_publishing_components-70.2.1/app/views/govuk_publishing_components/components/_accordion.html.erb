@@ -1,0 +1,89 @@
+<%
+  local_assigns[:margin_bottom] ||= 6
+  shared_helper = GovukPublishingComponents::Presenters::SharedHelper.new(local_assigns)
+  accordion_helper = GovukPublishingComponents::Presenters::AccordionHelper.new()
+
+  id ||= "default-id-#{SecureRandom.hex(4)}"
+  items ||= []
+  anchor_navigation ||= false
+  disable_ga4 ||= false
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.set_id(id)
+  component_helper.add_class("gem-c-accordion govuk-accordion")
+  component_helper.add_data_attribute({ module: "govuk-accordion gem-accordion" })
+  component_helper.add_data_attribute({ module: "ga4-event-tracker" }) unless disable_ga4
+  component_helper.add_data_attribute({ ga4_expandable: "" }) unless disable_ga4
+  component_helper.add_data_attribute({ anchor_navigation: anchor_navigation }) if anchor_navigation
+  component_helper.add_data_attribute(accordion_helper.apply_translations)
+%>
+<% if items.any? %>
+  <%= tag.div(**component_helper.all_attributes) do %>
+    <% items.each_with_index do |item, i| %>
+      <%
+        # The GOVUK Frontend JavaScript for this component
+        # uses a loop starting at 1 for accessing heading ID values,
+        # hence the increment below
+        index = i + 1
+
+        item[:data_attributes] ||= nil
+        ga4_link_data_attributes ||= nil
+
+        unless disable_ga4
+          heading_text = Nokogiri::HTML(item[:heading][:text]).text
+          item[:data_attributes] ||= {}
+          item[:data_attributes][:ga4_event] = {
+            event_name: "select_content",
+            type: "accordion",
+            text: heading_text,
+            index_section: index,
+            index_section_count: items.length,
+          }.to_json
+
+          # These attributes have been created separately from the item[:data_attributes]
+          # object in order to keep them from colliding with GA4 event tracking attributes
+          ga4_link_data_attributes = {}
+          ga4_link_data_attributes[:module] = "ga4-link-tracker"
+          ga4_link_data_attributes[:ga4_set_indexes] = ""
+          ga4_link_data_attributes[:ga4_link] = {
+            event_name: "navigation",
+            type: "accordion",
+            section: heading_text,
+            index_section: index,
+            index_section_count: (items.length),
+          }.to_json
+        end
+
+        section_classes = %w(govuk-accordion__section)
+        section_classes << "govuk-accordion__section--expanded" if item[:expanded]
+
+        summary_classes = %w(govuk-accordion__section-summary govuk-body)
+      %>
+      <%= tag.div(class: section_classes) do %>
+        <%= tag.div(class: "govuk-accordion__section-header") do %>
+          <%=
+            content_tag(
+              shared_helper.get_heading_level,
+              content_tag(
+                "span",
+                item[:heading][:text],
+                class: "govuk-accordion__section-button",
+                id: "#{id}-heading-#{index}",
+              ),
+              class: "govuk-accordion__section-heading",
+              id: item[:heading][:id],
+              data: item[:data_attributes],
+            )
+          %>
+          <%= tag.div(item[:summary][:text], id: "#{id}-summary-#{index}", class: summary_classes) if item[:summary].present? %>
+        <% end %>
+        <%= tag.div(
+          item[:content][:html],
+          id: "#{id}-content-#{index}",
+          class: "govuk-accordion__section-content",
+          data: ga4_link_data_attributes,
+        ) %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

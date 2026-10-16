@@ -1,0 +1,260 @@
+---
+ja:
+  common:
+    hide: 非表示
+    show: 表示
+    toggle_less: 一部を表示
+    toggle_less_html:
+    toggle_more: さらに ％{number}
+    toggle_more_html:
+    translations: 翻訳
+  components:
+    accordion:
+      hide_all: すべてのセクションを非表示
+      show_all: すべてのセクションを表示
+      this_section_visually_hidden: " このセクション"
+    app_promo_banner:
+      aria_label:
+      body_text:
+      close:
+      title_text:
+      view:
+    article_schema:
+      scoped_search_description: "％{title}内で検索"
+    attachment:
+      opendocument_html: このファイルは、<a href='https://www.gov.uk/guidance/using-open-document-formats-odf-in-your-organisation' target=%{target} class='govuk-link'>OpenDocument</a> 形式です
+      order_a_copy: コピーを注文する
+      page:
+        other: "％{count}ページ"
+      preview_aria_label:
+      preview_link:
+      reference: 参照：%{reference}
+      request_format_cta: アクセス可能なフォーマットをリクエストしてください。
+      request_format_details_html: 支援技術（スクリーンリーダーなど）を使用していて、このドキュメントのよりアクセスしやすい形式のバージョンが必要な場合は、<a href='mailto:%{alternative_format_contact_email}' target='_blank' class='govuk-link'>%{alternative_format_contact_email}</a>。必要なフォーマットを教えてください。使用している支援技術を教えていただければ助かります。
+      request_format_text: このファイルは、支援技術のユーザーには適していない可能性があります。
+    back_link:
+      back: 戻る
+    back_to_top_link:
+      contents: コンテンツ
+    character_count:
+      body: 最大 ％{number} ％{type} を入力できます
+      type:
+        characters: 文字
+        words: 単語
+    chart:
+      accessibility_heading:
+      accessibility_html:
+      accessibility_link:
+      source:
+      table_dropdown:
+    checkboxes:
+      or: または
+    contents_list:
+      contents: コンテンツ
+    contextual_sidebar:
+      pretitle: 次の一部：
+    cookie_banner:
+      buttons:
+        accept_cookies: 追加のCookieを受け入れる
+        reject_cookies: 追加のCookieを拒否する
+        view_cookies:
+      confirmation_message:
+        accepted:
+        html: いつでも ％{link} できます。
+        link: Cookieの設定を変更する
+        rejected:
+      hide:
+      text:
+      - "「このウェブサイトを機能させるためにいくつかの重要なCookieを使用しています。」、「GOV.UKの使用方法を理解し、設定を記憶し、政府サービスを改善するために、追加のCookieを設定したいと思います。」、「他のサイトは、サービスからコンテンツを配信するのに役立ちます。」"
+      title: GOV.UKのCookie
+    devolved_nations:
+      applies_to:
+      aria_label:
+      england:
+        end:
+        middle:
+        start:
+      northern_ireland:
+        end:
+        middle:
+        start:
+      scotland:
+        end:
+        middle:
+        start:
+      type:
+        consultation:
+        detailed_guide:
+        guidance:
+        publication:
+      wales:
+        end:
+        middle:
+        start:
+    feedback:
+      close: 閉じる
+      dont_include_personal_info: 国民保険番号やクレジットカードの詳細などの個人情報や財務情報は含めないでください。
+      email_address: Eメールアドレス
+      help_us_improve_govuk: GOV.UKの改善にご協力ください
+      is_not_useful: このページは役に立ちません
+      is_this_page_useful: このページは役に立ちますか？
+      is_useful: このページは役に立ちます
+      maybe: 多分
+      more_about_visit:
+      'no': いいえ
+      send: 送信
+      send_me_survey: アンケートを送ってください
+      something_wrong: このページの問題を報告する
+      thank_you_for_feedback: ご意見ありがとうございます
+      what_doing: 何をしましたか？
+      what_wrong: どのような不具合ですか？
+      'yes': はい
+    figure:
+      image_credit: 画像著作権：%{credit}
+    intervention:
+      accessible_link_text_suffix:
+    layout_footer:
+      copyright_html: <a class="govuk-footer__link govuk-footer__copyright-logo" href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">© Crown copyright</a>
+      licence_html: 特に明記されていない限り、すべてのコンテンツは <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>でご利用いただけます。
+      navigation_links:
+      support_links: サポートリンク
+    layout_for_public:
+      account_layout:
+        feedback:
+          banners:
+            phase_banner_html:
+        navigation:
+          menu_bar:
+            account:
+              link_text:
+            manage:
+              link_text:
+    layout_header:
+      menu: メニュー
+      top_level: 最上位レベル
+    layout_super_navigation_header:
+      logo_link_title:
+      menu_toggle_label:
+        hide:
+        show:
+      navigation_link:
+        href:
+        label:
+      navigation_links_columns:
+      navigation_menu_heading:
+      navigation_search_subheading:
+      search_text:
+    metadata:
+      and:
+      from: から
+      history: 歴史
+      last_updated: 最終更新
+      part_of: 一部の
+      published: 公開済み
+      see_all_updates: すべての更新を表示
+      hidden_heading:
+      hide_all_updates: すべての更新を非表示
+      show_all_updates: すべての更新を表示
+    modal_dialogue:
+      close_modal: 特殊ウインドウを閉じる
+    notice:
+      banner_title:
+    option_select:
+      found_multiple:
+      found_single:
+      selected:
+    organisation_schema:
+      all_content_search_description: "％{organisation} からすべてのコンテンツを検索"
+    pagination:
+      next:
+      pagination: ページ付け
+      previous:
+    password_input:
+      button:
+      button_aria_hide_label:
+      button_aria_label:
+      button_hide:
+      error_text_prefix:
+      label:
+      password_hidden_announcement:
+      password_shown_announcement:
+    print_link:
+      text: このページを印刷する
+    published_dates:
+      hidden_heading:
+      hide_all_updates: すべての更新を非表示
+      last_updated: 最終更新日：%{date}
+      published: 公開日：%{date}
+      see_all_updates: すべての更新を見る
+      show_all_updates: すべての更新を表示
+    radio:
+      or: また
+    related_footer_navigation:
+      collections: コレクション
+      policies: 方針
+      statistical_data_sets: 統計データセット
+      topical_events: 話題のイベント
+    related_navigation:
+      collections: コレクション
+      external_links: ウェブ上の他の場所
+      policies: 方針
+      publishers: 公開元：
+      related_contacts: その他の連絡先
+      related_content: 関連したコンテンツ
+      related_external_links: ウェブ上の他の場所
+      related_guides: 詳細なガイダンス
+      statistical_data_sets: 統計データセット
+      toggle_visually_hidden_text:
+        collections:
+        related_external_links:
+        related_guides:
+        related_items:
+        statistical_data_sets:
+        topical_events:
+        topics:
+        world_locations:
+      topical_events: 話題のイベント
+      topics: トピックを探索する
+      ukraine:
+        links:
+        title:
+      world_locations: 世界の場所
+    search_box:
+      input_title: 検索
+      label: GOV.UKで検索
+      search_button: 検索
+    service_navigation:
+      menu_toggle:
+    share_links:
+      all_opens_in_new_tab:
+      opens_in_new_tab:
+    single_page_notification_button:
+      subscribe_text:
+      unsubscribe_text:
+    skip_link:
+      text: 主要コンテンツに移動
+    step_by_step_nav:
+      hide: 非表示
+      hide_all: すべてのステップを非表示にする
+      show: 表示
+      show_all: すべてのステップを表示する
+    step_by_step_nav_related:
+      part_of: 一部
+      this_page_is:
+      this_page_is_part_of_html:
+    subscription_links:
+      email_signup_link_text: Eメールを受け取る
+      feed_link_label: このURLをコピーしてフィードリーダーに貼り付けます
+      feed_link_text: フィードを購読する
+      subscriptions: 購読
+    success_alert:
+      success: 成功
+    summary_list:
+      delete: 削除
+      edit: 変更
+    table:
+      filter_count:
+      filter_label:
+      filter_message:
+    tabs:
+      contents: コンテンツ

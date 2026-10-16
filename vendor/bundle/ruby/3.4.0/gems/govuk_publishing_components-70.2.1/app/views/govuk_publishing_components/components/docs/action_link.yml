@@ -1,0 +1,34 @@
+name: Action link
+description: Use action links to help users get to the next stage of a journey quickly.
+shared_accessibility_criteria:
+  - link
+uses_component_wrapper_helper: true
+examples:
+  default:
+    data:
+      text: Go to NHS 111 online
+      href: "/page"
+  with_bottom_margin:
+    data:
+      text: Look at this margin
+      href: "/page"
+      margin_bottom: 9
+  inverse:
+    data:
+      text: "Coronavirus (COVID-19)"
+      href: "/page"
+      inverse: true
+    context:
+      dark_background: true
+  simple_arrow:
+    data:
+      text: Getting financial help and keeping your business safe
+      href: "/financial-help"
+      simple: true
+  large:
+    description: For use on the GOV.UK homepage popular links.
+    data:
+      text: This way for cookies
+      href: "/cookies"
+      large: true
+

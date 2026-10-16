@@ -1,0 +1,20 @@
+name: Copy to clipboard
+description: Content that a user is intended to copy, like a URL
+uses_component_wrapper_helper: true
+examples:
+  default:
+    data:
+      label: Copy and send this link to someone and they’ll be able to preview your draft on GOV.UK.
+      copyable_content: http://www.example.org
+      button_text: Copy link
+  with_data_attributes:
+    data:
+      label: Copy and send this link to someone and they’ll be able to preview your draft on GOV.UK.
+      copyable_content: http://www.example.org
+      input_data_attributes:
+        an_attribute: for the input
+      button_text: Copy link
+      button_data_attributes:
+        another_attribute: for the button
+accessibility_criteria: |
+  - should be usable with keyboard

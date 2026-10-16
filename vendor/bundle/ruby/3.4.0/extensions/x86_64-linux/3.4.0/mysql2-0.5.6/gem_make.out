@@ -1,0 +1,72 @@
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/mysql2-0.5.6/ext/mysql2
+/home/hadrienblanc/.local/ruby/bin/ruby extconf.rb --with-mysql-config\=/tmp/opencode/mysql/mysql-8.4.11-linux-glibc2.28-x86_64-minimal/bin/mysql_config
+checking for rb_absint_size()... yes
+checking for rb_absint_singlebit_p()... yes
+checking for rb_gc_mark_movable()... yes
+checking for rb_wait_for_single_fd()... yes
+checking for rb_enc_interned_str() in ruby.h... yes
+-----
+Using mysql_config at /tmp/opencode/mysql/mysql-8.4.11-linux-glibc2.28-x86_64-minimal/bin/mysql_config
+-----
+checking for mysql.h... yes
+checking for errmsg.h... yes
+checking for SSL_MODE_DISABLED in mysql.h... yes
+checking for SSL_MODE_PREFERRED in mysql.h... yes
+checking for SSL_MODE_REQUIRED in mysql.h... yes
+checking for SSL_MODE_VERIFY_CA in mysql.h... yes
+checking for SSL_MODE_VERIFY_IDENTITY in mysql.h... yes
+checking for MYSQL.net.vio in mysql.h... yes
+checking for MYSQL.net.pvio in mysql.h... no
+checking for MYSQL_DEFAULT_AUTH in mysql.h... yes
+checking for MYSQL_ENABLE_CLEARTEXT_PLUGIN in mysql.h... yes
+checking for SERVER_QUERY_NO_GOOD_INDEX_USED in mysql.h... yes
+checking for SERVER_QUERY_NO_INDEX_USED in mysql.h... yes
+checking for SERVER_QUERY_WAS_SLOW in mysql.h... yes
+checking for MYSQL_OPTION_MULTI_STATEMENTS_ON in mysql.h... yes
+checking for MYSQL_OPTION_MULTI_STATEMENTS_OFF in mysql.h... yes
+checking for my_bool in mysql.h... no
+checking for mysql_ssl_set() in mysql.h... yes
+-----
+Setting libpath to /tmp/opencode/mysql/mysql-8.4.11-linux-glibc2.28-x86_64-minimal/lib
+-----
+creating Makefile
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/mysql2-0.5.6/ext/mysql2
+make DESTDIR\= sitearchdir\=./.gem.20261016-389377-trv7w4 sitelibdir\=./.gem.20261016-389377-trv7w4 clean
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/mysql2-0.5.6/ext/mysql2
+make DESTDIR\= sitearchdir\=./.gem.20261016-389377-trv7w4 sitelibdir\=./.gem.20261016-389377-trv7w4
+compiling client.c
+In file included from client.c:15:
+mysql_enc_name_to_ruby.h: In function 'mysql2_mysql_enc_name_to_rb_hash':
+mysql_enc_name_to_ruby.h:43:1: warning: old-style function definition [-Wold-style-definition]
+   43 | mysql2_mysql_enc_name_to_rb_hash (str, len)
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mysql_enc_name_to_ruby.h: In function 'mysql2_mysql_enc_name_to_rb':
+mysql_enc_name_to_ruby.h:86:1: warning: old-style function definition [-Wold-style-definition]
+   86 | mysql2_mysql_enc_name_to_rb (str, len)
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+At top level:
+cc1: note: unrecognized command-line option '-Wno-used-but-marked-unused' may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option '-Wno-static-in-inline' may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option '-Wno-reserved-id-macro' may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option '-Wno-documentation-unknown-command' may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option '-Wno-disabled-macro-expansion' may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option '-Wno-covered-switch-default' may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option '-Wno-conditional-uninitialized' may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option '-Wno-compound-token-split-by-macro' may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option '-Wno-self-assign' may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option '-Wno-parentheses-equality' may have been intended to silence earlier diagnostics
+cc1: note: unrecognized command-line option '-Wno-constant-logical-operand' may have been intended to silence earlier diagnostics
+compiling infile.c
+compiling mysql2_ext.c
+compiling result.c
+compiling statement.c
+linking shared-object mysql2/mysql2.so
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/mysql2-0.5.6/ext/mysql2
+make DESTDIR\= sitearchdir\=./.gem.20261016-389377-trv7w4 sitelibdir\=./.gem.20261016-389377-trv7w4 install
+/usr/bin/install -c -m 0755 mysql2.so ./.gem.20261016-389377-trv7w4/mysql2
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/mysql2-0.5.6/ext/mysql2
+make DESTDIR\= sitearchdir\=./.gem.20261016-389377-trv7w4 sitelibdir\=./.gem.20261016-389377-trv7w4 clean

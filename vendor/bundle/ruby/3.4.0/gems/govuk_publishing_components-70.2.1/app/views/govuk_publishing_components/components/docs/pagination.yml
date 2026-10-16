@@ -1,0 +1,134 @@
+name: Pagination
+description: Navigational links that allow users to navigate within a series of pages
+  or elements.
+body: |
+  This component accepts 3 optional parameters: previous, next and items.
+
+  The next and previous parameters accept:
+
+  - an URL for the link
+  - a title for the URL
+  - a label that can add extra info (ie page number) that will be displayed under the title
+
+  If one of the 2 parameters is nil, no link will appear.
+
+  The item parameter accepts an array of objects with the following parameters:
+
+  - an href for the link
+  - a number of the page (required if ellipsis not set)
+  - current, if set then the item will be styled as the current page
+  - ellipsis, if set then the item will not be a link but will be a seperator with the text of "..."
+  - visually hidden text, which will override the default aria label of the page link (Page NUMBER)
+
+  For more guidance on best practice, please refer to the [GOV.UK Design System's Pagination guidance](https://design-system.service.gov.uk/components/pagination/).
+
+accessibility_criteria: |
+  Icons in the component must not be announced by screen readers.
+
+  The component must:
+
+  - identify itself as pagination navigation
+  - provide a distinction between the navigation text and label text of the links both visually and for screenreaders
+
+uses_component_wrapper_helper: true
+shared_accessibility_criteria:
+  - link
+accessibility_excluded_rules:
+  - landmark-unique # aria-label attributes will be duplicated in component examples list
+examples:
+  default:
+    data:
+      previous_page:
+        href: previous-page
+        title: Previous page
+        label: 1 of 3
+  only_next:
+    data:
+      next_page:
+        href: next-page
+        title: Next page
+        label: Tax disc
+  both_previous_and_next:
+    data:
+      previous_page:
+        href: previous-page
+        title: Previous page
+        label: 1 of 3
+      next_page:
+        href: next-page
+        title: Next page
+        label: 3 of 3
+  both_previous_and_next_no_labels:
+    data:
+      previous_page:
+        href: previous-page
+        title: Previous page
+      next_page:
+        href: next-page
+        title: Next page
+  become_a_lorry_bus_driver_example:
+    data:
+      previous_page:
+        href: previous-page
+        title: Previous
+        label: Applying for a provisional lorry or bus licence
+      next_page:
+        href: next-page
+        title: Next
+        label: 'Driver CPC part 1 test: theory'
+  without_ga4_tracking:
+    description: Disables the GA4 link tracker on the links. Tracking is enabled by default.
+    data:
+      disable_ga4: true
+      previous_page:
+        href: previous-page
+        title: Previous
+        label: Applying for a provisional lorry or bus licence
+      next_page:
+        href: next-page
+        title: Next
+        label: 'Driver CPC part 1 test: theory'
+  both_previous_and_next_with_items:
+    data:
+      previous_page:
+        href: previous-page
+      next_page:
+        href: next-page
+      items:
+      - number: 1
+        href: "#"
+      - ellipsis: true
+      - number: 6
+        href: "#"
+      - number: 7
+        href: "#"
+        current: true
+      - number: 8
+        href: "#"
+      - ellipsis: true
+      - number: 42
+        href: "#"
+  next_with_items:
+    data:
+      next_page:
+        href: next-page
+      items:
+      - number: 1
+        href: "#"
+        current: true
+      - number: 2
+        href: "#"
+      - number: 3
+        href: "#"
+  previous_with_items:
+    data:
+      previous_page:
+        href: next-page
+      items:
+      - number: 1
+        href: "#"
+      - number: 2
+        href: "#"
+      - number: 3
+        href: "#"
+        current: true

@@ -1,0 +1,157 @@
+name: Machine readable metadata
+description: Generates schema.org JSON-LD for use by search engines
+body: |
+  This component doesn't output anything visible. It generates "structured data"
+  in JSON-LD format, with [schema.org](http://schema.org) schemas.
+accessibility_criteria: |
+  The HTML should not be visible.
+display_html: true
+display_preview: false
+examples:
+  default:
+    data:
+      content_item:
+        title: "A title"
+        base_path: "/foo"
+        details: {}
+      schema: :article
+
+  with_description:
+    data:
+      content_item:
+        title: "A title"
+        base_path: "/foo"
+        details: {}
+      schema: :article
+      description: "Some manually set description of the page"
+
+  with_canonical_url:
+    data:
+      content_item:
+        title: "A title"
+        base_path: "/foo"
+        details: {}
+      schema: :article
+      canonical_url: "https://www.gov.uk/foreign-travel-advice/andorra/health"
+  with_body:
+    data:
+      content_item:
+        title: "A title"
+        base_path: "/foo"
+        details: {}
+      schema: :article
+      body: "Some other body"
+  a_guide:
+    data:
+      content_item:
+        title: "How to train your dragon"
+        base_path: "/how-to-train-your-dragon"
+        details:
+          parts:
+            - slug: overview
+              body: A thing on how to train scaly beasts
+              title: Overview
+            - slug: treating-injuries
+              body: Get to know a good blacksmith
+              title: Treating injuries
+      body: >
+        <p>Training scaly beasts can be tricky</p>
+        <h2 id='preparation'>Preparation</h2>
+        <p>Prepare by meditating and writing a will</p>
+        <h2 id='afterwards'>Afterwards<h2>
+        <p>Your next of kin may need a strong stomach</p>
+      schema: :faq
+      canonical_url: https://www.gov.uk/how-to-train-your-dragon
+  government_service_schema:
+    data:
+      content_item:
+        title: "Apply for your first dragon"
+        base_path: "/apply-for-your-first-dragon"
+        description: "Apply for your first dragon from the Ministry of Dragons online"
+        details: {}
+      schema: :government_service
+  person_schema:
+    data:
+      content_item:
+        title: "A. Person"
+        base_path: "/foo"
+        details: {}
+      schema: :person
+  organisation_schema:
+    data:
+      content_item:
+        title: "Ministry of Organisation"
+        base_path: "/foo"
+        details: {}
+      schema: :organisation
+  organisation_schema_with_related_orgs:
+    data:
+      content_item:
+        title: "Magical Artefacts Agency"
+        base_path: "/foo"
+        details: {}
+        links:
+          ordered_parent_organisations:
+            - title: "Ministry of Magic"
+              base_path: "/ministry-of-magic"
+          ordered_child_organisations:
+            - title: "Dodgy Wands Commission"
+              base_path: "/dodgy-wands-commission"
+      schema: :organisation
+  organisation_schema_with_people:
+    data:
+      content_item:
+        title: "Ministry of Organisation"
+        base_path: "/foo"
+        details:
+          ordered_ministers:
+            - name_prefix: "Minister"
+              name: "Rufus Scrimgeour MP"
+              role: "Minister for Magic"
+              href: "/rufus-scrimgeour"
+              role_href: "/minister-for-magic"
+              image:
+                url: "https://images.gov.uk/rufus.jpg"
+            - name_prefix: "Minister"
+              name: "Rufus Scrimgeour MP"
+              role: "Head of Auror Office"
+              href: "/rufus-scrimgeour"
+              role_href: "/head-of-auror-office"
+              image:
+                url: "https://images.gov.uk/rufus.jpg"
+      schema: :organisation
+  search_results_page_schema:
+    data:
+      content_item:
+        title: "The finding of all things"
+        base_path: "/finder/all"
+        details: {}
+      schema: :search_results_page
+  dataset_schema:
+    data:
+      content_item:
+        title: "All the data about Hogwarts"
+        base_path: "government/statistical-data-sets/hogwarts-data"
+        details: {}
+      schema: :dataset
+  dataset_schema_with_attachments:
+    data:
+      content_item:
+        title: "All the data about Hogwarts"
+        base_path: "government/statistical-data-sets/hogwarts-data"
+        details:
+          attachments:
+            - attachment_type: "file"
+              url: "https://assets.publishing.service.gov.uk/hogwarts-data/headmasters.csv"
+              title: "List of headmasters"
+              content_type: "text/csv"
+              id: "headmasters.csv"
+            - attachment_type: "html"
+              url: "https://www.gov.uk/government/statistical-data-sets/hogwarts-data/houses"
+              title: "Houses of Hogwarts"
+              id: "houses"
+            - attachment_type: "external"
+              url: "https://hogwarts.gov.uk/datasets/dungeon-cleaning-schedule"
+              title: "Dungeon cleaning shedule"
+              id: "dungeon-cleaning-schedule"
+      schema: :dataset

@@ -1,0 +1,309 @@
+# frozen_string_literal: true
+
+module Playwright
+  # https://github.com/microsoft/playwright/blob/master/src/client/connection.ts
+  # https://github.com/microsoft/playwright-python/blob/master/playwright/_impl/_connection.py
+  # https://github.com/microsoft/playwright-java/blob/master/playwright/src/main/java/com/microsoft/playwright/impl/Connection.java
+  class Connection
+    def initialize(transport)
+      @transport = transport
+      @transport.on_message_received do |message|
+        dispatch(message)
+      end
+      @transport.on_driver_crashed do
+        callbacks = @callbacks_mutex.synchronize { @callbacks.values }
+        callbacks.each { |callback| callback.reject(::Playwright::DriverCrashedError.new) }
+        raise ::Playwright::DriverCrashedError.new
+      end
+      @transport.on_driver_closed do
+        cleanup
+      end
+
+      @objects = {} # Hash[ guid => ChannelOwner ]
+      @objects_mutex = Mutex.new
+      @waiting_for_object = {} # Hash[ guid => Promise<ChannelOwner> ]
+      @callbacks = {} # Hash [ guid => Promise<ChannelOwner> ]
+      @callbacks_mutex = Mutex.new
+      @call_id_prefix = Array.new(4) { ('a'..'z').to_a.sample }.join
+      @root_object = RootChannelOwner.new(self)
+      @remote = false
+      @tracing_count = 0
+      @closed_error = nil
+    end
+
+    attr_reader :local_utils
+
+    def mark_as_remote
+      @remote = true
+    end
+
+    def remote?
+      @remote
+    end
+
+    def async_run
+      @transport.async_run
+    end
+
+    def stop
+      @transport.stop
+      cleanup
+    end
+
+    def cleanup(cause: nil)
+      @closed_error = TargetClosedError.new(message: cause)
+      callbacks = @callbacks_mutex.synchronize do
+        @callbacks.values.tap { @callbacks.clear }
+      end
+      callbacks.each { |callback| callback.reject(@closed_error) }
+    end
+
+    def initialize_playwright
+      # Avoid Error: sdkLanguage: expected one of (javascript|python|java|csharp)
+      # ref: https://github.com/microsoft/playwright/pull/18308
+      # ref: https://github.com/YusukeIwaki/playwright-ruby-client/issues/228
+      result = send_message_to_server('', 'initialize', { sdkLanguage: 'python' })
+      ChannelOwners::Playwright.from(result['playwright'])
+    end
+
+    def set_in_tracing(value)
+      if value
+        @tracing_count += 1
+      else
+        @tracing_count -= 1
+      end
+    end
+
+    def async_send_message_to_server(guid, method, params, metadata: nil)
+      if method == '__waitInfo__' && @closed_error
+        return Concurrent::Promises.fulfilled_future(nil)
+      end
+      # After the driver is gone, fail fast with the close error instead of
+      # returning nil (which would blow up with NoMethodError on .value!).
+      # ref: https://github.com/YusukeIwaki/playwright-ruby-client/issues/392
+      return Concurrent::Promises.rejected_future(@closed_error) if @closed_error
+
+      callback = Concurrent::Promises.resolvable_future
+      fire_and_forget = method == '__waitInfo__'
+
+      with_generated_id do |id|
+        # register callback promise object first.
+        # @see https://github.com/YusukeIwaki/puppeteer-ruby/pull/34
+        @callbacks_mutex.synchronize { @callbacks[id] = callback } unless fire_and_forget
+
+        wire_params = params.dup
+        timeout = if wire_params.key?(:timeout)
+                    wire_params.delete(:timeout)
+                  elsif wire_params.key?('timeout')
+                    wire_params.delete('timeout')
+                  end
+
+        _metadata = {}
+        frames = []
+        if metadata
+          frames = metadata[:stack]
+          _metadata[:wallTime] = metadata[:wallTime]
+          _metadata[:apiName] = metadata[:apiName]
+          _metadata[:location] = metadata[:stack].first
+          _metadata[:internal] = !metadata[:apiName]
+          if metadata[:title]
+            _metadata[:title] = metadata[:title]
+          end
+        end
+        _metadata[:timeout] = timeout unless timeout.nil?
+        _metadata.compact!
+
+        message = {
+          id: id,
+          guid: guid,
+          method: method,
+          params: replace_channels_with_guids(wire_params),
+          metadata: _metadata,
+        }
+
+        begin
+          @transport.send_message(message)
+        rescue => err
+          @callbacks_mutex.synchronize { @callbacks.delete(id) }
+          callback.reject(err)
+          raise unless err.is_a?(Transport::AlreadyDisconnectedError)
+        end
+        callback.fulfill(nil) if fire_and_forget
+
+        if @tracing_count > 0 && !frames.empty? && guid != 'localUtils' && !remote?
+          @local_utils.add_stack_to_tracing_no_reply(id, frames)
+        end
+      end
+
+      callback
+    end
+
+    def send_message_to_server(guid, method, params, metadata: nil)
+      async_send_message_to_server(guid, method, params, metadata: metadata).value!
+    end
+
+    private
+
+    # ```usage
+    # connection.with_generated_id do |id|
+    #   # play with id
+    # end
+    # ````
+    def with_generated_id(&block)
+      id = @callbacks_mutex.synchronize do
+        @last_id ||= 0
+        @last_id += 1
+      end
+      block.call("#{@call_id_prefix}@#{id}")
+    end
+
+    # @param guid [String]
+    # @param parent [Playwright::ChannelOwner]
+    # @note This method should be used internally. Accessed via .send method from Playwright::ChannelOwner, so keep private!
+    def update_object_from_channel_owner(guid, parent)
+      @objects_mutex.synchronize { @objects[guid] = parent }
+    end
+
+    # @param guid [String]
+    # @note This method should be used internally. Accessed via .send method from Playwright::ChannelOwner, so keep private!
+    def delete_object_from_channel_owner(guid)
+      @objects_mutex.synchronize { @objects.delete(guid) }
+    end
+
+    def dispatch(msg)
+      return if @closed_error
+
+      id = msg['id']
+      if id
+        callback = @callbacks_mutex.synchronize { @callbacks.delete(id) }
+
+        unless callback
+          raise "Cannot find command to respond: #{id}"
+        end
+
+        error = msg['error']
+        if error && !msg['result']
+          parsed_error = ::Playwright::Error.parse(error['error'])
+          parsed_error.log = msg['log']
+          parsed_error.details = msg['errorDetails']
+          callback.reject(parsed_error)
+        else
+          result = replace_guids_with_channels(msg['result'])
+          callback.fulfill(result)
+        end
+
+        return
+      end
+
+      guid = msg['guid']
+      method = msg['method']
+      params = msg['params']
+
+      if method == "__create__"
+        remote_object = create_remote_object(
+          parent_guid: guid,
+          type: params["type"],
+          guid: params["guid"],
+          initializer: params["initializer"],
+        )
+        if remote_object.is_a?(ChannelOwners::LocalUtils)
+          @local_utils = remote_object
+        end
+        return
+      end
+
+      object = @objects_mutex.synchronize { @objects[guid] }
+      unless object
+        raise "Cannot find object to \"#{method}\": #{guid}"
+      end
+
+      if method == "__adopt__"
+        child = @objects_mutex.synchronize { @objects[params["guid"]] }
+        unless child
+          raise "Unknown new child: #{params['guid']}"
+        end
+        object.send(:adopt!, child)
+        return
+      end
+
+      if method == "__dispose__"
+        object.send(:dispose!, reason: params["reason"])
+        return
+      end
+
+      if object.is_a?(ChannelOwners::JsonPipe) && method == 'message'
+        object.channel.emit(method, params)
+      else
+        object.channel.emit(method, replace_guids_with_channels(params))
+      end
+    end
+
+    def replace_channels_with_guids(payload)
+      if payload.nil?
+        return nil
+      end
+
+      if payload.is_a?(Array)
+        return payload.map{ |pl| replace_channels_with_guids(pl) }
+      end
+
+      if payload.is_a?(Channel)
+        return { guid: payload.guid }
+      end
+
+      if payload.is_a?(Hash)
+        return payload.map { |k, v| [k, replace_channels_with_guids(v)] }.to_h
+      end
+
+      payload
+    end
+
+    def replace_guids_with_channels(payload)
+      if payload.nil?
+        return nil
+      end
+
+      if payload.is_a?(Array)
+        return payload.map{ |pl| replace_guids_with_channels(pl) }
+      end
+
+      if payload.is_a?(Hash)
+        guid = payload['guid']
+        if guid
+          object = @objects_mutex.synchronize { @objects[guid] }
+          return object.channel if object
+        end
+
+        return payload.map { |k, v| [k, replace_guids_with_channels(v)] }.to_h
+      end
+
+      payload
+    end
+
+    # @return [Playwright::ChannelOwner|nil]
+    def create_remote_object(parent_guid:, type:, guid:, initializer:)
+      parent = @objects_mutex.synchronize { @objects[parent_guid] }
+      unless parent
+        raise "Cannot find parent object #{parent_guid} to create #{guid}"
+      end
+      initializer = replace_guids_with_channels(initializer)
+
+      result =
+        begin
+          ChannelOwners.const_get(type).new(
+            parent,
+            type,
+            guid,
+            initializer,
+          )
+        rescue NameError
+          raise "Missing type #{type}"
+        end
+
+      callback = @objects_mutex.synchronize { @waiting_for_object.delete(guid) }
+      callback&.fulfill(result)
+
+      result
+    end
+  end
+end

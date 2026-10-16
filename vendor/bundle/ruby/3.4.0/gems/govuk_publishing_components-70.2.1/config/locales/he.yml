@@ -1,0 +1,264 @@
+---
+he:
+  common:
+    hide: הסתר
+    show: הצג
+    toggle_less: הצג פחות
+    toggle_less_html:
+    toggle_more: "%{show} %{number} עוד"
+    toggle_more_html:
+    translations: תרגומים
+  components:
+    accordion:
+      hide_all: הסתר כל המקטעים
+      show_all: הצג כל המקטעים
+      this_section_visually_hidden: מקטע זה
+    app_promo_banner:
+      aria_label:
+      body_text:
+      close:
+      title_text:
+      view:
+    article_schema:
+      scoped_search_description: חפש בתוך %{title}
+    attachment:
+      opendocument_html: קובץ זה נמצא ב <a href='https://www.gov.uk/guidance/using-open-document-formats-odf-in-your-organisation' target=%{target} class='govuk-link'>OpenDocument</a> פורמט
+      order_a_copy: הזמן עותק
+      page:
+        one: דף 1
+        other: "%{count} דפים"
+      preview_aria_label:
+      preview_link:
+      reference: 'הפניה: %{reference}'
+      request_format_cta: בקש פורמט נגיש
+      request_format_details_html: אם אתה משתמש בטכנולוגיה מסייעת (כגון קורא מסך) וזקוק לגרסה של מסמך זה בפורמט נגיש יותר, שלח דואר אלקטרוני ל <a href='mailto:%{alternative_format_contact_email}' target='_blank' class='govuk-link'>%{alternative_format_contact_email}</a>. אנא ספר לנו איזה פורמט אתה צריך. זה יעזור לנו אם תגיד באיזו טכנולוגיה מסייעת אתה משתמש.
+      request_format_text: ייתכן שקובץ זה אינו מתאים למשתמשי טכנולוגיה מסייעת.
+    back_link:
+      back: חזור
+    back_to_top_link:
+      contents: תוכן
+    character_count:
+      body: תוכל להזין עד% {number}% {type}
+      type:
+        characters: תווים
+        words: מילים
+    chart:
+      accessibility_heading:
+      accessibility_html:
+      accessibility_link:
+      source:
+      table_dropdown:
+    checkboxes:
+      or: או
+    contents_list:
+      contents: תוכן
+    contextual_sidebar:
+      pretitle: גם חלק של
+    cookie_banner:
+      buttons:
+        accept_cookies: קבל עוגיות נוספות
+        reject_cookies: דחה עוגיות נוספות
+        view_cookies:
+      confirmation_message:
+        accepted:
+        html: אתה יכול %{link} בכל עת.
+        link: שנה את הגדרות העוגיות שלך
+        rejected:
+      hide:
+      text:
+      - אנו משתמשים בכמה עוגיות חיוניות כדי לגרום לאתר זה לפעול.
+      - ברצוננו להגדיר קובצי עוגיות נוספים כדי להבין כיצד אתה משתמש ב- GOV.UK
+      - לזכור את ההגדרות שלך ולשפר את השירותים הממשלתיים.
+      - 'אנו משתמשים גם בקובצי עוגיות שהוגדרו על ידי אתרים אחרים שיעזרו לנו להעביר תוכן משירותיהם. '
+      title: עוגיות ב- GOV.UK
+    devolved_nations:
+      applies_to:
+      aria_label:
+      england:
+        end:
+        middle:
+        start:
+      northern_ireland:
+        end:
+        middle:
+        start:
+      scotland:
+        end:
+        middle:
+        start:
+      type:
+        consultation:
+        detailed_guide:
+        guidance:
+        publication:
+      wales:
+        end:
+        middle:
+        start:
+    feedback:
+      close: סגור
+      dont_include_personal_info: 'אל תכלול מידע אישי או פיננסי כמו מספר הביטוח הלאומי שלך או פרטי כרטיס האשראי שלך. '
+      email_address: כתובת דואר אלקטרוני
+      help_us_improve_govuk: עזור לנו לשפר את GOV.UK
+      is_not_useful: דף זה אינו שימושי
+      is_this_page_useful: האם דף זה שימושי?
+      is_useful: דף זה שימושי
+      maybe: אולי
+      more_about_visit:
+      'no': לא
+      send: שלח
+      send_me_survey: שלח לי את הסקר
+      something_wrong: דווח על בעיה בדף זה
+      thank_you_for_feedback: תודה על המשוב
+      what_doing: מה אתה עושה?
+      what_wrong: מה השתבש?
+      'yes': כן
+    figure:
+      image_credit: 'קרדיט תמונה: %{credit}'
+    intervention:
+      accessible_link_text_suffix:
+    layout_footer:
+      copyright_html: <a class="govuk-footer__link govuk-footer__copyright-logo" href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">© Crown copyright</a>
+      licence_html: כל התוכן זמין תחת <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">פתוח רישיון ממשלתי v3.0</a>, אלא אם מצוין אחרת
+      navigation_links:
+      support_links: תומך בקישורים
+    layout_for_public:
+      account_layout:
+        feedback:
+          banners:
+            phase_banner_html:
+        navigation:
+          menu_bar:
+            account:
+              link_text:
+            manage:
+              link_text:
+    layout_header:
+      menu: תפריט
+      top_level: רמה עליונה
+    layout_super_navigation_header:
+      logo_link_title:
+      menu_toggle_label:
+        hide:
+        show:
+      navigation_link:
+        href:
+        label:
+      navigation_links_columns:
+      navigation_menu_heading:
+      navigation_search_subheading:
+      search_text:
+    metadata:
+      and:
+      from: מ-
+      history: היסטוריה
+      last_updated: עדכון אחרון
+      part_of: חלק של
+      published: פורסם
+      see_all_updates: ראה כל העדכונים
+      hidden_heading:
+      hide_all_updates: להסתיר כל עדכונים
+      show_all_updates: הצג כל עדכונים
+    modal_dialogue:
+      close_modal: סגור דיאלוג מודאלי
+    notice:
+      banner_title:
+    option_select:
+      found_multiple:
+      found_single:
+      selected:
+    organisation_schema:
+      all_content_search_description: מצא את כל התוכן של %{organization}
+    pagination:
+      next:
+      pagination: חלוקה לעמודים
+      previous:
+    password_input:
+      button:
+      button_aria_hide_label:
+      button_aria_label:
+      button_hide:
+      error_text_prefix:
+      label:
+      password_hidden_announcement:
+      password_shown_announcement:
+    print_link:
+      text: הדפס עמוד זה
+    published_dates:
+      hidden_heading:
+      hide_all_updates: להסתיר כל עדכונים
+      last_updated: עדכון אחרון %{date}
+      published: פורסם %{date}
+      see_all_updates: ראה כל העדכונים
+      show_all_updates: הצג כל עדכונים
+    radio:
+      or: או
+    related_footer_navigation:
+      collections: אוספים
+      policies: מדיניות
+      statistical_data_sets: מערכי נתונים סטטיסטיים
+      topical_events: אירועים אקטואליים
+    related_navigation:
+      collections: אוסף
+      external_links: במקומות אחרים ברשת
+      policies: מדיניות
+      publishers: פורסם על-ידי
+      related_contacts: אנשי קשר אחרים
+      related_content: תוכן קשור
+      related_external_links: במקומות אחרים ברשת
+      related_guides: הדרכה מפורטת
+      statistical_data_sets: מערך נתונים סטטיסטיים
+      toggle_visually_hidden_text:
+        collections:
+        related_external_links:
+        related_guides:
+        related_items:
+        statistical_data_sets:
+        topical_events:
+        topics:
+        world_locations:
+      topical_events: אירוע אקטואלי
+      topics: סייר את הנושא
+      ukraine:
+        links:
+        title:
+      world_locations: מיקומים גלובאליים
+    search_box:
+      input_title: 'חפש '
+      label: 'חפש ב- GOV.UK '
+      search_button: חפש
+    service_navigation:
+      menu_toggle:
+    share_links:
+      all_opens_in_new_tab:
+      opens_in_new_tab:
+    single_page_notification_button:
+      subscribe_text:
+      unsubscribe_text:
+    skip_link:
+      text: דלג לתוכן הראשי
+    step_by_step_nav:
+      hide: הסתר
+      hide_all: הסתר את כל השלבים
+      show: הצג
+      show_all: הצג את כל השלבים
+    step_by_step_nav_related:
+      part_of: חלק של
+      this_page_is:
+      this_page_is_part_of_html:
+    subscription_links:
+      email_signup_link_text: קבל הודעות דואר אלקטרוני
+      feed_link_label: העתק והדבק URL זו בקורא הזנות שלך
+      feed_link_text: הירשם להזנה
+      subscriptions: מנויים
+    success_alert:
+      success: הצלחה
+    summary_list:
+      delete: מחק
+      edit: שנה
+    table:
+      filter_count:
+      filter_label:
+      filter_message:
+    tabs:
+      contents: תוכן

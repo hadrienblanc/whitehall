@@ -1,0 +1,36 @@
+<%
+  js_filename ||= "application"
+  js_module_filename ||= "es6-components"
+  css_filename ||= "application"
+
+  product_name ||= "Publishing"
+  use_type_module ||= false
+%>
+
+<!DOCTYPE html>
+<html lang="en" class="govuk-template">
+  <head>
+    <meta charset="utf-8">
+    <title><%= browser_title %> - GOV.UK <%= product_name %></title>
+    <meta name="robots" content="noindex,nofollow,noimageindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag "govuk_publishing_components/favicon-#{environment}.png" %>
+    <%= stylesheet_link_tag css_filename, media: "all" %>
+    <% if GovukPublishingComponents::Config.use_es6_components %>
+      <%= javascript_include_tag js_module_filename, type: "module" %>
+    <% end %>
+    <%= yield :head %>
+  </head>
+  <body class="gem-c-layout-for-admin govuk-template__body">
+    <%= javascript_tag nonce: true do -%>
+      document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');
+    <% end %>
+    <%= yield %>
+    <% if use_type_module %>
+      <%= javascript_include_tag js_filename, type: "module" %>
+    <% else %>
+      <%= javascript_include_tag js_filename %>
+    <% end %>
+  </body>
+</html>

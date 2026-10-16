@@ -1,0 +1,149 @@
+<% content_for :title, "#{@component_doc.name} component" %>
+
+<% content_for :application_stylesheet do %>
+  <% if @component_doc.source == "application" %>
+    <%= render "application_stylesheet" %>
+  <% end %>
+<% end %>
+
+<%= render "govuk_publishing_components/components/heading", {
+    text: @component_doc.name,
+    context: "Component",
+    heading_level: 1,
+    font_size: "xl",
+    margin_bottom: 8,
+  } %>
+
+<div class="component-show">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <% if !@component_doc.accessibility_criteria.present? %>
+        <div class="component-violation">
+          <h2 class="component-violation__title">This component is not valid</h2>
+          <a class="component-violation__link" href="https://github.com/alphagov/govuk_publishing_components/blob/main/docs/accessibility_acceptance_criteria.md">Please define accessibility acceptance criteria for this component.</a>
+        </div>
+      <% end %>
+      <%= render "govuk_publishing_components/components/lead_paragraph", text: @component_doc.description %>
+      <% if @component_doc.body.present? %>
+        <div class="component-body">
+          <div class="component-markdown">
+            <%= sanitize @component_doc.html_body %>
+          </div>
+        </div>
+      <% end %>
+      <p class="govuk-body"><%= link_to "Search for usage of this component on GitHub", @component_doc.github_search_url, class: "govuk-link" %>.</p>
+    </div>
+  </div>
+
+  <div class="component-doc__content-list">
+    <%
+      other_examples_links = []
+      other_examples_links << {
+        href: "#standard-options",
+        text: "Standard options",
+      } if @component_doc.uses_component_wrapper_helper?
+      other_examples_links.concat(@component_doc.other_examples.map do | example |
+        {
+          href: "##{example.id}",
+          text: example.name,
+        }
+      end)
+      content_items = [
+        ({
+          href: "#overview",
+          text: "Overview",
+          items: [
+            ({ href: "#how-it-looks", text: "How it looks" } if @component_doc.display_preview? || @component_doc.display_html?),
+            { href: "#how-to-call-this-component", text: "How to call this component" },
+            ({ href: "#govuk-design-system", text: "GOV.UK Design System" } if @component_doc.govuk_frontend_components.any?),
+            ({ href: "#accessibility-acceptance-criteria", text: "Accessibility acceptance criteria" } if @component_doc.accessibility_criteria.present?),
+          ].compact,
+        }),
+        ({
+          href: "#other-examples",
+          text: "Other examples",
+          items: other_examples_links,
+        } if @component_doc.other_examples.any? or @component_doc.uses_component_wrapper_helper?),
+      ].compact
+    %>
+    <%= render "govuk_publishing_components/components/contents_list", {
+      contents: content_items,
+      margin_bottom: 8,
+    } %>
+  </div>
+
+  <h2 class="govuk-heading-l" id="overview">Overview</h2>
+  <% if @component_doc.display_preview? || @component_doc.display_html? %>
+    <h3 class="govuk-heading-m" id="how-it-looks">
+      <a href="<%= component_example_path(@component_doc.id, "default") %>" class="govuk-link">How it looks</a>
+      <small class="govuk-!-font-size-16">(<a href="<%= component_preview_path(@component_doc.id, "default") %>" class="govuk-link">preview</a>)</small>
+      <small class="govuk-!-font-size-16">(<a href="<%= component_preview_all_path(@component_doc.id) %>" class="govuk-link">preview all</a>)</small>
+    </h3>
+    <%= render "govuk_publishing_components/component_guide/component_doc/preview", component_doc: @component_doc, example: @component_doc.example %>
+  <% end %>
+
+  <h3 class="govuk-heading-m govuk-!-margin-top-4" id="how-to-call-this-component">How to call this component</h3>
+  <%= render "govuk_publishing_components/component_guide/component_doc/call", component_doc: @component_doc, example: @component_doc.example %>
+
+  <% if @component_doc.govuk_frontend_components.any? %>
+    <h3 class="govuk-heading-m" id="govuk-design-system">GOV.UK Design System</h3>
+    <div class="component-markdown">
+      <p>This component incorporates components from the <%= link_to "GOV.UK Design System", "https://design-system.service.gov.uk" %>:</p>
+
+      <ul>
+      <% @component_doc.govuk_frontend_components.each do |component| %>
+        <li><%= link_to component.humanize, "https://design-system.service.gov.uk/components/#{component}" %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @component_doc.accessibility_criteria.present? %>
+    <div class="govuk-grid-row component-accessibility-criteria" id="accessibility-acceptance-criteria">
+      <div class="govuk-grid-column-two-thirds">
+        <h3 class="govuk-heading-m">Accessibility acceptance criteria</h3>
+        <div class="component-markdown">
+          <%= sanitize @component_doc.html_accessibility_criteria %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @component_doc.other_examples.any? or @component_doc.uses_component_wrapper_helper? %>
+    <h2 class="govuk-heading-l" id="other-examples">Other examples</h2>
+
+    <% if @component_doc.uses_component_wrapper_helper? %>
+      <div class="component-example" id="standard-options">
+        <h3 class="govuk-heading-m">Standard options</h3>
+        <div class="component-markdown">
+          <%= sanitize @component_doc.html_component_wrapper_options_intro %>
+          <%= render "govuk_publishing_components/components/details", {
+            title: "See all standard options",
+            disable_ga4: true,
+          } do %>
+            <%= sanitize @component_doc.html_component_wrapper_options_description %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <% @component_doc.other_examples.each do |example| %>
+      <div class="component-example" id="<%= example.id %>">
+        <h3 class="govuk-heading-m">
+          <a href="<%= component_example_path(@component_doc.id, example.id) %>" class="govuk-link"><%= example.name %></a>
+          <small>(<a href="<%= component_preview_path(@component_doc.id, example.id) %>" class="govuk-link">preview</a>)</small>
+        </h3>
+        <% if example.html_description %>
+          <div class="component-markdown component-markdown--no-margin">
+            <%= sanitize example.html_description %>
+          </div>
+        <% end %>
+        <% code_example = capture do %>
+          <%= render "govuk_publishing_components/component_guide/component_doc/call", component_doc: @component_doc, example: example %>
+        <% end %>
+        <%= render "govuk_publishing_components/component_guide/component_doc/preview", component_doc: @component_doc, example: example %>
+        <%= code_example %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

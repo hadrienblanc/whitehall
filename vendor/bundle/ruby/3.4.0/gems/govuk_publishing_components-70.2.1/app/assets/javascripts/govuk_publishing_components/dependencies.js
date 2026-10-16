@@ -1,0 +1,16 @@
+/* eslint-env */
+
+// This adds in javascript that initialises components and dependencies
+// in public frontend applications.
+// = require ./modules.js
+
+document.addEventListener('DOMContentLoaded', function () {
+  // if statements ensure these functions don't execute during testing
+  if (typeof window.GOVUK.loadAnalytics !== 'undefined') {
+    window.GOVUK.loadAnalytics.loadExtraDomains()
+    if (typeof window.GOVUK.analyticsGa4.vars === 'undefined') {
+      window.GOVUK.loadAnalytics.loadGa4()
+    }
+  }
+  window.GOVUK.modules.start()
+})

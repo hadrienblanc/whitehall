@@ -1,0 +1,25 @@
+<%
+  extra_spacing ||= nil
+  items ||= []
+  list_type ||= "unordered"
+  visible_counters ||= nil
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-list govuk-list")
+  component_helper.add_class("govuk-list--bullet") if visible_counters and list_type === "unordered"
+  component_helper.add_class("govuk-list--number") if visible_counters and list_type === "number"
+  component_helper.add_class("govuk-list--spaced") if extra_spacing
+
+  # Default list type is unordered list.
+  list_tag = "ul"
+
+  # Set to ordered list to override default.
+  list_tag = "ol" if list_type === "number"
+%>
+<% if items.any? %>
+  <%= content_tag list_tag, **component_helper.all_attributes do %>
+    <% items.each do |item| %>
+      <li><%= raw(item) %></li>
+    <% end %>
+  <% end %>
+<% end %>

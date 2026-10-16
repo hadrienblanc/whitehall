@@ -143,6 +143,34 @@ class Admin::DocumentCollectionGroupDocumentSearchControllerTest < ActionControl
     assert_select "button", text: "Add", count: 5
   end
 
+  view_test "GET :add_by_title does not disclose access-limited editions of other organisations" do
+    writer = login_as(:writer, create(:organisation))
+
+    # A sensitive draft edition, access-limited to a different organisation
+    # (the :protected_edition factory restricts it to an organisation the
+    # writer does not belong to).
+    secret = create(:protected_edition, title: "ZZ Secret Budget Split Draft")
+
+    # Negative control: the writer is normally forbidden from seeing this
+    # edition. Admin::EditionsController#show returns 403 for it via
+    # limit_edition_access! -> enforce_permission!(:see, edition).
+    assert_not Whitehall::Authority::Enforcer.new(writer, secret).can?(:see), "writer should not be allowed to see the access-limited edition"
+
+    @request_params[:title] = "ZZ Secret Budget"
+    get :add_by_title, params: @request_params
+
+    assert_response :success
+    # SECURITY REGRESSION TEST: the search results are built from
+    # Edition.active.with_title_containing without any can?(:see) filtering,
+    # so the access-limited edition of another organisation is disclosed
+    # (title, state, public_url, content_id). Once the controller filters
+    # results with permitted_only (as Admin::EditionFilter does), the row
+    # will no longer be rendered and these assertions will pass.
+    leaked_rows = css_select(".govuk-table tbody tr").map(&:to_s).select { |row| row.include?("ZZ Secret Budget Split Draft") }
+    assert_empty leaked_rows, "SECURITY: access-limited edition of another organisation disclosed in collection document search results"
+    assert_select ".govuk-table tbody tr", text: /ZZ Secret Budget Split Draft/, count: 0
+  end
+
   view_test "GET :add_by_title shows the state of each edition" do
     create(:published_edition, title: "Something published")
     create(:unpublished_edition, title: "Something unpublished")

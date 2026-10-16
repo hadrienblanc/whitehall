@@ -1,0 +1,19 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+# rspec failure tracking
+.rspec_status
+.DS_Store
+/Gemfile.lock
+/vendor
+
+# The 'dummy' app used in the test suite
+/spec/dummy/log/*
+/spec/dummy/tmp/*
+/spec/dummy/db/*

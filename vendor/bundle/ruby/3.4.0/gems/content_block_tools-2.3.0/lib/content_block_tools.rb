@@ -1,0 +1,51 @@
+# frozen_string_literal: true
+
+require "action_view"
+require "uri"
+require "gds-api-adapters"
+require "govspeak"
+
+require "content_block_tools/helpers/govspeak"
+require "content_block_tools/helpers/override_classes"
+
+require "content_block_tools/presenters/field_presenters/base_presenter"
+require "content_block_tools/presenters/field_presenters/contact/email_presenter"
+require "content_block_tools/presenters/field_presenters/time_period/date_range_presenter"
+require "content_block_tools/presenters/field_presenters/time_period/date_presenter"
+require "content_block_tools/presenters/field_presenters/time_period/time_presenter"
+require "content_block_tools/presenters/field_presenters/time_period/start_presenter"
+require "content_block_tools/presenters/field_presenters/time_period/end_presenter"
+require "content_block_tools/presenters/field_presenters/pension/amount_presenter"
+
+require "content_block_tools/content_block"
+require "content_block_tools/content_block_reference"
+require "content_block_tools/embed_code"
+require "content_block_tools/format"
+require "content_block_tools/internal_content_path"
+require "content_block_tools/normalised_date_range"
+require "content_block_tools/renderer"
+
+require "content_block_tools/engine"
+
+require "content_block_tools/version"
+
+module ContentBlockTools
+  class Error < StandardError; end
+  class InvalidEmbedCodeError < StandardError; end
+  class InvalidFormatError < StandardError; end
+
+  module Presenters; end
+
+  module Components
+    module Contacts; end
+    module TimePeriod; end
+  end
+
+  class << self
+    attr_writer :logger
+
+    def logger
+      @logger ||= Logger.new($stdout)
+    end
+  end
+end

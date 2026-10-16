@@ -1,0 +1,21 @@
+<%
+  list_limit = 5
+  remaining = []
+  if items.length > (list_limit + 2)
+    remaining = items[list_limit..items.length]
+    items = items[0...list_limit]
+  end
+  connector = " #{t("components.metadata.and")} "
+%>
+<%= items.to_sentence(two_words_connector: connector, last_word_connector: connector).html_safe %>
+<% if remaining.any? %>
+  <div class="gem-c-metadata__details-wrapper">
+    <%= render "govuk_publishing_components/components/details", {
+      title: t("common.toggle_more", show: t("common.show"), number: remaining.length),
+      small: true,
+      inverse: inverse,
+    } do %>
+      <%= remaining.to_sentence.html_safe %>
+    <% end %>
+  </div>
+<% end %>

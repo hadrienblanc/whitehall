@@ -1,0 +1,39 @@
+<%
+  extra_class = []
+  extra_class << 'postal-address' if contact.post_addresses.any?
+%>
+<div id="contact_<%= contact.content_id %>" class="<%= ['contact', extra_class].flatten.join(' ') %>">
+  <div class="content">
+    <div class="vcard contact-inner">
+    <p><%= contact.title %></p>
+    <% contact.post_addresses.each do |address| %>
+      <%= Govspeak::HCardPresenter.new(address).render %>
+    <% end %>
+    <% if contact.email_addresses.any? || contact.phone_numbers.any? || contact.contact_form_links.any? %>
+      <div class="email-url-number">
+      <% contact.email_addresses.each do |email| %>
+        <p class="email">
+          <span class="type"><%= t('govspeak.contact.email') %></span>
+          <a href="mailto:<%= email[:email] %>" class="email"><%= email[:title].present? ? email[:title] : email[:email] %></a>
+        </p>
+      <% end %>
+      <% contact.contact_form_links.each do |form_link| %>
+        <p class="contact_form_url">
+          <span class="type"><%= t('govspeak.contact.contact_form') %></span>
+          <a href="<%= form_link[:link] %>"><%= form_link[:link].truncate(25) %></a>
+        </p>
+      <% end %>
+      <% contact.phone_numbers.each do |number| %>
+        <p class="tel">
+          <span class="type"><%= number[:title] %></span>
+          <%= number[:number] %>
+        </p>
+      <% end %>
+      </div>
+    <% end %>
+    <% if contact.description.present? %>
+      <p class="comments"><%= Rinku.auto_link(format_with_html_line_breaks(contact.description)) %></p>
+    <% end %>
+    </div>
+  </div>
+</div>

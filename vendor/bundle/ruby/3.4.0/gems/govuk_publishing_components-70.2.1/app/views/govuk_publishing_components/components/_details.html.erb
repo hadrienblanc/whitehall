@@ -1,0 +1,47 @@
+<%
+  open ||= nil
+  disable_ga4 ||= false
+  @ga4 ||= OpenStruct.new(index_section: 0) unless disable_ga4
+  @ga4[:index_section] += 1 unless disable_ga4
+  ga4_attributes ||= {}
+  local_assigns[:margin_bottom] ||= 3
+  theme ||= nil
+  inverse ||= false
+  small ||= false
+
+  unless disable_ga4
+    ga4_event = {
+      event_name: "select_content",
+      type: "detail",
+      text: title,
+      section: title,
+      index_section: @ga4[:index_section],
+    }
+    ga4_event.merge!(ga4_attributes)
+  end
+
+  summary_aria_attributes ||= {}
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-details govuk-details")
+  component_helper.add_class("gem-c-details--black") if theme == "black"
+  component_helper.add_class("gem-c-details--inverse") if inverse
+  component_helper.add_class("gem-c-details--small") if small
+  component_helper.add_class("direction-#{direction}") if local_assigns.include?(:direction)
+  component_helper.set_open(open)
+
+  summary_attributes = {}
+  summary_attributes[:module] = "ga4-event-tracker" unless disable_ga4
+  summary_attributes[:ga4_event] = ga4_event unless disable_ga4
+  summary_attributes[:ga4_expandable] = true unless disable_ga4
+%>
+<%= tag.details(**component_helper.all_attributes) do %>
+  <%= tag.summary class: "govuk-details__summary", aria: summary_aria_attributes, data: summary_attributes do %>
+    <%= tag.span class: "govuk-details__summary-text" do %>
+      <%= title %>
+    <% end %>
+  <% end %>
+  <div class="govuk-details__text">
+    <%= yield %>
+  </div>
+<% end %>

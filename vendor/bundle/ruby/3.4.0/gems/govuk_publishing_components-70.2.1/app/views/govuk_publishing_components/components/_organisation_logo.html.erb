@@ -1,0 +1,37 @@
+<%
+  logo_helper = GovukPublishingComponents::Presenters::OrganisationLogoHelper.new(local_assigns)
+  brand_helper = GovukPublishingComponents::AppHelpers::BrandHelper.new(organisation[:brand])
+
+  organisation ||= {}
+  heading_level ||= false
+  inline ||= false
+  inverse ||= false
+
+  # Check if `heading_level` is an appropriate number:
+  use_heading = [*1..6].include?(heading_level)
+
+  # Set the wrapping element to be a heading or a `div`:
+  wrapping_element = (use_heading ? "h#{heading_level}" : "div").to_sym
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-organisation-logo")
+  component_helper.add_class(brand_helper.brand_class)
+  component_helper.add_class("gem-c-organisation-logo--inverse") if inverse
+
+  container_classes = [
+    logo_helper.logo_container_class,
+    brand_helper.border_color_class,
+  ]
+  container_classes << "gem-c-organisation-logo__container--inline" if inline
+%>
+
+<%= content_tag(wrapping_element, **component_helper.all_attributes) do %>
+  <% if organisation[:url] %>
+    <%= link_to organisation[:url], class: container_classes.join(" ") do %>
+      <%= logo_helper.logo_content %>
+    <% end %>
+  <% else %>
+    <div class="<%= container_classes.join(" ") %>">
+      <%= logo_helper.logo_content %>
+    </div>
+  <% end %>
+<% end %>

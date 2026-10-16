@@ -1,0 +1,79 @@
+name: Form label
+description: Use labels for all form fields.
+body: |
+  For use with other form inputs e.g. [Radio buttons](/component-guide/radio)
+uses_component_wrapper_helper: true
+accessibility_criteria: |
+  All text must have a contrast ratio higher than 4.5:1 against the background colour to meet [WCAG AA](https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast)
+
+  Labels must:
+
+  - have visible text
+
+  Hint text must:
+
+  - be associated with an input. The `hint_id` must match the `aria-describedby` property on the input your label is associated with.
+
+  If hint text is within a label it will be announced in its entirety by screen readers. By putting the hint alongside labels and associating hints with inputs using `aria-describedby`, then screen readers will read the label, describe the type of input (eg radio) and then read additional text. It means users of screen readers can scan and skip options as easy as people making choices with sight. [A discussion of this approach](https://github.com/alphagov/govuk_elements/issues/574).
+govuk_frontend_components:
+  - label
+examples:
+  default:
+    data:
+      text: "National Insurance number"
+      html_for: "id-that-matches-input"
+  with_hint:
+    data:
+      text: "National Insurance number"
+      html_for: "id-that-matches-input-1"
+      hint_id: "should-match-aria-describedby-input"
+      hint_text: "It’s on your National Insurance card, benefit letter, payslip or P60. For example, ‘QQ 12 34 56 C’."
+  with_custom_label_size:
+    description: Make the label different sizes. Valid options are 's', 'm', 'l' and 'xl'.
+    data:
+      text: "Surname"
+      html_for: "id-that-matches-input-2"
+      heading_size: "xl"
+  bold_with_hint:
+    data:
+      bold: true
+      text: "National Insurance number"
+      html_for: "id-that-matches-input-3"
+      hint_id: "should-match-aria-describedby-input-bold"
+      hint_text: "It’s on your National Insurance card, benefit letter, payslip or P60. For example, ‘QQ 12 34 56 C’."
+  as_page_heading:
+    data:
+      is_page_heading: true
+      heading_size: "xl" 
+      text: "National Insurance number"
+      html_for: "id-that-matches-input-4"
+      hint_id: "should-match-aria-describedby-input-bold"
+  inside_a_radio_component:
+    description: |
+      When the label is used inside the [radio component](/component-guide/radio) additional classes are required on the radio, which are added by this option. This is already handled by the radio component and is a specific use case, but is worth documenting.
+
+      Note that this example will not render correctly - do not be alarmed. It only works properly when inside the radio component.
+    data:
+      text: "National Insurance number"
+      html_for: "id-that-matches-input-5"
+      is_radio_label: true
+      html_for: "id-radio"
+      hint_id: "id-radio"
+      hint_text: "It’s on your National Insurance card, benefit letter, payslip or P60. For example, ‘QQ 12 34 56 C’."
+  with_id:
+    description: 
+    data:
+      text: "Label with an ID"
+      id: "id-for-the-label"
+      html_for: "id-that-matches-input-6"
+  with_dir_attribute:
+    description: |
+      To allow the correct display of right to left languages.
+
+      When the `right_to_left` parameter is set to `true` any hint text displays in the same text direction as the label.
+    data:
+      text: "العربيَّة"
+      html_for: "id-that-matches-input-7"
+      hint_id: "should-match-aria-describedby-input"
+      hint_text: "Hint text displayed right to left"
+      right_to_left: true

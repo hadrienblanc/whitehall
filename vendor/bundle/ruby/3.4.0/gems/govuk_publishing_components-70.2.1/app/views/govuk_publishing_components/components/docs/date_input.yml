@@ -1,0 +1,94 @@
+name: Form date input
+description: Use the date input component to help users enter a memorable date or one they can easily look up.
+uses_component_wrapper_helper: true
+accessibility_criteria: |
+  Inputs in the component must:
+
+  * accept focus
+  * be focusable with a keyboard
+  * be usable with a keyboard
+  * be usable with touch
+  * indicate when they have focus
+  * be recognisable as form input elements
+  * have correctly associated labels
+  * be of the appropriate type for their use, in this case 'number'
+
+  Labels use the [label component](/component-guide/label).
+
+  Avoid using [`autofocus`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/autofocus) and `tabindex` unless you have user research to support this behaviour.
+govuk_frontend_components:
+  - date-input
+examples:
+  default:
+    data: {}
+  with_name:
+    description: |
+      Settting a name at the component level helps generating the name for each individual input within the
+      component as follows: `custom-name[day]`, `custom-name[month]`, `custom-name[year]`
+    data:
+      name: "dob"
+  with_autocomplete_for_date_of_birth_fields:
+    description: |
+      Use the `autocomplete_date_of_birth` option when you're asking for the user's date of birth. This supports browsers or tools that can autofill the information on a user's behalf if they've entered it previously.
+
+      Note that the option should only be passed to the component if the date of birth asked for is the date of birth of the person filling the form in and not asked for on behalf of someone else.
+    data:
+      autocomplete_date_of_birth: true
+  with_legend:
+    data:
+      legend_text: "What is your date of birth?"
+  with_legend_level_and_size:
+    description: Valid options for level are 1 to 6. Valid options for size are s, m, l and xl.
+    data:
+      legend_text: "What is your date of birth?"
+      legend_heading_level: 2
+      legend_size: "l"
+  with_hint:
+    description: When hint text is rendered each input field takes the value of `hint_id` as a value for the `aria-describedby` attribute
+    data:
+      legend_text: "What is your date of birth?"
+      hint: "For example, 31 3 1980"
+  with_error:
+    description: When an error message is rendered each input field takes the value of `error_id` as a value for the `aria-describedby` attribute. Note that error_id is optional, if it is not passed one will be generated automatically.
+    data:
+      legend_text: "What is your date of birth?"
+      hint: "For example, 31 3 1980"
+      error_id: error_item_id
+      error_message: "Error message goes here"
+  with_error_items:
+    description: When error messages are rendered each input field takes the value of `error_id` as a value for the `aria-describedby` attribute. Note that error_id is optional, if it is not passed one will be generated automatically.
+    data:
+      legend_text: "What is your date of birth?"
+      hint: "For example, 31 3 1980"
+      error_id: error_id
+      error_items:
+        - text: "Error 1"
+        - text: "Error 2"
+  with_error_id_but_no_message:
+    description: For some instances of this component the error message should be rendered separately but an error state is still required. In this scenario an `error_id` can be passed without an `error_message` to highlight the component and set `aria-describedby` correctly.
+    data:
+      legend_text: "What is your date of birth?"
+      hint: "For example, 31 3 1980"
+      error_id: error_id
+  with_data_attributes:
+    data:
+      data_attributes:
+        module: "some-module"
+        other_attribute: "something-else"
+  with_custom_items:
+    data:
+      legend_text: "Beth yw eich dyddiad geni?"
+      hint: "Er enghraifft, 31 3 1980"
+      items:
+        - label: Dydd
+          name: dob-dydd
+          width: 2
+          value: 31
+        - label: Mis
+          name: dob-mis
+          width: 2
+          value: 3
+        - label: Blwyddyn
+          name: dob-blwyddyn
+          width: 4
+          value: 1980

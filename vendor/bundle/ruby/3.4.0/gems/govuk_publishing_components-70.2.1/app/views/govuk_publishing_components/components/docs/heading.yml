@@ -1,0 +1,112 @@
+name: Heading
+description: A text heading
+body: |
+  A versatile heading tag component, including options for different heading levels and font sizes.
+
+  This is a `h2` by default.
+
+  Real world examples:
+
+  - [Publication](/government/publications/recognising-the-terrorist-threat)
+  - [Consultation](/government/consultations/proposal-for-the-future-of-rotherham-goldthorpe-jobcentre)
+accessibility_criteria: |
+  The heading must:
+
+  - be part of a correct heading structure for a page
+  - be semantically represented as a heading
+  - convey the heading level
+uses_component_wrapper_helper: true
+examples:
+  default:
+    data:
+      text: 'Download the full outcome'
+  specific_heading_level:
+    data:
+      text: 'Original consultation'
+      heading_level: 3
+  different_font_sizes:
+    description: |
+      Set a different font size for the heading. Uses the [GOV.UK Frontend heading sizes](https://design-system.service.gov.uk/styles/headings/). Valid options are `xl`, `l`, `m` and `s`.
+
+      This option is not tied to the `heading_level` option in order to give flexibility.
+    data:
+      text: 'One big heading containing a number of words'
+      font_size: "xl"
+  right_to_left:
+    data:
+      text: 'مستندات'
+    context:
+      right_to_left: true
+  with_padding:
+    description:
+    data:
+      text: 'Padded'
+      padding: true
+  with_margin:
+    description: The component accepts a number for margin bottom from `0` to `9` (`0px` to `60px`) using the [GOV.UK Frontend spacing scale](https://design-system.service.gov.uk/styles/spacing/#the-responsive-spacing-scale). It defaults to having no margin bottom.
+    data:
+      text: 'Really big bottom margin'
+      margin_bottom: 9
+  with_border:
+    description: A top border can be applied to the component of different thicknesses. Accepted values are `1` (`1px`), `2` (`2px`) and `5` (`5px`). Note that this works best with padding applied.
+    data:
+      text: 'With a border'
+      padding: true
+      border_top: 2
+  with_branding:
+    description: Organisation [colour branding](https://github.com/alphagov/govuk_publishing_components/blob/main/docs/component_branding.md) can be added to the component as shown, if a top border is included.
+    data:
+      text: 'Branding'
+      brand: 'department-for-environment-food-rural-affairs'
+      padding: true
+      border_top: 5
+  inverted:
+    data:
+      text: 'On a dark background'
+      inverse: true
+    context:
+      dark_background: true
+  with_lang_attribute:
+    description: |
+      The component is used on translated pages that don’t have a translation for the text strings. This means that it could display the fallback English string if the translate method can’t find an appropriate translation. This makes sure that the lang can be set to ensure that browsers understand which parts of the page are in each language.
+
+      The lang attribute must be set to a [valid BCP47 string](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang#Language_tag_syntax). A valid code can be the two or three letter language code - for example, English is `en` or `eng`, Korean is `ko` or `kor` - but if in doubt please check.
+    data:
+      text: "Ein gweinidogion"
+      lang: "cy"
+  with_context:
+    description: Context is applied sometimes where the heading is used as a page title H1. Note that the text size of the context is larger than the default size of the heading, so a larger `font_size` should be applied as shown.
+    data:
+      text: I like toast
+      context: Food opinion
+      font_size: "xl"
+  with_context_inside:
+    description: |
+      If the context should be considered part of the page heading, you can nest the context within the <code><h1></code>.
+    data:
+      context: Publication
+      text: My page title
+      font_size: "xl"
+      context_inside: true
+  with_context_language_labelled:
+    description: |
+      Sometimes this component appears on a page that has been translated. The title will naturally be supplied in the required language but the context string may fall back to the default. In these instances we need to label the language so the page remains semantic and screenreaders can handle the switch.
+
+      The `lang` attribute **must** be set to a [valid BCP47 string](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang#Language_tag_syntax). A valid code can be the two or three letter language code - for example, English is `en` or `eng`, Korean is `ko` or `kor` - but if in doubt please check.
+    data:
+      context: Publication
+      context_locale: en
+      text: My page title
+      font_size: "xl"
+  with_context_inverted:
+    data:
+      context: Publication
+      text: My page title
+      font_size: "xl"
+      inverse: true
+    context:
+      dark_background: true
+  with_nested_html:
+    description: HTML can be rendered within the heading as shown.
+    data:
+      text: <label>This is a label element</label>

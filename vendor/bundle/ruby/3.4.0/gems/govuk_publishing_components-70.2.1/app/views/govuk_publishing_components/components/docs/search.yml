@@ -1,0 +1,125 @@
+name: "Search"
+description: "Search box"
+body: |
+  A search box with label and attached submit button. The component must be used within an HTML form.
+  The search input has a name="q" attribute and a customisable ID and NAME.
+
+  It can be used on white or on govuk-blue using the `on_govuk_blue` option.
+
+  Markup such as heading tags can be included in the label using the label_text option. Styling is not included in the component for heading tags in labels, however this is what the search results page does.
+accessibility_criteria: |
+  The search box should:
+
+  - be used inside a form with the role of 'search', to indicate it as a [search landmark](https://www.w3.org/TR/wai-aria-practices-1.1/#aria_lh_search)
+  - have a clear label to identify the search functionality, which is visible to all users
+uses_component_wrapper_helper: true
+examples:
+  default:
+    data: {}
+  set_search_value:
+    data:
+      value: "driving licence"
+  stop_the_label_appearing_inline:
+    data:
+      inline_label: false
+  for_use_on_govuk_blue_background:
+    data:
+      on_govuk_blue: true
+    context:
+      dark_background: true
+  homepage:
+    description: For use on the homepage. See the `search with autocomplete` component for reference, which wraps this component.
+    data:
+      label_text: "Search"
+      inline_label: false
+      on_govuk_blue: true
+      label_size: "s"
+      label_margin_bottom: 3
+      homepage: true
+      size: "large"
+    context:
+      dark_background: true
+  change_label_text:
+    data:
+      label_text: "Search"
+  set_id_for_search_input:
+    data:
+      label_id: "my_unique_id"
+  large_version:
+    data:
+      size: "large"
+  change_field_name:
+    description: To be used if you need to change the default name 'q'
+    data:
+      name: "my_own_fieldname"
+  with_aria_controls_attribute:
+    description: |
+      The aria-controls attribute is a 'relationship attribute' which denotes which elements in a page an interactive element or set of elements has control over and affects.
+
+      For places like the finders where the page is updated dynamically after value changes to the input.
+    data:
+      aria_controls: "wrapper"
+  with_custom_button_text:
+    description: |
+      The search box component may be used multiple times on a page -- for example, on a [guidance and regulation finder results page](https://www.gov.uk/search/guidance-and-regulation?keywords=bananas&order=relevance) there is both the sitewide search in the header and also for the specific finder.
+
+      To avoid confusion, the text inside the button should be different for each form. This can be done by setting the `button_text` parameter.
+
+      This is visually hidden text -- to check for changes use a screen reader or inspect the button element.
+    data:
+      button_text: "Search absolutely everywhere"
+  with_set_label_size:
+    description: |
+      Allows the label text size to be set to `xl`, `l`, `m`, or `s`. If this is set, then `inline_label` is automatically set to `false`.
+    data:
+      label_size: "xl"
+  wrap_label_inside_a_heading:
+    description: |
+      Puts the label inside a heading; heading level defaults to `2` if not set.
+
+      (The size of the label can still be set with `label_size` to appear more like a heading.)
+    data:
+      wrap_label_in_a_heading: true
+      heading_level: 1
+  with_margin_bottom:
+    description: |
+      Allows the spacing at the bottom of the component to be adjusted.
+
+      This accepts a number from `0` to `9` (`0px` to `60px`) using the [GOV.UK Frontend spacing scale](https://design-system.service.gov.uk/styles/spacing/#the-responsive-spacing-scale). It defaults to having no margin bottom.
+    data:
+      margin_bottom: 9
+  with_margin_bottom_for_the_label:
+    description: |
+      Allows the spacing between the label and the input be adjusted.
+
+      Requires `inline_label` to be false.
+
+      This accepts a number from `0` to `9` (`0px` to `60px`) using the [GOV.UK Frontend spacing scale](https://design-system.service.gov.uk/styles/spacing/#the-responsive-spacing-scale). It defaults to having no margin bottom.
+    data:
+      label_margin_bottom: 9
+      inline_label: false
+  with_long_label_text:
+    description: |
+      Demonstrates how long label text wraps across multiple lines without being clipped.
+
+      Requires `inline_label` to be false.
+    data:
+      inline_label: false
+      label_text: Search for a licence, permit, or regulation by entering keywords, document title, or reference number
+  with_custom_label_class:
+    description: |
+      Allows adding a custom class to the label of the component.
+    data:
+      label_custom_class: "govuk-heading-xl"
+  with_corrections_disabled:
+    description: |
+      Allows disabling mobile browser autocorrect features (`autocorrect` and `autocapitalize`
+      attributes) on the input field.
+
+      Mobile browser autocorrect and text substitution features can conflict with the built in
+      autocorrect features of some search engines, and will frequently correct domain-specific
+      search terms to something that is not what the user intended (for example, correcting "SORN"
+      to "sworn" or "HMRC" to "Hercules"). Capitalisation can also be significant for some search
+      engines such as that currently used by Search API v2.
+    data:
+      disable_corrections: true

@@ -1,0 +1,25 @@
+<%
+  description ||= nil
+  title_id ||= "govuk-notification-banner-title-#{SecureRandom.hex(4)}"
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-success-alert govuk-notification-banner govuk-notification-banner--success")
+  component_helper.add_role("alert")
+  component_helper.set_tabindex(-1)
+  component_helper.add_aria_attribute({ labelledby: title_id })
+  component_helper.add_data_attribute({ module: "initial-focus" })
+%>
+
+<%= tag.div(**component_helper.all_attributes) do %>
+  <div class="govuk-notification-banner__header">
+    <%= tag.h2 t("components.success_alert.success"), class: "govuk-notification-banner__title", id: title_id %>
+  </div>
+  <div class="govuk-notification-banner__content">
+    <% if description.present? %>
+      <%= tag.h3 message, class: "govuk-notification-banner__heading" %>
+      <%= description %>
+    <% else %>
+      <%= tag.p message, class: "govuk-notification-banner__heading" %>
+    <% end %>
+  </div>
+<% end %>

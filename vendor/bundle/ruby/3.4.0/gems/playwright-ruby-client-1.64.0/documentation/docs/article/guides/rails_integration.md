@@ -1,0 +1,346 @@
+---
+sidebar_position: 3
+---
+
+# Capybara driver for Ruby on Rails application
+
+`playwright-ruby-client` is a client library just for browser automation, while Rails uses [Capybara](https://github.com/teamcapybara/capybara) for system testing.
+
+`capybara-playwright-driver` provides a [Capybara](https://github.com/teamcapybara/capybara) driver based on playwright-ruby-client and makes it easy to integrate into Ruby on Rails applications.
+
+## Installation
+
+Add the line below into Gemfile:
+
+```rb
+gem 'capybara-playwright-driver'
+```
+
+and then `bundle install`.
+
+Note that capybara-playwright-driver does not depend on Selenium. But `selenium-webdriver` is also required [on Rails 5.x, 6.0](https://github.com/rails/rails/pull/39179)
+
+## Register and configure Capybara driver
+
+```rb
+Capybara.register_driver(:customized_playwright) do |app|
+  Capybara::Playwright::Driver.new(app,
+    browser_type: :chromium, # :chromium (default) or :firefox, :webkit
+    headless: false, # true for headless mode (default), false for headful mode.
+  )
+end
+```
+
+:::note
+
+Rails itself (since Rails 6.1) reserves the driver name `:playwright` for its built‑in integration (see [rails/rails#39987](https://github.com/rails/rails/issues/39987) and [YusukeIwaki/capybara-playwright-driver#93](https://github.com/YusukeIwaki/capybara-playwright-driver/issues/93)). **If you call `Capybara.register_driver(:playwright) { ... }` and then use `driven_by :playwright`, Rails' built‑in Playwright driver will be selected** instead of the one defined by `Capybara.register_driver(:playwright) { ... }`. Therefore, when you want to use the driver from this gem with custom options, register it with another name such as `:customized_playwright`.
+
+:::
+
+### When running Playwright in a container
+
+If Playwright is running in an independent container, with docker-compose.yaml config like this
+
+```
+  playwright: # this is our PLAYWRIGHT_HOST value
+    image: mcr.microsoft.com/playwright:v1.57.0-noble
+    command: >
+      /bin/sh -c "npm install --no-save playwright-core@1.57.0 && ./node_modules/.bin/playwright-core run-server --port 3000 --host 0.0.0.0 --path /ws"
+    init: true
+    restart: unless-stopped
+```
+
+Configure capybara to use the `browser_server_endpoint_url`
+
+```rb
+Capybara.register_driver(:playwright_remote) do |app|
+  Capybara::Playwright::Driver.new(
+    app,
+    browser_type: :chromium,
+    headless: true,
+    browser_server_endpoint_url: "ws://#{ENV.fetch('PLAYWRIGHT_HOST')}:3000/ws"
+  )
+end
+```
+
+### Update timeout
+
+Capybara sets the default value of timeout to _2 seconds_. Generally it is too short to wait for HTTP responses.
+
+It is recommended to set the timeout to 15-30 seconds for Playwright driver.
+
+```rb
+Capybara.default_max_wait_time = 15
+```
+
+### (Optional) Update default driver
+
+By default, Capybara driver is set to `:rack_test`, which works only with non-JS contents. If your Rails application has many JavaScript contents, it is recommended to change the default driver to `:playwright`.
+
+```rb
+Capybara.default_driver = :playwright
+Capybara.javascript_driver = :playwright
+```
+
+If you registered a customized driver (e.g. `:customized_playwright` as above) and want that to be the default, set:
+
+```rb
+Capybara.default_driver = :customized_playwright
+Capybara.javascript_driver = :customized_playwright
+```
+
+Remember: choosing `:playwright` here will use Rails' built‑in driver, not the customized one from this gem.
+
+It is not mandatory. Without changing the default driver, you can still use the customized Playwright driver by specifying `Capybara.current_driver = :customized_playwright` (or `driven_by :customized_playwright` in system spec) explicitly. Use `:playwright` only if you intend to run against Rails' built‑in Playwright driver (see issues: https://github.com/YusukeIwaki/capybara-playwright-driver/issues/93, https://github.com/rails/rails/issues/39987).
+
+### (reference) Available driver options
+
+These parameters can be passed into `Capybara::Playwright::Driver.new`
+
+- `playwright_cli_executable_path`
+  - Refer [this article](./download_playwright_driver) to understand what to specify.
+- `browser_type`
+  - `:chromium` (default), `:firefox`, or `:webkit`
+- Parameters for [Playwright::BrowserType#launch](/docs/api/browser_type#launch)
+  - args
+  - channel
+    - `chrome`, `msedge`, `chrome-beta`, `chrome-dev`, `chrome-canary`, `msedge-beta`, `msedge-dev` Browser distribution channel. Read more about using [Google Chrome & Microsoft Edge](https://playwright.dev/docs/browsers#google-chrome--microsoft-edge)
+  - devtools
+  - downloadsPath
+  - env
+  - executablePath
+  - firefoxUserPrefs
+  - headless
+  - ignoreDefaultArgs
+  - proxy
+  - slowMo
+  - timeout
+- Parameters for [Playwright::Browser#new_context](/docs/api/browser#new_context)
+  - bypassCSP
+  - colorScheme
+  - deviceScaleFactor
+  - extraHTTPHeaders
+  - geolocation
+  - hasTouch
+  - httpCredentials
+  - ignoreHTTPSErrors
+  - isMobile
+  - javaScriptEnabled
+  - locale
+  - noViewport
+  - offline
+  - permissions
+  - proxy
+  - record_har_omit_content
+  - record_har_path
+  - record_video_dir
+  - record_video_size
+  - screen
+  - serviceWorkers
+  - storageState
+  - timezoneId
+  - userAgent
+  - viewport
+
+```ruby
+driver_opts = {
+  # `playwright-core` command path.
+  playwright_cli_executable_path: './node_modules/.bin/playwright-core',
+
+  # Use firefox for testing.
+  browser_type: :firefox,
+
+  # Headful mode.
+  headless: false,
+
+  # Slower operation
+  slowMo: 50, # integer. (50-100 would be good for most cases)
+}
+
+Capybara::Playwright::Driver.new(app, driver_opts)
+```
+
+## Available functions and Limitations
+
+### Capybara DSL
+
+Most of the methods of `Capybara::Session` and `Capybara::Node::Element` are available. However the following method is not yet implemented.
+
+- `Capybara::Node::Element#drop`
+
+### Playwright-native scripting
+
+We can also describe Playwright-native automation script using `with_playwright_page` and `with_playwright_element_handle`.
+
+```ruby
+# With Capybara DSL
+find('a[data-item-type="global_search"]').click
+
+# With Playwright-native Page
+Capybara.current_session.driver.with_playwright_page do |page|
+  # `page` is an instance of Playwright::Page.
+  page.click('a[data-item-type="global_search"]')
+end
+```
+
+```ruby
+all('.list-item').each do |li|
+  # With Capybara::Node::Element method
+  puts li.all('a').first.text
+
+  # With Playwright-native ElementHandle
+  puts li.with_playwright_element_handle do |handle|
+    # `handle` is an instance of Playwright::ElementHandle
+    handle.query_selector('a').text_content
+  end
+end
+```
+
+Generally, Capybara DSL seems simple, but Playwright-native scripting are more precise and efficient. Also `waitForNavigation`, `waitForSelector`, and many other Playwright functions are available with Playwright-native scripting.
+
+### Screen recording
+
+NO NEED to keep sitting in front of screen during test. Just record what happened with video.
+
+For example, we can store the video for [Allure report](https://github.com/allure-framework/allure-ruby) as below:
+
+```ruby
+before do |example|
+  Capybara.current_session.driver.on_save_screenrecord do |video_path|
+    Allure.add_attachment(
+      name: "screenrecord - #{example.description}",
+      source: File.read(video_path),
+      type: Allure::ContentType::WEBM,
+      test_case: true,
+    )
+  end
+end
+```
+
+![screenrecord](https://user-images.githubusercontent.com/11763113/121126629-71b5f600-c863-11eb-8f88-7924ab669946.gif)
+
+For more details, refer [Recording video](./recording_video.md#using-screen-recording-from-capybara-driver)
+
+### Screenshot just before teardown
+
+In addition to `Capybara::Session#save_screenshot`, capybara-playwright-driver have another method for storing last screen state just before teardown.
+
+For example, we can attach the screenshot for [Allure report](https://github.com/allure-framework/allure-ruby) as below:
+
+```ruby
+before do |example|
+  Capybara.current_session.driver.on_save_raw_screenshot_before_reset do |raw_screenshot|
+    Allure.add_attachment(
+      name: "screenshot - #{example.description}",
+      source: raw_screenshot,
+      type: Allure::ContentType::PNG,
+      test_case: true,
+    )
+  end
+end
+```
+
+### Tracing for postmortem
+
+Playwright users often expect to see what happened in the browser when the test failed. `capybara-playwright-driver` provides a feature to store the trace easily.
+
+```ruby
+before do |example|
+  Capybara.current_session.driver.on_save_trace do |trace_zip_path|
+    Allure.add_attachment(
+      name: "trace - #{example.description}",
+      source: File.read(trace_zip_path),
+      type: 'application/zip',
+      test_case: true,
+    )
+  end
+end
+```
+
+This example code would attach the trace zip file to Allure report for each test case.
+
+![add trace image](https://user-images.githubusercontent.com/11763113/282307106-520d800b-67ac-4e14-98bb-75a8bbb98a1f.png)
+
+We can download and show the trace with `playwright show-trace` command.
+
+```
+./node_modules/.bin/playwright-core show-trace ababcdcdefef.zip
+```
+
+![show-trace image](https://user-images.githubusercontent.com/11763113/282307098-a4167c32-d5e7-4631-a3b6-62d278efbeef.png)
+
+Instead of the easy configuration using `on_save_trace`, we can also use `page.driver.start_tracing` / `page.driver.stop_tracing` or `page.driver.with_trace do { ... }` for storing the trace with detailed options. See [the PR](https://github.com/YusukeIwaki/capybara-playwright-driver/pull/66) for more details including example codes for RSpec.
+
+### Limitations
+
+- Playwright doesn't allow clicking invisible DOM elements or moving elements. `click` sometimes doesn't work as Selenium does. See the detail in https://playwright.dev/docs/actionability/
+- `current_window.maximize` and `current_window.fullscreen` work only on headful (non-headless) mode, as selenium driver does.
+- `Capybara::Node::Element#drag_to` does not accept `html5` parameter. HTML5 drag and drop is not fully supported in Playwright.
+
+#### Selenium migration incompatibilities
+
+Some Selenium-backed Capybara behavior depends on WebDriver implementation details or accepts patterns outside Capybara's documented API. `capybara-playwright-driver` does not try to emulate these Selenium-specific behaviors when they conflict with Playwright's actionability, dialog, or rendered text model.
+
+##### Modal dialogs must be handled before the action that opens them
+
+Use Capybara's block-oriented modal API:
+
+```ruby
+accept_alert('message') do
+  click_button 'Open alert'
+end
+
+accept_confirm('Are you sure?') do
+  click_button 'Delete'
+end
+```
+
+Selenium-backed Capybara may sometimes handle an already-open modal after the action has returned:
+
+```ruby
+click_button 'Delete'
+accept_confirm('Are you sure?')
+```
+
+This pattern is not portable to Playwright. In Playwright, the action that opens a JavaScript dialog does not complete until the dialog is handled, so the driver cannot wait for later Ruby code to call `accept_alert`, `accept_confirm`, or another modal helper.
+
+Wrap the action that opens the dialog in `accept_alert`, `accept_confirm`, `dismiss_confirm`, `accept_prompt`, or `dismiss_prompt`.
+
+##### Clicking a disabled element waits for actionability
+
+Selenium-backed Capybara may return from a second click on an already-disabled button without changing the page. Playwright waits for the element to become actionable, then times out. This is expected Playwright behavior, and commonly appears in migration work around double-submit prevention tests.
+
+Instead of attempting a second click on a disabled control, assert the disabled state and the expected result:
+
+```ruby
+expect(button).to be_disabled
+expect(page).to have_text('submitted')
+```
+
+Alternatively, assert the relevant server or client state directly.
+
+##### Visible text follows rendered `innerText` behavior
+
+When a `<br>` is hidden with CSS, Selenium-backed Capybara may still preserve a newline in text extraction. Playwright follows the browser's rendered `innerText` behavior: a hidden `<br>` does not create a rendered line break.
+
+For example:
+
+```html
+<p>not submitted.<br class="hidden">click submit.</p>
+```
+
+If the `<br>` is hidden with `display: none`, Playwright-style visible text is:
+
+```ruby
+"not submitted.click submit."
+```
+
+not:
+
+```ruby
+"not submitted.\nclick submit."
+```
+
+Avoid newline-sensitive expectations around responsive or hidden line break elements, or assert the browser-rendered text that users actually see.
+
+These examples are not exhaustive. If you find another Capybara/Selenium migration incompatibility, please open an issue at [capybara-playwright-driver issues](https://github.com/YusukeIwaki/capybara-playwright-driver/issues) with the reproduction HTML and the Ruby/Capybara code that reproduces it.

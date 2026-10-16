@@ -1,0 +1,263 @@
+---
+ku:
+  common:
+    hide: شاردنەوە
+    show: پیشاندان
+    toggle_less: پیشاندانی کەمتر
+    toggle_less_html:
+    toggle_more: "%{show} %{number}زیاتر"
+    toggle_more_html:
+    translations: وەرگێڕانەکان
+  components:
+    accordion:
+      hide_all: هەموو بەشەکان بشارەوە
+      show_all: هەموو بەشەکان پیشان بدە
+      this_section_visually_hidden: ئەم بەشە
+    app_promo_banner:
+      aria_label:
+      body_text:
+      close:
+      title_text:
+      view:
+    article_schema:
+      scoped_search_description: لە ناوەوە بگەڕێ %{title}
+    attachment:
+      opendocument_html: ئەم پەڕگەیە بە شێوازی یان  فۆرماتێکی <a href='https://www.gov.uk/guidance/using-open-document-formats-odf-in-your-organisation' target=%{target} class='govuk-link'>OpenDocument</a> یە
+      order_a_copy: داوای کۆپییەک بکە
+      page:
+        one: لاپەڕەی ١
+        other: "%{count} لاپەڕەکان"
+      preview_aria_label: بینینی %{title} بە شێوەی ئۆنلاین
+      preview_link: بینینی ئۆنلاین
+      reference: 'سەرچاوە: %{reference}'
+      request_format_cta: داوای فۆرماتێک بکە کە بتوانیت دەستت پێی بگات
+      request_format_details_html: ئەگەر تەکنەلۆژیای یارمەتیدەر بەکاردەهێنیت (وەک خوێنەری شاشە) و پێویستت بە وەشانی ئەم بەڵگەنامەیە بە فۆرماتێکی دەستڕاگەیشتنتر، تکایە ئیمەیڵێک بنێرە بۆ <a href='mailto:%{alternative_format_contact_email}' target='_blank' class='govuk-link'>%{alternative_format_contact_email}</a>. تکایە پێمان بڵێن پێویستت بە چ فۆرماتێکە. یارمەتیدەرمان دەبێت ئەگەر بڵێیت چ تەکنەلۆژیایەکی یارمەتیدەر بەکاردەهێنیت.
+      request_format_text: لەوانەیە ئەم پەڕگەیە یان ئەم فایلە بۆ بەکارهێنەرانی تەکنەلۆژیای یارمەتیدەر گونجاو نەبێت.
+    back_link:
+      back: گەڕانەوە
+    back_to_top_link:
+      contents:
+    character_count:
+      body: دەتوانیت تا %{number} %{type} دابنێیت.
+      type:
+        characters: کارەکتەرەکان
+        words: وشەکان
+    chart:
+      accessibility_heading:
+      accessibility_html:
+      accessibility_link:
+      source:
+      table_dropdown:
+    checkboxes:
+      or: یان
+    contents_list:
+      contents: 'ةاوەرۆکەکان '
+    contextual_sidebar:
+      pretitle: هەروەها بەشێک لە
+    cookie_banner:
+      buttons:
+        accept_cookies: کووکی زیادە قبوڵ بکە
+        reject_cookies: کووکی زیادە ڕەت بکەرەوە
+        view_cookies: بینینی کووکیەکان
+      confirmation_message:
+        accepted: تۆ کووکی زیادەت وەرگرتووەو قبووڵکردووە
+        html: دەتوانیت لە هەر کاتێکدا %{link} بکەیت.
+        link: ڕێکخستنەکانی کووکیەکەت بگۆڕە
+        rejected: تۆ کووکی زیادەت ڕەتکردۆتەوە
+      hide:
+      text:
+      - ئێمە هەندێک کووکی گرنگ بەکاردەهێنین بۆ ئەوەی ئەم ماڵپەڕە کاربکات.
+      - پێمان خۆشە کووکی زیادە دابنێین بۆ ئەوەی تێبگەین کە چۆن GOV.UK بەکاردەهێنیت، ڕێکخستنەکانت لەبیربێت و خزمەتگوزارییە حکومییەکان باشتر بکەیت.
+      - هەروەها کووکی کە لەلایەن ماڵپەڕەکانی دیکەوە دانراون بەکاردەهێنین بۆ ئەوەی یارمەتیدەرمان بن لە گەیاندنی ناوەڕۆک لە خزمەتگوزارییەکانیانەوە.
+      title: کووکی لە ماڵپەڕی GOV.UK
+    devolved_nations:
+      applies_to: 'پێشکەشی بکە بۆ '
+      aria_label:
+      england:
+        end: و ئینگلتەرا
+        middle: "، ئینگلتەرا"
+        start: ئینگلتەرا
+      northern_ireland:
+        end: و ئیرلەندای باکوور
+        middle: "، ئیرلەندای باکوور"
+        start: ئیرلەندای باکوور
+      scotland:
+        end: و سکۆتلەندا
+        middle: "، سکۆتلەندا"
+        start: سکۆتلەندا
+      type:
+        consultation: ڕاوێژکاری بۆ %{nation}
+        detailed_guide: ڕێنمایی بۆ %{nation}
+        guidance: ڕێنمایی بۆ %{nation}
+        publication: بڵاوکراوە بۆ %{nation}
+      wales:
+        end: و وێڵز
+        middle: "، وێڵز"
+        start: وێڵز
+    feedback:
+      close: ڕاگرتن
+      dont_include_personal_info: زانیاری کەسی یان زانیاری دارایی وەک ژمارەی بیمەی نیشتمانی یان وردەکارییەکانی کارتی بانکیی خۆت مەخەرە ناوەوە.
+      email_address: ناونیشانی ئیمەیڵ
+      help_us_improve_govuk: یارمەتیدەرمان بن بۆ باشترکردنی GOV.UK
+      is_not_useful: ئەم پەیجە سودبەخش نیە
+      is_this_page_useful: ئایە ئەم پەیجە سوود بەخشە ؟
+      is_useful: ئەم پەیجە سوودبەخشە
+      maybe: ڕەنگە-لەوانەیە
+      more_about_visit: بۆ ئەوەی یارمەتیدەرمان بێت لە باشترکردنی GOV.UK، حەز دەکەین زیاتر بزانین دەربارەی سەردانەکەت ئەمڕۆ.
+      'no': نەخێر
+      send: ناردن
+      send_me_survey: ڕاپرسیەکەم بۆ بنێرە
+      something_wrong: کێشەیەک لەم پەیجەدایە ڕاپۆرتی بکە
+      thank_you_for_feedback: سوپاس بۆ ڕای خۆتان
+      what_doing: تۆ چیت دەکرد؟
+      what_wrong: چی بە خراپی ڕۆیشتووە بەڕێوە ؟
+      'yes': بەڵێ
+    figure:
+      image_credit:
+    intervention:
+      accessible_link_text_suffix: "(لە پەڕەیەکی نوێدا دەکرێتەوە)"
+    layout_footer:
+      copyright_html: مافی چاپکردنی تاج
+      licence_html: هەموو ناوەڕۆکەکان بەپێی "مۆڵەتی حکومەتی کراوە" بەردەستە، تەنها لەو شوێنانە نەبێت کە بە پێچەوانەوە ئاماژەیان پێکراوە
+      navigation_links:
+      support_links: بەستەرەکانی پشتگیری
+    layout_for_public:
+      account_layout:
+        feedback:
+          banners:
+            phase_banner_html: ئەمە خزمەتگوزارییەکی نوێیە "فیدباک"ەکەت یارمەتیدەرمان دەبێت بۆ باشترکردنی.
+        navigation:
+          menu_bar:
+            account:
+              link_text: چوونەژوورەوەی GOV.UK One ی تۆ
+            manage:
+              link_text: ڕێکخستنەکان
+    layout_header:
+      menu: مێنۆ
+      top_level: ئاستی سەرەوە
+    layout_super_navigation_header:
+      logo_link_title: بڕۆ بۆ ماڵپەڕی GOV.UK
+      menu_toggle_label:
+        hide: مینیوی %{label} بشارەوە
+        show: مێنۆی %{label} پیشان بدە
+      navigation_link:
+        href:
+        label: مێنۆ
+      navigation_links_columns:
+      navigation_menu_heading: مێنۆی گەشتکردن
+      navigation_search_subheading: گەڕان
+      search_text: گەڕان بەدوای GOV.UK
+    metadata:
+      and: و
+      from: لە
+      history: مێژوو
+      last_updated: دوایین نوێکردنەوە
+      part_of: بەشێک لە
+      published: بڵاوکراوەتەوە
+      see_all_updates: هەموو نوێکارییەکان ببینە
+      hidden_heading:
+      hide_all_updates:
+      show_all_updates:
+    modal_dialogue:
+      close_modal: گفتوگۆی مۆداڵی دابخە
+    notice:
+      banner_title: گرنگە
+    option_select:
+      found_multiple: بژاردەکان دۆزرایەوە
+      found_single: بژاردە دۆزرایەوە
+      selected: هەڵبژێردراوە
+    organisation_schema:
+      all_content_search_description: هەموو ناوەڕۆکەکان لە %{organisation} بدۆزەرەوە
+    pagination:
+      next: داهاتوو
+      pagination: لاپەڕەسازی
+      previous: پێشووتر
+    password_input:
+      button: پیشاندان
+      button_aria_hide_label: وشەی نهێنی بشارەوە
+      button_aria_label: وشەی نهێنی پیشان بدە
+      button_hide: شاردنەوە
+      error_text_prefix: هەڵە
+      label: ووشەی نهێنی
+      password_hidden_announcement: وشەی نهێنی تۆ شاراوەتەوە
+      password_shown_announcement: وشەی نهێنی تۆ دیارە
+    print_link:
+      text: ئەم لاپەڕەیە پرنت بکە
+    published_dates:
+      hidden_heading:
+      hide_all_updates:
+      last_updated:
+      published:
+      see_all_updates:
+      show_all_updates:
+    radio:
+      or: یان
+    related_footer_navigation:
+      collections: کۆکردنەوە
+      policies: سیاسەتەکان
+      statistical_data_sets: کۆمەڵە زانیارییە ئامارییەکان
+      topical_events: ڕووداوە بابەتییەکان
+    related_navigation:
+      collections: کۆکردنەوە
+      external_links: لە شوێنەکانی تری وێب
+      policies: سیاسەت
+      publishers: بڵاوکراوەتە لەلایەن
+      related_contacts: پەیوەندییەکانی تر
+      related_content: ناوەڕۆکی پەیوەندیدار
+      related_external_links: لە شوێنەکانی تری وێب
+      related_guides: ڕێنمایی وردەکارییەکان
+      statistical_data_sets: کۆمەڵە زانیارییە ئامارییەکان
+      toggle_visually_hidden_text:
+        collections:
+        related_external_links:
+        related_guides:
+        related_items:
+        statistical_data_sets:
+        topical_events:
+        topics:
+        world_locations:
+      topical_events: ڕووداوێکی بابەتیی
+      topics: بەدواداچوون بۆ بابەتەکە بکە
+      ukraine:
+        links:
+        title: داگیرکردنی ئۆکرانیا
+      world_locations: شوێنەکانی جیهان
+    search_box:
+      input_title: گەڕان
+      label: گەڕان لە ماڵپەڕی GOV.UK
+      search_button: گەڕان
+    service_navigation:
+      menu_toggle:
+    share_links:
+      all_opens_in_new_tab: ئەم بەستەرانەی خوارەوە لە تابێکی نوێدا دەکرێنەوە
+      opens_in_new_tab: "(لە تابی نوێدا دەکرێتەوە)"
+    single_page_notification_button:
+      subscribe_text: ئیمەیڵ دەربارەی ئەم پەیجە بەدەست بهێنە
+      unsubscribe_text: واز لە وەرگرتنی ئیمەیڵەکان بێنە دەربارەی ئەم لاپەڕەیە
+    skip_link:
+      text: بەجێێ بێڵەوە بڕۆ بۆ ناوەڕۆکی سەرەکی
+    step_by_step_nav:
+      hide: شاردنەوە
+      hide_all: هەموو هەنگاوەکان بشارەوە
+      show: پیشانی بدە
+      show_all: هەموو هەنگاوەکان پیشان بدە
+    step_by_step_nav_related:
+      part_of: بەشێک لە
+      this_page_is:
+      this_page_is_part_of_html:
+    subscription_links:
+      email_signup_link_text: ئیمەیڵەکان بەدەست بهێنە
+      feed_link_label: ئەم URL ە کۆپی بکە و بیخە ناو خوێنەری فیدەکەتەوە
+      feed_link_text: بەشداری بکە بۆ فید
+      subscriptions: بەشداریکردن
+    success_alert:
+      success: سەرکەوتوو
+    summary_list:
+      delete: سڕینەوە
+      edit: گوڕین
+    table:
+      filter_count: ئەنجامەکان بۆ ئەو زاراوەیەی کە داخڵ کراوە
+      filter_label: فلتەر
+      filter_message: هیچ ئەنجامێکی هاوتا و بەرامبەر نییە
+    tabs:
+      contents: ناوەرۆکەکان

@@ -1,0 +1,401 @@
+name: Form radio button
+description: A radio button is an element that allows users to answer a question by selecting an option. If you have a question with more than one option you should stack radio buttons.
+body: |
+  You can also use 'or' as an item to break up radios.
+
+  If JavaScript is disabled a conditionally revealed content expands fully. All of the functionality (including aria attributes) are added using JavaScript.
+uses_component_wrapper_helper: true
+accessibility_criteria: |
+  Radio buttons should
+
+  - accept focus
+  - be focusable with a keyboard
+  - be usable with a keyboard
+  - indicate when they have focus
+  - change in appearance when active (in the active state)
+  - be usable with touch
+  - have label with a touch area similar to the input
+  - be usable with [voice commands](https://www.w3.org/WAI/perspectives/voice.html)
+  - have visible text
+  - have a meaningful accessible name
+  - be usable when interacting with the label
+  - additional information in hint text should be read out found when focusing inputs
+  - should always be used nested in a fieldset so that it has proper context, useful for users of assistive technologies.
+
+  [Keyboard interaction](https://www.w3.org/TR/wai-aria-practices-1.1/#radiobutton)
+
+  - when a radio group receives focus:
+    - if a radio button is checked, focus is set on the checked button.
+    - if none of the radio buttons are checked, focus is set on the first radio button in the group.
+  - Space: checks the focused radio button if it is not already checked.
+  - Right Arrow and Down Arrow: move focus to the next radio button in the group, uncheck the previously focused button, and check the newly focused button. If focus is on the last button, focus moves to the first button.
+  - Left Arrow and Up Arrow: move focus to the previous radio button in the group, uncheck the previously focused button, and check the newly focused button. If focus is on the first button, focus moves to the last button.
+
+accessibility_excluded_rules:
+  - aria-expanded # We use aria expanded to reflect the state of a conditionally revealed radio content even if this attribute is not officially supported on this element.
+govuk_frontend_components:
+  - radios
+examples:
+  default:
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group"
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+  with_small_radios:
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group"
+      small: true
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+  with_bold_labels:
+    description: Used to provide better contrast between long labels and hint text.
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group-bold"
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+        hint_text: "You'll have a user ID if you've signed up to do things like sign up Self Assessment tax return online."
+        bold: true
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+        hint_text: "You'll have an account if you've already proved your identity with a certified company, such as the Post Office."
+        bold: true
+  with_custom_bottom_margin:
+    description: The component accepts a number for margin bottom from `0` to `9` (`0px` to `60px`) using the [GOV.UK Frontend spacing scale](https://design-system.service.gov.uk/styles/spacing/#the-responsive-spacing-scale). It defaults to a margin bottom of `30px` (`6`).
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group"
+      margin_bottom: 9
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+  with_hint_on_form_group:
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group-error"
+      id_prefix: "hint"
+      hint: "You’ll need to prove your identity using one of the following methods"
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+  with_legend:
+    description: |
+      Legend text is automatically wrapped inside a `h2`. To render the text without it, `heading_level` must be set to `0`.
+    data:
+      name: "radio-group-legend"
+      heading: "What's it to do with?"
+      heading_level: 0
+      items:
+      - value: "yes"
+        text: "Yes"
+      - value: "no"
+        text: "No"
+  with_custom_heading_size:
+    description: |
+      By default, text supplied for the `legend` is wrapped inside a `h2`.
+
+      The font size of this heading can be changed using the `heading_size` option. Valid options are `s`, `m`, `l`, `xl`, defaulting to `m` if no option is passed.
+    data:
+      name: "radio-group-description"
+      heading: "What is your favourite colour?"
+      heading_size: "s"
+      items:
+      - value: "red"
+        text: "Red"
+      - value: "green"
+        text: "Green"
+      - value: "blue"
+        text: "Blue"
+  with_custom_heading_level:
+    description: |
+      By default, text supplied for the `legend` is wrapped inside a `h2`. This can be changed using the `heading_level` option.
+
+      If `heading_level` is `1` and `heading_size` is not set, the text size will be `xl`.
+    data:
+      name: "radio-group-description"
+      heading: "What is your favourite colour?"
+      heading_level: 1
+      items:
+      - value: "red"
+        text: "Red"
+      - value: "green"
+        text: "Green"
+      - value: "blue"
+        text: "Blue"
+  with_page_heading_and_caption:
+    description: |
+      A caption can be added using the `heading_caption` option. Captions will only be displayed if text for the heading option is present.
+
+      The pattern is used across GOV.UK to show a high-level section that this page belongs to.
+    data:
+      name: "radio-group-heading"
+      heading: "Is it snowing?"
+      heading_caption: "Question 3 of 9"
+      heading_level: 1
+      items:
+        - value: "yes"
+          text: "Yes"
+        - value: "no"
+          text: "No"
+  with_page_heading_and_hint:
+    data:
+      name: "radio-group-heading"
+      heading: "Is it snowing?"
+      heading_level: 1
+      hint: "Sleet or hail doesn’t count."
+      items:
+      - value: "yes"
+        text: "Yes"
+      - value: "no"
+        text: "No"
+  with_visually_hidden_heading:
+    description: |
+      If the heading/legend on the radios is not required, it can be visually hidden using this
+      option. It will still be visible to screen readers.
+    data:
+      name: "radio-group-visually-hidden-heading"
+      heading: "What is your favourite colour?"
+      visually_hidden_heading: true
+      items:
+      - value: "red"
+        text: "Red"
+      - value: "green"
+        text: "Green"
+      - value: "blue"
+        text: "Blue"
+  with_description:
+    data:
+      name: "radio-group-description"
+      heading: "What is your favourite colour?"
+      description: |
+        Skittles consist of hard sugar shells imprinted with the letter "S".
+        The interior consists mainly of sugar, corn syrup, and hydrogenated
+        palm kernel oil along with fruit juice, citric acid, natural and artificial flavors.
+      items:
+      - value: "red"
+        text: "Red"
+      - value: "green"
+        text: "Green"
+      - value: "blue"
+        text: "Blue"
+  with_description_and_hint:
+    data:
+      name: "radio-group-description"
+      heading: "What is your favourite colour?"
+      description: |
+        Skittles consist of hard sugar shells imprinted with the letter "S".
+        The interior consists mainly of sugar, corn syrup, and hydrogenated
+        palm kernel oil along with fruit juice, citric acid, natural and artificial flavors.
+      hint: "Choose the colour"
+      items:
+      - value: "red"
+        text: "Red"
+      - value: "green"
+        text: "Green"
+      - value: "blue"
+        text: "Blue"
+  with_description_and_page_heading:
+    data:
+      name: "radio-group-description"
+      heading: "What is your favourite colour?"
+      heading_level: 1
+      description: |
+        Skittles consist of hard sugar shells imprinted with the letter "S".
+        The interior consists mainly of sugar, corn syrup, and hydrogenated
+        palm kernel oil along with fruit juice, citric acid, natural and artificial flavors.
+      hint: "Choose the colour"
+      items:
+      - value: "red"
+        text: "Red"
+      - value: "green"
+        text: "Green"
+      - value: "blue"
+        text: "Blue"
+  with_hint_text_on_radios:
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group-hint-text"
+      items:
+      - value: "government-gateway"
+        hint_text: "You'll have a user ID if you've signed up to do things like sign up Self Assessment tax return online."
+        text: "Use Government Gateway"
+      - value: "govuk-verify"
+        hint_text: "You'll have an account if you've already proved your identity with a certified company, such as the Post Office."
+        text: "Use GOV.UK Verify"
+  with_checked_option:
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group-checked"
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+        checked: true
+  with_data_attributes:
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group-data-attributes"
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+        data_attributes: { "contextual-guidance": "government-gateway" }
+  with_custom_id_prefix:
+    data:
+      heading: How do you want to sign in?
+      id_prefix: 'custom'
+      name: "radio-custom-id-prefix"
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+  with_or_divider:
+    description: "See [related service manual guidance for this pattern](https://www.gov.uk/service-manual/design/writing-for-user-interfaces#ask-questions-that-users-can-understand)"
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group-or-divider"
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+      - :or
+      - value: "create-an-account"
+        text: "Create an account"
+  extreme:
+    description: 'Note that the `:or` option [is documented as a string due to a bug](https://github.com/alphagov/govuk_publishing_components/issues/102)'
+    data:
+      heading: How do you want to sign in?
+      id_prefix: 'extreme'
+      name: "radio-custom-extreme"
+      items:
+      - value: "extreme-value-1"
+        hint_text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sapien justo, lobortis elementum tortor in, luctus interdum turpis. Nam sit amet nulla nec arcu condimentum dapibus quis varius metus. Suspendisse cursus tristique diam et vestibulum. Proin nec lacinia tortor. Morbi at nisi id lorem aliquam ullamcorper. Pellentesque laoreet sit amet leo sodales ultricies. Suspendisse maximus efficitur odio in tristique."
+        text: "Quisque tincidunt venenatis bibendum. Morbi volutpat magna euismod ipsum consequat cursus. Etiam bibendum interdum ultricies."
+        bold: true
+      - value: "extreme-value-2"
+        hint_text: "Cras mi neque, porttitor mattis ultricies id, fringilla non ipsum. Etiam non elit ac magna tincidunt ultrices. Morbi eu quam sed justo scelerisque efficitur sed ut risus. Integer commodo, lectus et venenatis maximus, augue erat egestas nulla, eget fermentum augue lacus tempor nulla. Aenean ultricies suscipit erat, vitae hendrerit neque varius nec. Etiam ac euismod massa. Ut at erat id sapien mollis posuere."
+        text: "Aliquam rutrum lobortis blandit. Praesent sit amet lacinia libero. Morbi nulla tellus, euismod et ipsum id, porta volutpat enim. Ut mauris libero"
+        bold: true
+      - :or
+      - value: "extreme-value-3"
+        hint_text: "Nullam congue neque et tempor tincidunt. In ornare lacus ac arcu maximus ultricies. Quisque et ultrices nulla. Suspendisse potenti. Nunc imperdiet ornare leo ut ultrices. Praesent in quam in tellus dictum lacinia vitae vitae lacus. Nulla hendrerit feugiat urna eu gravida. Nam a molestie nisi, at semper neque. Quisque tincidunt venenatis bibendum. Morbi volutpat magna euismod ipsum consequat cursus. Etiam bibendum interdum ultricies."
+        text: "Duis tempus est metus, in varius enim lobortis non. Nunc laoreet nisi vel lectus consequat, sed venenatis tellus dictum. Nunc ut nibh blandit ipsum bibendum dictum."
+        bold: true
+      - value: "extreme-value-4"
+        hint_text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sapien justo, lobortis elementum tortor in, luctus interdum turpis. Nam sit amet nulla nec arcu condimentum dapibus quis varius metus. Suspendisse cursus tristique diam et vestibulum. Proin nec lacinia tortor. Morbi at nisi id lorem aliquam ullamcorper. Pellentesque laoreet sit amet leo sodales ultricies. Suspendisse maximus efficitur odio in tristique."
+        text: "Quisque tincidunt venenatis bibendum. Morbi volutpat magna euismod ipsum consequat cursus. Etiam bibendum interdum ultricies."
+        bold: true
+  with_error_on_form_group:
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group-error"
+      id_prefix: "error"
+      error_message: "Please select one option"
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+  with_error_and_hint_on_form_group:
+    description: ""
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group-error"
+      id_prefix: "error"
+      error_message: "Please select one option"
+      hint: "Choose the option that suits"
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+  with_error_items_on_form_group:
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group-error"
+      id_prefix: "error"
+      error_items:
+      - text: Descriptive link to the question with an error 1
+        href: '#example-error-1'
+      - text: Descriptive link to the question with an error 2
+        href: '#example-error-2'
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+  conditional:
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group-conditional"
+      id_prefix: "conditional"
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+        conditional: "You’ll need to prove your identity using Government Gateway"
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+        conditional: "You’ll need to prove your identity using GOV.UK Verify"
+  conditional_checked:
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group-conditional-checked"
+      id_prefix: "conditional-checked"
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+        conditional: "You’ll need to prove your identity using Government Gateway"
+        checked: true
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+        conditional: "You’ll need to prove your identity using GOV.UK Verify"
+  tracking-url:
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group-tracking-url"
+      id_prefix: "tracking-url"
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+        url: "https://www.tax.service.gov.uk/gg/sign-in?continue=%2Fcheck-your-state-pension"
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"
+        url: "https://www.tax.service.gov.uk/check-your-state-pension/signin/verify?journey_hint=uk_idp_sign_in"
+  inline:
+    description: "When providing few options, radio buttons should be inline rather than stacked. We recommend this for two small options like yes and no, on and off"
+    data:
+      heading: Have you changed your name?
+      name: "inline-radios"
+      inline: true
+      items:
+        - value: "yes"
+          text: "Yes"
+        - value: "no"
+          text: "No"
+  with_custom_id_attribute:
+    data:
+      heading: How do you want to sign in?
+      name: "radio-group"
+      id: "radio-group"
+      items:
+      - value: "government-gateway"
+        text: "Use Government Gateway"
+      - value: "govuk-verify"
+        text: "Use GOV.UK Verify"

@@ -1,0 +1,107 @@
+name: Layout header
+description: The header provides the crown logo, product or service name and navigation
+body: |
+  Requires the specification of the environment (development, integration,
+  staging or production).
+govuk_frontend_components:
+  - header
+uses_component_wrapper_helper: true
+capture_full_width_screenshot: true
+accessibility_excluded_rules:
+  - landmark-banner-is-top-level # The header element can not be top level in the examples
+  - form-field-multiple-labels # Form labels will be ambiguous in component examples list
+  - landmark-no-duplicate-banner # banners will be duplicated in component examples list
+  - landmark-unique # aria-label attributes will be duplicated in component examples list
+examples:
+  default:
+    data:
+      environment: production
+  staging_environment:
+    data:
+      environment: staging
+  integration_environment:
+    data:
+      environment: integration
+  development_environment:
+    data:
+      environment: development
+  with_product_name:
+    data:
+      environment: production
+      product_name: Product
+  with_signout_link:
+    description: Adds a "signout" link. For use across publishing apps.
+    data:
+      environment: production
+      signout_link: true
+  with_signout_link and product name:
+    description: Adds a "signout" link for use across publishing apps and a product name
+    data:
+      environment: production
+      signout_link: true
+      product_name: Component Guide 999.9.9
+  with_navigation:
+    description: Note that [remove_bottom_border](#no_bottom_border) automatically gets set to true on the header when navigation items are added.
+    data:
+      environment: production
+      navigation_items:
+      - text: Mainstream browse
+        href: "item-1"
+        active: true
+      - text: Step by steps
+        href: "item-2"
+      - text: Some kind of topic page
+        href: "item-3"
+      - text: Jonathan Doe
+        href: "item-4"
+      - text: Logout
+        href: "item-5"
+  with_product_name_and_navigation:
+    data:
+      product_name: Component Guide 999.9.9
+      environment: production
+      navigation_items:
+      - text: Navigation item 1
+        href: "item-1"
+        active: true
+      - text: Navigation item 2
+        href: "item-2"
+      - text: Navigation item 3
+        href: "item-3"
+  with_navigation_link_data_attributes:
+    description: Supports adding data attributes i.e for tracking
+    data:
+      navigation_items:
+      - text: Departments
+        href: "item-1"
+        data:
+          module: "a custom attribute"
+          something_else: "some other custom attribute"
+      - text: Worldwide
+        href: "item-2"
+  full_width:
+    data:
+      environment: production
+      full_width: true
+  no_bottom_border:
+    description: This is useful for pages where a large full-width banner is the first thing to appear on the page, for example, the [GOV.UK homepage](https://www.gov.uk). This is also automatically enabled when navigation items exist.
+    data:
+      remove_bottom_border: true
+  with_custom_logo_link:
+    description: The header logo links to root by default. This option allows us to override that in certain instances.
+    data:
+      logo_link: "/account/home"
+accessibility_criteria: |
+  The component must:
+
+  - have a text contrast ratio higher than 4.5:1 against the background colour to meet [WCAG AA](https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast)
+
+  Images in the Header must:
+
+  - be presentational when linked to from accompanying text (crown icon).
+
+  Landmarks and Roles in the Header should:
+
+  - have a role of `banner` at the root of the component (<header>) ([ARIA 1.1](https://www.w3.org/TR/wai-aria-1.1/#banner))
+shared_accessibility_criteria:
+  - link

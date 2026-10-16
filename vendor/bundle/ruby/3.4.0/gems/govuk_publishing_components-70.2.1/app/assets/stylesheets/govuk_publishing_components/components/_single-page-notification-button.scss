@@ -1,0 +1,7 @@
+.govuk-frontend-supported .gem-c-single-page-notification-button.js-personalisation-enhancement {
+  opacity: 0;
+
+  &.gem-c-single-page-notification-button--visible {
+    opacity: 1;
+  }
+}

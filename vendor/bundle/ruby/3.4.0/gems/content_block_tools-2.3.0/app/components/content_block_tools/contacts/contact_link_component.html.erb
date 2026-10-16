@@ -1,0 +1,12 @@
+<ul class="govuk-list list-no-bullets <%= margin_classes(0, 0, 6, 0) %>">
+  <li>
+    <a href="<%= item[:url] %>" class="url">
+      <%= link_text %>
+    </a>
+  </li>
+  <% if item[:description] %>
+    <li>
+      <%= render_govspeak(item[:description]) %>
+    </li>
+  <% end %>
+</ul>

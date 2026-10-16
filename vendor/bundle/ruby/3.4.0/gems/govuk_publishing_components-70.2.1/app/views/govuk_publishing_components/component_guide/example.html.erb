@@ -1,0 +1,34 @@
+<% content_for :title, "#{@component_example.name} example - #{@component_doc.name} component" %>
+<% content_for :application_stylesheet do %>
+  <% if @component_doc.source == "application" %>
+    <%= render "application_stylesheet" %>
+  <% end %>
+<% end %>
+
+<%= render "govuk_publishing_components/components/heading", {
+    text: @component_example.name,
+    context: "#{@component_doc.name} example",
+    heading_level: 1,
+    font_size: "xl",
+    margin_bottom: 8,
+  } %>
+
+<% code_example = capture do %>
+  <%= render partial: "govuk_publishing_components/component_guide/component_doc/call", locals: { component_doc: @component_doc, example: @component_example } %>
+<% end %>
+
+<div class="component-show">
+  <div class="component-doc">
+    <div class="component-markdown">
+      <%= sanitize @component_example.html_description %>
+    </div>
+    <h2 class="govuk-heading-m">
+      How it looks
+      <small class="govuk-!-font-size-16">(<a href="<%= component_preview_path(@component_doc.id, @component_example.id) %>" class="govuk-link">preview</a>)</small>
+    </h2>
+    <%= render partial: "govuk_publishing_components/component_guide/component_doc/preview", locals: { component_doc: @component_doc, example: @component_example } %>
+
+    <h2 class="govuk-heading-m govuk-!-margin-top-4">How to call this example</h2>
+    <%= code_example %>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+.gem-link--destructive {
+  @include govuk-font(19);
+
+  &:link {
+    color: govuk-functional-colour(error);
+  }
+
+  &:visited,
+  &:hover,
+  &:active {
+    color: govuk-colour("red", $variant: "shade-25");
+  }
+
+  &:focus {
+    color: govuk-functional-colour(focus-text);
+  }
+}

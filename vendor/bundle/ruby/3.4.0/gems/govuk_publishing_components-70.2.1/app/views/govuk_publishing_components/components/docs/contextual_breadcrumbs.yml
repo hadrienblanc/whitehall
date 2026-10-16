@@ -1,0 +1,48 @@
+name: Contextual breadcrumbs
+description: Breadcrumbs that shows different things depending on the page
+body: |
+  This is a complex component that calls other components. For more accurate
+  preview with real data, see the [contextual navigation preview][preview].
+
+  There are 4 main variants of the component:
+
+  - Step by step, which uses the [step by step header][header]
+  - Parent breadcrumb, which uses the `parent` link of the page with the [breadcrumbs component][breadcrumbs]
+  - Taxon breadcrumb, which uses the `taxons` link of the page with the [breadcrumbs component][breadcrumbs]
+  - Organisation breadcrumb, which uses the `organisations` link of the page with the [breadcrumbs component][breadcrumbs]
+
+  It must always used [together with the contextual sidebar][sidebar] and [footer].
+
+  [preview]: /contextual-navigation
+  [header]: /component-guide/step_by_step_nav_header
+  [footer]: /component-guide/contextual_footer
+  [sidebar]: /component-guide/contextual_sidebar
+  [breadcrumbs]: https://components.publishing.service.gov.uk/component-guide/breadcrumbs
+accessibility_criteria: |
+  Components called by this component must be accessible
+uses_component_wrapper_helper: true
+examples:
+  default:
+    data:
+      content_item:
+        title: "A content item"
+  inverse:
+    description: Passes the `inverse` option to the breadcrumbs, if shown.
+    data:
+      content_item:
+        title: "Another content item"
+      inverse: true
+    context:
+      dark_background: true
+  without_ga4_tracking:
+    description: |
+      Disables GA4 tracking. Tracking is enabled by default. This includes GA4 tracking on the step by step nav header component when it is rendered as a breadcrumb. See the
+      [ga4-link-tracker documentation](https://github.com/alphagov/govuk_publishing_components/blob/main/docs/analytics-ga4/ga4-link-tracker.md) for more information.
+    data:
+      disable_ga4: true
+      content_item:
+        title: "A content item"
+        links:
+          part_of_step_navs:
+            - title: "Learn to drive a car: step by step"
+              base_path: "/micropigs-vs-micropugs"

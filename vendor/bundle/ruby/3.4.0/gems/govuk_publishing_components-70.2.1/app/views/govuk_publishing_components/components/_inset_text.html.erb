@@ -1,0 +1,17 @@
+<%
+  id ||= "inset-text-#{SecureRandom.hex(4)}"
+  local_assigns[:margin_bottom] ||= 6
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-inset-text gem-print-force-link-styles-within")
+  component_helper.set_id(id)
+%>
+<%= tag.div(**component_helper.all_attributes) do %>
+  <div class="govuk-inset-text">
+    <% if defined? text %>
+      <%= text %>
+    <% elsif block_given? %>
+      <%= yield %>
+    <% end %>
+  </div>
+<% end %>

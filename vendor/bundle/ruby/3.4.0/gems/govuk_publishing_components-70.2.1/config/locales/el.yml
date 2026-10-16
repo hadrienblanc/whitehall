@@ -1,0 +1,264 @@
+---
+el:
+  common:
+    hide: Απόκρυψη
+    show: Εμφάνιση
+    toggle_less: Εμφάνιση λιγότερων
+    toggle_less_html:
+    toggle_more: "%{show} %{number} ακόμη"
+    toggle_more_html:
+    translations: Μεταφράσεις
+  components:
+    accordion:
+      hide_all: Απόκρυψη όλων των ενοτήτων
+      show_all: Εμφάνιση όλων των ενοτήτων
+      this_section_visually_hidden: " αυτή η ενότητα"
+    app_promo_banner:
+      aria_label:
+      body_text:
+      close:
+      title_text:
+      view:
+    article_schema:
+      scoped_search_description: Αναζήτηση εντός %{title}
+    attachment:
+      opendocument_html: Αυτό το αρχείο είναι σε μορφή <a href='https://www.gov.uk/guidance/using-open-document-formats-odf-in-your-organisation' target=%{target} class='govuk-link'>OpenDocument</a>
+      order_a_copy: Παραγγείλετε ένα αντίγραφο
+      page:
+        one: 1 σελίδα
+        other: "%{count} σελίδες"
+      preview_aria_label:
+      preview_link:
+      reference: 'Αναφ.: %{reference}'
+      request_format_cta: Ζητήστε μια προσβάσιμη μορφή
+      request_format_details_html: Εάν χρησιμοποιείτε βοηθητική τεχνολογία (όπως ένα πρόγραμμα ανάγνωσης οθόνης) και χρειάζεστε μια έκδοση αυτού του εγγράφου σε πιο προσβάσιμη μορφή, στείλτε email στην διεύθυνση <a href='mailto:%{alternative_format_contact_email}' target='_blank' class='govuk-link'>%{alternative_format_contact_email}</a>. Πείτε μας τι μορφή χρειάζεστε. Θα μας βοηθήσει αν πείτε ποια βοηθητική τεχνολογία χρησιμοποιείτε.
+      request_format_text: Αυτό το αρχείο ενδέχεται να μην είναι κατάλληλο για χρήστες βοηθητικής τεχνολογίας.
+    back_link:
+      back: Πίσω
+    back_to_top_link:
+      contents: Περιεχόμενα
+    character_count:
+      body: Μπορείτε να εισαγάγετε έως και %{number} %{type}
+      type:
+        characters: χαρακτήρες
+        words: λέξεις
+    chart:
+      accessibility_heading:
+      accessibility_html:
+      accessibility_link:
+      source:
+      table_dropdown:
+    checkboxes:
+      or: ή
+    contents_list:
+      contents: Περιεχόμενα
+    contextual_sidebar:
+      pretitle: Επίσης μέρος του
+    cookie_banner:
+      buttons:
+        accept_cookies: Αποδοχή επιπλέον cookies
+        reject_cookies: Απόρριψη επιπλέον cookies
+        view_cookies:
+      confirmation_message:
+        accepted:
+        html: Μπορείτε %{link} ανά πάσα στιγμή.
+        link: αλλάξτε τις ρυθμίσεις cookies
+        rejected:
+      hide:
+      text:
+      - Χρησιμοποιούμε μερικά βασικά cookies για να λειτουργήσει αυτός ο ιστότοπος.
+      - Θα θέλαμε να ορίσουμε επιπλέον cookies για να κατανοήσουμε πώς χρησιμοποιείτε το GOV.UK
+      - να θυμόμαστε τις ρυθμίσεις σας και να βελτιώσουμε τις κρατικές υπηρεσίες.
+      - Χρησιμοποιούμε επίσης cookies που έχουν οριστεί από άλλους ιστότοπους για να μας βοηθήσουν να παραδώσουμε περιεχόμενο από τις υπηρεσίες τους.
+      title: Cookies στο GOV.UK
+    devolved_nations:
+      applies_to:
+      aria_label:
+      england:
+        end:
+        middle:
+        start:
+      northern_ireland:
+        end:
+        middle:
+        start:
+      scotland:
+        end:
+        middle:
+        start:
+      type:
+        consultation:
+        detailed_guide:
+        guidance:
+        publication:
+      wales:
+        end:
+        middle:
+        start:
+    feedback:
+      close: Κλείσε
+      dont_include_personal_info: Μην συμπεριλαμβάνετε προσωπικά ή οικονομικά στοιχεία, όπως τον αριθμό της Εθνικής σας Ασφάλισης ή τα στοιχεία της πιστωτικής σας κάρτας.
+      email_address: Διεύθυνση email
+      help_us_improve_govuk: Βοηθήστε μας να βελτιώσουμε το GOV.UK
+      is_not_useful: αυτή η σελίδα δεν είναι χρήσιμη
+      is_this_page_useful: Είναι χρήσιμη αυτή η σελίδα;
+      is_useful: αυτή η σελίδα είναι χρήσιμη
+      maybe: Ίσως
+      more_about_visit:
+      'no': Όχι
+      send: Αποστολή
+      send_me_survey: Στείλτε μου την έρευνα
+      something_wrong: Αναφορά προβλήματος με αυτήν τη σελίδα
+      thank_you_for_feedback: Ευχαριστούμε για το σχόλιό σας
+      what_doing: Τι κάνατε;
+      what_wrong: Τι πήγε στραβά;
+      'yes': Ναι
+    figure:
+      image_credit: 'Εικόνα από: %{credit}'
+    intervention:
+      accessible_link_text_suffix:
+    layout_footer:
+      copyright_html: <a class="govuk-footer__link govuk-footer__copyright-logo" href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">© Πνευματικά δικαιώματα Crown</a>
+      licence_html: Όλο το περιεχόμενο είναι διαθέσιμο βάσει της <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Άδειας Ανοικτής Κυβέρνησης v3.0</a> , εκτός εάν αναφέρεται διαφορετικά
+      navigation_links:
+      support_links: Σύνδεσμοι υποστήριξης
+    layout_for_public:
+      account_layout:
+        feedback:
+          banners:
+            phase_banner_html:
+        navigation:
+          menu_bar:
+            account:
+              link_text:
+            manage:
+              link_text:
+    layout_header:
+      menu: Μενού
+      top_level: Κορυφαίο επίπεδο
+    layout_super_navigation_header:
+      logo_link_title:
+      menu_toggle_label:
+        hide:
+        show:
+      navigation_link:
+        href:
+        label:
+      navigation_links_columns:
+      navigation_menu_heading:
+      navigation_search_subheading:
+      search_text:
+    metadata:
+      and:
+      from: Από
+      history: Ιστορικό
+      last_updated: Τελευταία ενημέρωση
+      part_of: Μέρος του
+      published: Δημοσιεύθηκε
+      see_all_updates: Δείτε όλες τις ενημερώσεις
+      hidden_heading:
+      hide_all_updates: απόκρυψη όλων των ενημερώσεων
+      show_all_updates: εμφάνιση όλων των ενημερώσεων
+    modal_dialogue:
+      close_modal: Κλείσιμο παράθυρου διαλόγου
+    notice:
+      banner_title:
+    option_select:
+      found_multiple:
+      found_single:
+      selected:
+    organisation_schema:
+      all_content_search_description: Εύρεση όλου του περιεχομένου από τον οργανισμό %{Organization}
+    pagination:
+      next:
+      pagination: Σελιδοποίηση
+      previous:
+    password_input:
+      button:
+      button_aria_hide_label:
+      button_aria_label:
+      button_hide:
+      error_text_prefix:
+      label:
+      password_hidden_announcement:
+      password_shown_announcement:
+    print_link:
+      text: Εκτύπωση αυτής της σελίδας
+    published_dates:
+      hidden_heading:
+      hide_all_updates: απόκρυψη όλων των ενημερώσεων
+      last_updated: Τελευταία ενημέρωση %{date}
+      published: Δημοσιεύτηκε %{date}
+      see_all_updates: δείτε όλες τις ενημερώσεις
+      show_all_updates: εμφάνιση όλων των ενημερώσεων
+    radio:
+      or: ή
+    related_footer_navigation:
+      collections: Συλλογές
+      policies: Πολιτικές
+      statistical_data_sets: Σύνολα στατιστικών δεδομένων
+      topical_events: Θεματικές εκδηλώσεις
+    related_navigation:
+      collections: Συλλογή
+      external_links: Αλλού στο διαδίκτυο
+      policies: Πολιτική
+      publishers: Δημοσιεύτηκε από
+      related_contacts: Άλλες επαφές
+      related_content: Σχετικό περιεχόμενο
+      related_external_links: Αλλού στο διαδίκτυο
+      related_guides: Αναλυτική καθοδήγηση
+      statistical_data_sets: Σύνολο στατιστικών δεδομένων
+      toggle_visually_hidden_text:
+        collections:
+        related_external_links:
+        related_guides:
+        related_items:
+        statistical_data_sets:
+        topical_events:
+        topics:
+        world_locations:
+      topical_events: Θεματική εκδήλωση
+      topics: Εξερευνήστε το θέμα
+      ukraine:
+        links:
+        title:
+      world_locations: Παγκόσμιες τοποθεσίες
+    search_box:
+      input_title: Αναζήτηση
+      label: Αναζήτηση στο GOV.UK
+      search_button: Αναζήτηση
+    service_navigation:
+      menu_toggle:
+    share_links:
+      all_opens_in_new_tab:
+      opens_in_new_tab:
+    single_page_notification_button:
+      subscribe_text:
+      unsubscribe_text:
+    skip_link:
+      text: Μετάβαση στο κύριο περιεχόμενο
+    step_by_step_nav:
+      hide: Απόκρυψη
+      hide_all: Απόκρυψη όλων των βημάτων
+      show: Εμφάνιση
+      show_all: Εμφάνιση όλων των βημάτων
+    step_by_step_nav_related:
+      part_of: Μέρος του
+      this_page_is:
+      this_page_is_part_of_html:
+    subscription_links:
+      email_signup_link_text: Λάβετε email
+      feed_link_label: Αντιγράψτε και επικολλήστε αυτό το URL στο πρόγραμμα ανάγνωσης ροής
+      feed_link_text: Εγγραφείτε στη ροή
+      subscriptions: Συνδρομές
+    success_alert:
+      success: Επιτυχία
+    summary_list:
+      delete: Διαγραφή
+      edit: Αλλαγή
+    table:
+      filter_count:
+      filter_label:
+      filter_message:
+    tabs:
+      contents: Περιεχόμενα

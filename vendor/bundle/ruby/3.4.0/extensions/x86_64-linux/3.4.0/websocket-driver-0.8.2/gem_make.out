@@ -1,0 +1,18 @@
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/websocket-driver-0.8.2/ext/websocket-driver
+/home/hadrienblanc/.local/ruby/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/websocket-driver-0.8.2/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20261016-388482-7zrgn8 sitelibdir\=./.gem.20261016-388482-7zrgn8 clean
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/websocket-driver-0.8.2/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20261016-388482-7zrgn8 sitelibdir\=./.gem.20261016-388482-7zrgn8
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/websocket-driver-0.8.2/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20261016-388482-7zrgn8 sitelibdir\=./.gem.20261016-388482-7zrgn8 install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20261016-388482-7zrgn8
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/websocket-driver-0.8.2/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20261016-388482-7zrgn8 sitelibdir\=./.gem.20261016-388482-7zrgn8 clean

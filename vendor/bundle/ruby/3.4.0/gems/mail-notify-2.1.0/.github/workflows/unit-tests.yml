@@ -1,0 +1,43 @@
+name: Unit tests
+permissions: {}
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+jobs:
+  unit-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: [ 3.1, 3.2, 3.3 ]
+    runs-on: ubuntu-latest
+    name: Run specs and coverage report
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Run specs
+        run: bin/rspec
+      - name: Run coverage report
+        uses: coverallsapp/github-action@v2
+        with:
+          fail-on-error: false
+  results:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    name: All unit tests
+    needs: [ unit-tests ]
+    steps:
+      # If any of the previous actions failed, we return a non-zero exit code
+      - run: exit 1
+        if: >-
+          ${{
+               contains(needs.*.result, 'failure')
+            || contains(needs.*.result, 'cancelled')
+            || contains(needs.*.result, 'skipped')
+          }}

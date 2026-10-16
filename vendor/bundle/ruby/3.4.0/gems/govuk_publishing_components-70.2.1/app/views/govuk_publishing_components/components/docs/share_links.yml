@@ -1,0 +1,350 @@
+name: Share links
+description: Social media links for linking to or sharing the current page on social media.
+body: |
+  The component will not process a URL into a share link itself. Pass complete share URLs to the component.
+
+  Note that the component automatically appends visually hidden text to the link (default: `Share on <your text> (opens in a new tab)`). Consider this when setting the link text.
+
+  Real world examples:
+
+    - [News article](https://www.gov.uk/government/news/fast-tracking-uk-innovation-apply-for-business-funding)
+    - [Consultation](https://www.gov.uk/government/consultations/soft-drinks-industry-levy)
+    - [Right to left](https://www.gov.uk/government/news/uk-sets-out-long-term-support-for-stable-secure-and-prosperous-afghanistan-to-2020.ur)
+
+accessibility_criteria: |
+  The share link icons must be presentational and ignored by screen readers.
+
+uses_component_wrapper_helper: true
+shared_accessibility_criteria:
+  - link
+examples:
+  default:
+    data:
+      links: [
+        {
+          href: '/facebook-share-link',
+          text: 'Facebook',
+          icon: 'facebook'
+        },
+        {
+          href: '/twitter-share-link',
+          text: 'Twitter',
+          icon: 'twitter'
+        },
+      ]
+  right_to_left:
+    data:
+      links: [
+        {
+          href: '/facebook-share-link',
+          text: 'Facebook',
+          icon: 'facebook'
+        },
+        {
+          href: '/twitter-share-link',
+          text: 'Twitter',
+          icon: 'twitter'
+        },
+      ]
+    context:
+      right_to_left: true
+  with_data_attributes:
+    description: Data attributes can be added to both the parent element and the individual share links, as shown. Note that the component defaults to having a `data-module` of `ga4-link-tracker` if tracking is enabled, but this is preserved even if another value for module is passed.
+    data:
+      data_attributes:
+        module: 'example-passed-module'
+      links: [
+        {
+          href: '/facebook-share-link',
+          text: 'Facebook',
+          icon: 'facebook',
+          data_attributes: {
+            meeting: 'hello'
+          },
+        },
+        {
+          href: '/twitter-share-link',
+          text: 'Twitter',
+          icon: 'twitter',
+          data_attributes: {
+            departing: 'goodbye'
+          },
+        },
+      ]
+  with_title:
+    data:
+      title: 'Share this page'
+      links: [
+        {
+          href: 'share',
+          text: 'Share on Facebook',
+          hidden_text: '',
+          icon: 'facebook'
+        }
+      ]
+  with_black_icons:
+    data:
+      black_icons: true
+      links: [
+        {
+          href: 'share',
+          text: 'Follow the Attorney General on Twitter',
+          hidden_text: '',
+          icon: 'twitter'
+        }
+      ]
+  with_black_links:
+    data:
+      black_links: true
+      links: [
+        {
+          href: 'share',
+          text: 'Follow the Attorney General on Twitter',
+          hidden_text: '',
+          icon: 'twitter'
+        }
+      ]
+  with_custom_visually_hidden_text:
+    description: |
+      Use this option to specify a visually hidden text for screenreaders to prepend to the link text.
+
+      If omitted, the default text used will be 'Share on'.
+    data:
+      links: [
+        {
+          href: 'share',
+          text: 'Facebook',
+          hidden_text: 'Download from',
+          icon: 'facebook'
+        }
+      ]
+  track_as_sharing_links:
+    description: |
+      In GA4, when this is set to true, a JSON is added to a data-attribute called data-ga4-link, which is detected by ga4-link-tracker.js and pushed to the dataLayer.
+      Most of the tracking values are added by default, but if you need to add more GA4 values or override defaults, you can pass a ga4_extra_data object.
+    data:
+      track_as_sharing: true
+      ga4_extra_data: {
+        optional_extra_values: "go here"
+      }
+      links: [
+        {
+          href: 'share',
+          text: 'Share on Facebook',
+          icon: 'facebook'
+        },
+        {
+          href: 'share',
+          text: 'Share on Twitter',
+          icon: 'twitter'
+        },
+      ]
+  track_as_follow_links:
+    description: |
+      Where the component is used to allow users to follow us on social media, tracking can be added.
+      When this is set to true, a JSON is added to a data-attribute called data-ga4-link, which is detected by ga4-link-tracker.js and pushed to the dataLayer.
+      Most of the tracking values are added by default, but if you need to add more GA4 values or override defaults, you can pass a ga4_extra_data object.
+    data:
+      track_as_follow: true
+      ga4_extra_data: {
+        optional_extra_values: "go here"
+      }
+      links: [
+        {
+          href: 'follow',
+          text: 'Follow us on Facebook',
+          hidden_text: '',
+          icon: 'facebook'
+        },
+        {
+          href: 'follow',
+          text: 'Follow us on Twitter',
+          hidden_text: '',
+          icon: 'twitter'
+        },
+      ]
+  stack_vertically:
+    data:
+      stacked: true
+      links: [
+        {
+          href: '/facebook-share-link',
+          text: 'Facebook',
+          icon: 'facebook'
+        },
+        {
+          href: '/twitter-share-link',
+          text: 'Twitter',
+          icon: 'twitter'
+        },
+      ]
+  arrange_in_columns:
+    description: |
+      Share links are arranged in even columns that adjust according to the available space. Note that the column width is based on an assumed width, so if the link text is long it may wrap (the example below demonstrates this).
+
+      This option uses CSS grid, which is not fully supported in IE <= 11, so in those browsers the columns are floated.
+    data:
+      columns: true
+      links: [
+        {
+          href: '/facebook-share-link',
+          text: 'Facebook',
+          icon: 'facebook'
+        },
+        {
+          href: '/twitter-share-link',
+          text: 'Twitter',
+          icon: 'twitter'
+        },
+        {
+          href: '/email-share-link',
+          text: 'Email',
+          icon: 'email'
+        },
+        {
+          href: '/flickr-share-link',
+          text: 'Flickr',
+          icon: 'flickr'
+        },
+        {
+          href: '/instagram-share-link',
+          text: 'Instagram',
+          icon: 'instagram'
+        },
+        {
+          href: '/linkedin-share-link',
+          text: 'Linkedin',
+          icon: 'linkedin'
+        },
+      ]
+  with_all_icons:
+    data:
+      stacked: true
+      links: [
+        {
+          href: '/facebook-share-link',
+          text: 'Facebook',
+          icon: 'facebook'
+        },
+        {
+          href: '/twitter-share-link',
+          text: 'Twitter',
+          icon: 'twitter'
+        },
+        {
+          href: '/email-share-link',
+          text: 'Email',
+          icon: 'email'
+        },
+        {
+          href: '/flickr-share-link',
+          text: 'Flickr',
+          icon: 'flickr'
+        },
+        {
+          href: '/instagram-share-link',
+          text: 'Instagram',
+          icon: 'instagram'
+        },
+        {
+          href: '/linkedin-share-link',
+          text: 'Linkedin',
+          icon: 'linkedin'
+        },
+        {
+          href: '/threads-share-link',
+          text: 'Threads',
+          icon: 'threads'
+        },
+        {
+          href: '/bluesky-share-link',
+          text: 'Bluesky',
+          icon: 'bluesky'
+        },
+        {
+          href: '/whatsapp-share-link',
+          text: 'WhatsApp',
+          icon: 'whatsapp'
+        },
+        {
+          href: '/other-share-link',
+          text: 'Anything else that might be included that could have quite a long name',
+          icon: 'other'
+        },
+        {
+          href: '/youtube-share-link',
+          text: 'YouTube',
+          icon: 'youtube'
+        }
+      ]
+  with_flexbox:
+    data:
+      flexbox: true
+      links: [
+        {
+          href: '/twitter-share-link',
+          text: 'Twitter',
+          icon: 'twitter'
+        },
+        {
+          href: '/instagram-share-link',
+          text: 'Instagram',
+          icon: 'instagram'
+        },
+                {
+          href: '/flickr-share-link',
+          text: 'Flickr',
+          icon: 'flickr'
+        },
+        {
+          href: '/facebook-share-link',
+          text: 'Facebook',
+          icon: 'facebook'
+        },
+        {
+          href: '/youtube-share-link',
+          text: 'YouTube',
+          icon: 'youtube'
+        },
+        {
+          href: '/other-share-link',
+          text: 'Anything else that might be included that could have quite a long name',
+          icon: 'other'
+        },
+      ]
+  with_square_icons_and_flexbox:
+    data:
+      square_icons: true
+      flexbox: true
+      links: [
+        {
+          href: '/twitter-share-link',
+          text: 'Twitter',
+          icon: 'twitter'
+        },
+        {
+          href: '/instagram-share-link',
+          text: 'Instagram',
+          icon: 'instagram'
+        },
+                {
+          href: '/flickr-share-link',
+          text: 'Flickr',
+          icon: 'flickr'
+        },
+        {
+          href: '/facebook-share-link',
+          text: 'Facebook',
+          icon: 'facebook'
+        },
+        {
+          href: '/youtube-share-link',
+          text: 'YouTube',
+          icon: 'youtube'
+        },
+        {
+          href: '/other-share-link',
+          text: 'Anything else that might be included that could have quite a long name',
+          icon: 'other'
+        },
+      ]

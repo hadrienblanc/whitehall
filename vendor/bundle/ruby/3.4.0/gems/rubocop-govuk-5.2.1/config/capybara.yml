@@ -1,0 +1,6 @@
+plugins: rubocop-capybara
+
+# Within GOV.UK we use Capybara test method syntax of feature,
+# scenario. 
+Capybara:
+  Enabled: true

@@ -1,0 +1,61 @@
+module GovukPublishingComponents
+  module Presenters
+    class DevolvedNationsHelper
+      attr_reader :national_applicability, :content_type
+
+      def initialize(local_assigns)
+        @national_applicability = local_assigns[:national_applicability]
+        @content_type = local_assigns[:content_type] || "publication"
+      end
+
+      def applicable_nations_title_text(use_english_translation = nil)
+        nation_keys = @national_applicability
+                    .select { |_, v| v[:applicable] == true }
+                    .map { |k, _| k }
+        nation_keys.each_with_index.map { |k, i| name_for_position(k, i, nation_keys.count, use_english_translation) }.join
+      end
+
+      def name_for_position(nation, position, total, use_english_translation, cy_initial_mutation: true)
+        key = if position.zero?
+                cy_initial_mutation ? :start : :middle
+              elsif position == (total - 1)
+                :end
+              else
+                :middle
+              end
+        name = I18n.t("components.devolved_nations.#{nation}.#{key}", locale: use_english_translation ? :en : nil)
+        position.zero? || position == (total - 1) ? name : ", #{name}"
+      end
+
+      def ga4_applicable_nations_title_text(remove_connector_word = nil)
+        return applicable_nations_title_text(true).gsub(" and", ",") if remove_connector_word
+
+        applicable_nations_title_text(true)
+      end
+
+      def nations_with_urls
+        url_to_nation_keys = @national_applicability.each_with_object(Hash.new { |h, k| h[k] = [] }) do |(nation_key, nation_data), hash|
+          if nation_data[:alternative_url].present?
+            hash[nation_data[:alternative_url]] << nation_key
+          end
+        end
+
+        url_to_nation_keys.transform_values do |nation_keys|
+          nations_text = nation_keys.each_with_index.map { |key, index|
+            name_for_position(key, index, nation_keys.count, false, cy_initial_mutation: false)
+          }.join
+
+          alternative_content_text(nations_text)
+        end
+      end
+
+      def alternative_content_text(nation)
+        if I18n.exists?("components.devolved_nations.type.#{@content_type}")
+          I18n.t("components.devolved_nations.type.#{@content_type}", nation:)
+        else
+          I18n.t("components.devolved_nations.type.publication", nation:)
+        end
+      end
+    end
+  end
+end

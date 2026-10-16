@@ -1,0 +1,94 @@
+name: Inverse header
+description: A wrapper to contain header content
+body: |
+  This component can be passed a block of template code and will wrap it in a light blue header. Implemented to accommodate topic and list page headings but unopinionated about its contents.
+
+  If passing links to the block make sure to add [the inverse link style](#with_paragraph_and_link), or in the case of the html publication header variant, [the inverse modifier](https://design-system.service.gov.uk/styles/links/#links-on-dark-backgrounds).
+uses_component_wrapper_helper: true
+accessibility_criteria: |
+  The component must:
+
+  * be used in conjunction with content that renders a text contrast ratio higher than 4.5:1 against the header colour to meet WCAG AA.
+examples:
+  default:
+    data:
+      block: |
+        <!-- example content -->
+          <%= render "govuk_publishing_components/components/heading", {
+            text: "Education, Training and Skills",
+            font_size: "xl",
+            padding: true,
+          } %>
+          <!-- end of example content -->
+  with_custom_padding:
+    description: Custom padding can be applied as shown, using the [Design System spacing scale](https://design-system.service.gov.uk/styles/spacing/).
+    data:
+      padding_top: 6
+      padding_bottom: 1
+      block: |
+        <!-- example content -->
+          <%= render "govuk_publishing_components/components/heading", {
+            text: "Education, Training and Skills",
+            margin_bottom: 0
+          } %>
+          <!-- end of example content -->
+  for_full_page_width:
+    description: "Used when the header covers the full width of the page, but it's content is in the grid layout. The left-right padding is removed to make the contents line up with the other items on the page."
+    data:
+        full_width: true
+        block: |
+          <!-- example content -->
+            <%= render "govuk_publishing_components/components/heading", {
+              text: "Education, Training and Skills",
+              font_size: "xl",
+              padding: true,
+            } %>
+            <!-- end of example content -->
+  html_publication_header:
+    description: "The html publication header with a blue background is used on HTML publications and CSV previews. [See example of a HTML publication on GOV.UK here](https://www.gov.uk/government/publications/ln5-0at-jackson-homes-scopwick-ltd-environmental-permit-application-advertisement/ln5-0at-jackson-homes-scopwick-ltd-environmental-permit-application), and [an example of a CSV preview on GOV.UK here](https://www.gov.uk/csv-preview/6756eeb07ec19a3516f79a3d/Malpractice_in_VTQ_-_Example_CSV_File.csv)"
+    data:
+      html_publication_header: true
+      block: |
+        <!-- example content -->
+          <%= render "govuk_publishing_components/components/heading", {
+            text: "LN5 0AT, Jackson Homes (Scopwick) Ltd: environmental permit application",
+            inverse: true,
+            context: "Notice",
+            padding: true,
+            font_size: "xl"
+          } %>
+          <p class="publication-header__last-changed">Published 22 April 2016</p>
+          <!-- end of example content -->
+  html_publication_header_with_subtext:
+    description: "The white subtext can be used with the html publication header variant. We don't currently support black subtext to be used with the default variant as it's not in use on GOV.UK. If you need this please add it as a variant to the component."
+    data:
+      subtext: This is some text
+      html_publication_header: true
+      block: |
+        <!-- example content -->
+          <%= render "govuk_publishing_components/components/heading", {
+            text: "Education, Training and Skills",
+            inverse: true,
+            margin_bottom: 0
+          } %>
+          <!-- end of example content -->
+  hmrc_header:
+    description: For use on HMRC manual pages such as [Capital Gains Manual](https://www.gov.uk/hmrc-internal-manuals/capital-gains-manual).
+    data:
+      hmrc_header: true
+      block: |
+        <!-- example content -->
+          <%= render "govuk_publishing_components/components/heading", {
+            context: "HMRC internal manual",
+            text: "Capital Gains Manual",
+            inverse: true,
+            margin_bottom: 0,
+            font_size: "xl"
+          } %>
+          <!-- end of example content -->
+  with_paragraph_and_link:
+    data:
+      block: |
+        <p class="gem-c-lead-paragraph">
+          Schools and academies, further and higher education apprenticeships and <a href="#other-skills" class="govuk-link gem-c-inverse-header__link">other skills</a> training, student funding, early years.
+        </p>

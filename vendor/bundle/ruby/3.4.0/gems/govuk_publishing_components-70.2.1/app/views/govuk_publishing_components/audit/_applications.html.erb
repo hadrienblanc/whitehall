@@ -1,0 +1,156 @@
+<%
+  title = "Applications (" + @applications.length.to_s + ")"
+  title = "This application" unless ENV["MAIN_COMPONENT_GUIDE"]
+%>
+<%= render "govuk_publishing_components/components/heading", {
+  text: title,
+  font_size: "l",
+  margin_bottom: 6,
+} %>
+
+<% if @applications.any? %>
+  <%= render "govuk_publishing_components/components/details", {
+    title: "How to use this information",
+  } do %>
+    <p class="govuk-body">This page shows information about component use on GOV.UK. This information has been cross referenced with the components in the gem to produce warnings where e.g. JavaScript for a component exists but has not been included in an application.</p>
+    <p class="govuk-body">Warnings should be investigated, although there may be a reason why the application has been configured as it is. Note that 'code' can refer to templates or ruby code.</p>
+  <% end %>
+
+  <%
+    accordion_content = nil
+    summary = nil
+  %>
+  <% application_items = @applications.map do |application| %>
+    <%
+      if @other_applications
+        summary = '<strong class="govuk-tag govuk-tag--red">Application not found</strong>'
+
+        if application[:application_found]
+          summary = "Warnings: 0"
+          summary = "Warnings: <strong class=\"govuk-tag govuk-tag--red\">#{application[:warning_count]}</strong>" if application[:warning_count] > 0
+        end
+      end
+    %>
+
+    <% accordion_content = capture do %>
+      <% if application[:application_found] %>
+        <% github_link = "https://github.com/alphagov/" + application[:dir] + "/blob/main/" %>
+
+        <% if @other_applications %>
+          <% application[:warnings].each do |warning| %>
+            <p class="govuk-body">
+              <strong class="govuk-tag">Warn</strong>
+              <strong><%= warning[:component] %></strong> - <%= warning[:message] %>
+            </p>
+          <% end %>
+        <% else %>
+          <p class="govuk-body">More information about this application is available by viewing the component guide from a locally running instance of govuk_publishing_components.</p>
+        <% end %>
+
+        <%= render "govuk_publishing_components/components/heading", {
+          text: "Components used",
+          font_size: "m",
+          margin_bottom: 4,
+          heading_level: 3,
+        } %>
+
+        <p class="govuk-body">Note that this information includes components within components - the application may not directly reference them.</p>
+
+        <% items = [] %>
+        <% application[:summary].each do |item| %>
+          <% content = capture do %>
+            <% if item[:value].length > 0 %>
+              <%= item[:value].join(", ") %>
+            <% else %>
+              None
+            <% end %>
+          <% end %>
+          <%
+            items << {
+              field: "#{item[:name]} (#{item[:value].length})",
+              value: content,
+            }
+          %>
+        <% end %>
+
+        <%= render "govuk_publishing_components/components/summary_list", {
+          items: items,
+        } %>
+
+        <% if application[:gem_style_references].any? %>
+          <%= render "govuk_publishing_components/components/heading", {
+            text: "Component references (#{application[:gem_style_references].length})",
+            font_size: "m",
+            margin_bottom: 4,
+            heading_level: 3,
+          } %>
+
+          <p class="govuk-body">This shows instances of `gem-c-` classes found in the application. This could be a style override or hard coded component markup, which is a violation of our principle of <a href="https://github.com/alphagov/govuk_publishing_components/blob/main/docs/component_principles.md#a-component-is-isolated-when" class="govuk-link">component isolation</a>.</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <% application[:gem_style_references].each do |ref| %>
+              <li>
+                <%= link_to ref, github_link + ref, class: "govuk-link" %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <% if application[:jquery_references].any? %>
+          <%= render "govuk_publishing_components/components/heading", {
+            text: "jQuery references (#{application[:jquery_references].length})",
+            font_size: "m",
+            margin_bottom: 4,
+            heading_level: 3,
+          } %>
+          <p class="govuk-body">This shows JavaScript files that might contain jQuery, which we are trying to remove.</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <% application[:jquery_references].each do |ref| %>
+              <li>
+                <%= link_to ref, github_link + ref, class: "govuk-link" %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <% application_components = application[:application_components] %>
+        <% if application_components[:component_file_details].any? %>
+          <%= render "govuk_publishing_components/components/heading", {
+            text: "Application components (#{application_components[:component_file_details].length})",
+            font_size: "m",
+            margin_bottom: 4,
+            heading_level: 3,
+          } %>
+          <p class="govuk-body">This is a list of components found in this application. Note that some components may appear to be missing files due to inconsistencies in directory structure and naming conventions.</p>
+          <%= render "component_contents", passed_components: application_components, show_application_name: false %>
+        <% end %>
+      <% else %>
+        <p class="govuk-body">This application was not found. This could be because you do not have this repository checked out locally.</p>
+      <% end %>
+    <% end %>
+
+    <%
+      {
+        heading: {
+          text: application[:name],
+        },
+        summary: {
+          text: sanitize(summary),
+        },
+        content: {
+          html: accordion_content,
+        },
+      }
+    %>
+  <% end %>
+
+  <% if ENV["MAIN_COMPONENT_GUIDE"] %>
+    <%= render "govuk_publishing_components/components/accordion", {
+      items: application_items,
+    } %>
+  <% else %>
+    <p class="govuk-body"><%= sanitize(summary) %></p>
+    <%= accordion_content %>
+  <% end %>
+<% else %>
+  <p class="govuk-body">No applications found.</p>
+<% end %>

@@ -1,0 +1,323 @@
+name: Related Navigation
+description: Component showing related content, including topics, guidance and collections
+accessibility_criteria: |
+  - Should have a role of 'navigation' on any navigation elements inside the component
+  - Should be marked up as navigation and not as tangential content
+uses_component_wrapper_helper: true
+shared_accessibility_criteria:
+  - link
+examples:
+  default:
+    data:
+      content_item:
+        links:
+          ordered_related_items:
+            - title: Find an apprenticeship
+              base_path: /apply-apprenticeship
+            - title: Training and study at work
+              base_path: /training-study-work-your-rights
+            - title: Careers helpline for teenagers
+              base_path: /careers-helpline-for-teenagers
+  with_mainstream_browse_pages:
+    data:
+      content_item:
+        links:
+          mainstream_browse_pages:
+          - title: Driving licences
+            base_path: /browse/driving/driving-licences
+            document_type: mainstream_browse_page
+          - title: Driving tests and learning to drive or ride
+            base_path: /browse/driving/learning-to-drive
+            document_type: mainstream_browse_page
+  with_taxons:
+    data:
+      content_item:
+        links:
+          taxons:
+          - title: Driving instruction and driving lessons
+            base_path: /transport/driving-instruction-and-driving-lessons
+            phase: live
+            document_type: taxon
+  with_mainstream_browse_pages_and_taxons:
+    description: Mainstream browse pages take precedence over the sidewide topic taxonomy.
+    data:
+      content_item:
+        links:
+          mainstream_browse_pages:
+          - title: Driving licences
+            base_path: /browse/driving/driving-licences
+            document_type: mainstream_browse_page
+          - title: Driving tests and learning to drive or ride
+            base_path: /browse/driving/learning-to-drive
+            document_type: mainstream_browse_page
+          taxons:
+          - title: Driving instruction and driving lessons
+            base_path: /transport/driving-instruction-and-driving-lessons
+            phase: live
+            document_type: taxon
+  with_collections:
+    data:
+      content_item:
+        links:
+          document_collections:
+            - title: Recruit an apprentice (formerly apprenticeship vacancies)
+              base_path: /government/collections/apprenticeship-vacancies
+              document_type: document_collection
+            - title: The future of jobs and skills
+              base_path: /government/collections/the-future-of-jobs-and-skills
+              document_type: document_collection
+  with_topical_events:
+    data:
+      content_item:
+        links:
+          topical_events:
+            - title: UK-China High-Level People to People Dialogue 2017
+              base_path: /government/topical-events/uk-china-high-level-people-to-people-dialogue-2017
+              document_type: topical_event
+  with_world_locations:
+    data:
+      content_item:
+        links:
+          world_locations:
+            - title: South Sudan
+              base_path: /world/south-sudan/news
+            - title: USA
+              base_path: /world/usa/news
+  with_external_related_links:
+    description: The component can accept other related links, such as external links or other contacts.
+    data:
+      content_item:
+        details:
+          external_related_links:
+            - url: "https://wikipedia.org"
+              title: "Wikipedia 1"
+            - url: "https://wikipedia.org"
+              title: "Wikipedia 2"
+            - url: "https://wikipedia.org"
+              title: "Wikipedia 3"
+            - url: "https://wikipedia.org"
+              title: "Wikipedia 4"
+            - url: "https://wikipedia.org"
+              title: "Wikipedia 5"
+            - url: "https://wikipedia.org"
+              title: "Wikipedia 6"
+            - url: "https://wikipedia.org"
+              title: "Wikipedia 7"
+  with_extensive_world_locations:
+    description: The component handles having a long list of content passed to it, by only showing the first few items and hiding the rest behind a Show More toggle.
+    data:
+      content_item:
+        links:
+          world_locations:
+            - title: Algeria
+              base_path: /world/algeria/news
+            - title: Austria
+              base_path: /world/austria/news
+            - title: Belarus
+              base_path: /world/belarus/news
+            - title: Belgium
+              base_path: /world/belgium/news
+            - title: Bolivia
+              base_path: /world/bolivia/news
+            - title: Brazil
+              base_path: /world/brazil/news
+            - title: Canada
+              base_path: /world/canada/news
+            - title: Chile
+              base_path: /world/chile/news
+            - title: China
+              base_path: /world/China/news
+            - title: Cuba
+              base_path: /world/cuba/news
+            - title: Denmark
+              base_path: /world/denmark/news
+            - title: Egypt
+              base_path: /world/egypt/news
+            - title: Fiji
+              base_path: /world/fiji/news
+            - title: Finland
+              base_path: /world/finland/news
+            - title: France
+              base_path: /world/france/news
+            - title: Germany
+              base_path: /world/germany/news
+            - title: Greece
+              base_path: /world/greece/news
+            - title: Norway
+              base_path: /world/norway/news
+            - title: Russia
+              base_path: /world/russia/news
+            - title: Sweden
+              base_path: /world/sweden/news
+            - title: United Kingdom
+              base_path: /world/united-kingdom/news
+            - title: USA
+              base_path: /world/usa/news
+  with_quick_links:
+    data:
+      content_item:
+        details:
+          quick_links:
+            - title: "Money Laundering Regulations: introduction"
+              url: "https://www.gov.uk/money-laundering-regulations-introduction"
+            - title: "Money Laundering Regulations: report suspicious activities"
+              url: "https://www.gov.uk/money-laundering-regulations-report-suspicious-activities"
+  with_related_statistical_data_sets:
+    data:
+      content_item:
+        links:
+          related_statistical_data_sets:
+          - title: International road fuel prices
+            base_path: /government/statistical-data-sets/comparisons-of-industrial-and-domestic-energy-prices-monthly-figures
+            document_type: statistical_data_set
+          - title: Weekly road fuel prices
+            base_path: /government/statistical-data-sets/oil-and-petroleum-products-weekly-statistics
+            document_type: statistical_data_set
+  with_related_contacts:
+    data:
+      content_item:
+        links:
+          related:
+            - title: Pest Control
+              base_path: /pest-control
+              document_type: contact
+  with_different_languages:
+    description: |
+      Each link can have a `locale` parameter to set the correct `lang` attribute.
+
+      If the link locale is the same as the document locale, then the lang attribute won't be used. For example, `lang="en"` won't appear on a page written in English.
+    data:
+      content_item:
+        links:
+          ordered_related_items:
+            - title: Find an apprenticeship (French)
+              base_path: /apply-apprenticeship.fr
+              locale: fr
+          mainstream_browse_pages:
+            - title: Apprenticeships, 14 to 19 education and training for work (Korean)
+              base_path: /browse/education/find-course.ko
+              document_type: topic
+              locale: ko
+          topical_events:
+            - title: UK-China High-Level People to People Dialogue 2017 (Spanish)
+              base_path: /government/topical-events/uk-china-high-level-people-to-people-dialogue-2017.es
+              document_type: topical_event
+              locale: es
+          related:
+            - title: Jam producers (Spanish)
+              base_path: /jam-producers.es
+              document_type: contact
+              locale: es
+          related_statistical_data_sets:
+            - title: International road fuel prices (Italian)
+              base_path: /government/statistical-data-sets/comparisons-of-industrial-and-domestic-energy-prices-monthly-figures.it
+              document_type: statistical_data_set
+              locale: it
+          document_collections:
+            - title: Recruit an apprentice (formerly apprenticeship vacancies)
+              base_path: /government/collections/apprenticeship-vacancies
+              document_type: document_collection
+              locale: en
+          world_locations:
+            - title: South Sudan (Arabic)
+              base_path: /world/south-sudan/news.ar
+              locale: ar
+        details:
+          external_related_links:
+            - url: "http://media.slc.co.uk/sfe/1718/ft/sfe_terms_and_conditions_guide_1718_d.pdf"
+              title: "Student loans: terms and conditions 2017 to 2018 (PDF, 136KB)"
+              locale: en
+  with_all_related-content:
+    data:
+      content_item:
+        links:
+          ordered_related_items:
+            - title: Find an apprenticeship
+              base_path: /apply-apprenticeship
+            - title: Training and study at work
+              base_path: /training-study-work-your-rights
+            - title: Careers helpline for teenagers
+              base_path: /careers-helpline-for-teenagers
+          mainstream_browse_pages:
+            - title: Apprenticeships, 14 to 19 education and training for work
+              base_path: /browse/education/find-course
+              document_type: mainstream_browse_page
+            - title: Finding a job
+              base_path: /browse/working/finding-job
+              document_type: mainstream_browse_page
+          topical_events:
+            - title: UK-China High-Level People to People Dialogue 2017
+              base_path: /government/topical-events/uk-china-high-level-people-to-people-dialogue-2017
+              document_type: topical_event
+          related:
+            - title: Pest Control
+              base_path: /pest-control
+              document_type: contact
+          related_statistical_data_sets:
+            - title: International road fuel prices
+              base_path: /government/statistical-data-sets/comparisons-of-industrial-and-domestic-energy-prices-monthly-figures
+              document_type: statistical_data_set
+            - title: Weekly road fuel prices
+              base_path: /government/statistical-data-sets/oil-and-petroleum-products-weekly-statistics
+              document_type: statistical_data_set
+          document_collections:
+            - title: Recruit an apprentice (formerly apprenticeship vacancies)
+              base_path: /government/collections/apprenticeship-vacancies
+              document_type: document_collection
+            - title: The future of jobs and skills
+              base_path: /government/collections/the-future-of-jobs-and-skills
+              document_type: document_collection
+          world_locations:
+            - title: South Sudan
+              base_path: /world/south-sudan/news
+            - title: USA
+              base_path: /world/usa/news
+        details:
+          external_related_links:
+            - url: "http://media.slc.co.uk/sfe/1718/ft/sfe_terms_and_conditions_guide_1718_d.pdf"
+              title: "Student loans: terms and conditions 2017 to 2018 (PDF, 136KB)"
+            - title: The Student Room repaying your student loan
+              url: https://www.thestudentroom.co.uk/content.php?r=5967-Repaying-your-student-loan
+  without_ga4_tracking:
+    description: Disables GA4 tracking on the banner. Tracking is enabled by default and uses the [GA4 link tracker](https://github.com/alphagov/govuk_publishing_components/blob/main/docs/analytics-ga4/ga4-link-tracker.md).
+    data:
+      disable_ga4: true
+      content_item:
+        links:
+          ordered_related_items:
+            - title: Find an apprenticeship
+              base_path: /apply-apprenticeship
+            - title: Training and study at work
+              base_path: /training-study-work-your-rights
+            - title: Careers helpline for teenagers
+              base_path: /careers-helpline-for-teenagers
+          mainstream_browse_pages:
+            - title: Apprenticeships, 14 to 19 education and training for work
+              base_path: /browse/education/find-course
+              document_type: mainstream_browse_page
+            - title: Finding a job
+              base_path: /browse/working/finding-job
+              document_type: mainstream_browse_page
+          topical_events:
+            - title: UK-China High-Level People to People Dialogue 2017
+              base_path: /government/topical-events/uk-china-high-level-people-to-people-dialogue-2017
+              document_type: topical_event
+          world_locations:
+            - title: Algeria
+              base_path: /world/algeria/news
+            - title: Austria
+              base_path: /world/austria/news
+            - title: Belarus
+              base_path: /world/belarus/news
+            - title: Belgium
+              base_path: /world/belgium/news
+            - title: Bolivia
+              base_path: /world/bolivia/news
+            - title: Brazil
+              base_path: /world/brazil/news
+            - title: Canada
+              base_path: /world/canada/news
+            - title: Chile
+              base_path: /world/chile/news
+            - title: China
+              base_path: /world/China/news

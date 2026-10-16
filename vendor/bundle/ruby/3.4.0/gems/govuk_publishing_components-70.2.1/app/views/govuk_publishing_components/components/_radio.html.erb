@@ -1,0 +1,133 @@
+<%
+  local_assigns[:margin_bottom] ||= 6
+  shared_helper = GovukPublishingComponents::Presenters::SharedHelper.new(local_assigns)
+  id ||= nil
+  id_prefix ||= "radio-#{SecureRandom.hex(4)}"
+  items ||= []
+
+  label ||= nil
+  heading ||= nil
+  heading_caption ||= nil
+  heading_size ||= nil
+  visually_hidden_heading ||= false
+  small ||= false
+  inline ||= false
+  heading_level = shared_helper.get_heading_level
+  heading_classes = %w(govuk-fieldset__heading)
+  heading_classes << "gem-c-radio__heading-text" if heading_level == "h1"
+
+  if (shared_helper.valid_heading_size?(heading_size))
+    size = heading_size
+  elsif heading_level == "h1"
+    size = "xl"
+  else
+    size = "m"
+  end
+
+  description ||= nil
+  hint ||= nil
+  error_message ||= nil
+  error_items ||= []
+
+  has_error = error_message || error_items.any?
+  hint_id = "hint-#{SecureRandom.hex(4)}" if hint
+  error_id = "error-#{SecureRandom.hex(4)}"
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("govuk-form-group")
+  component_helper.add_class("govuk-form-group--error") if has_error
+  component_helper.set_id(id)
+
+  radio_classes = %w(govuk-radios)
+  radio_classes << "govuk-radios--small" if small
+  radio_classes << "govuk-radios--inline" if inline
+
+  legend_classes = %w(govuk-fieldset__legend)
+  legend_classes << "govuk-fieldset__legend--#{size}"
+  legend_classes << "govuk-visually-hidden" if visually_hidden_heading
+
+  aria = "#{hint_id} #{"#{error_id}" if has_error}".strip if hint or has_error
+
+  # check if any item is set as being conditional
+  has_conditional = items.any? { |item| item.is_a?(Hash) && item[:conditional] }
+%>
+<%= tag.div(**component_helper.all_attributes) do %>
+  <%= tag.fieldset class: "govuk-fieldset", "aria-describedby": aria do %>
+    <% if heading.present? %>
+      <%= tag.legend class: legend_classes do %>
+        <%= tag.span(heading_caption, class: "govuk-caption-#{size}") if heading_caption.present? %>
+        <%= content_tag(heading_level, heading, class: heading_classes) %>
+      <% end %>
+    <% end %>
+    <% if description.present? %>
+      <%= tag.div description, class: "govuk-body" %>
+    <% end %>
+
+    <% if hint %>
+      <%= render "govuk_publishing_components/components/hint", {
+        id: hint_id,
+        text: hint,
+      } %>
+    <% end %>
+
+    <% if has_error %>
+      <%= render "govuk_publishing_components/components/error_message", {
+        id: error_id,
+        text: error_message,
+        items: error_items,
+      } %>
+    <% end %>
+
+    <%= content_tag :div, class: radio_classes,
+      data: {
+        module: ("govuk-radios" if has_conditional),
+      } do %>
+      <% items.each_with_index do |item, index| %>
+        <% if item === :or %>
+          <%= tag.div t("components.radio.or"), class: "govuk-radios__divider" %>
+        <% else %>
+          <%
+            label_id = item[:id] ? item[:id] : "#{id_prefix}-#{index}"
+            label_hint_id = "label-hint-#{SecureRandom.hex(4)}" if item[:hint_text].present?
+            conditional_id = "conditional-#{SecureRandom.hex(4)}" if item[:conditional].present?
+
+            data_attrs = { "aria-controls": conditional_id }
+            data_attrs["tracking-url"] =  item[:url] if item.key?(:url)
+
+            if item.fetch(:data_attributes, {}).any?
+              data_attrs = data_attrs.merge(item[:data_attributes])
+            end
+          %>
+          <%= tag.div class: %w( gem-c-radio govuk-radios__item ) do %>
+            <%= check_box_tag name,
+              item[:value],
+              item[:checked],
+              {
+                class: "govuk-radios__input",
+                id: label_id,
+                type: "radio",
+                aria: {
+                  describedby: label_hint_id,
+                },
+                data: data_attrs,
+              } %>
+            <%= render "govuk_publishing_components/components/label", {
+              hint_id: label_hint_id,
+              html_for: label_id,
+              is_radio_label: true,
+              hint_text: item[:hint_text],
+              text: item[:text],
+              bold: item[:bold],
+            } %>
+          <% end %>
+
+          <% if item[:conditional] %>
+            <%= tag.div item[:conditional], class:"govuk-radios__conditional govuk-radios__conditional--hidden govuk-body", id: conditional_id %>
+          <% end %>
+
+        <% end %>
+      <% end %>
+    <% end %>
+
+  <% end %>
+<% end %>

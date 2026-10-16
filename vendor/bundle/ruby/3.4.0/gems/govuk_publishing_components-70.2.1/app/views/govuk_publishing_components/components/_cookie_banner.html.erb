@@ -1,0 +1,90 @@
+<%
+  id ||= "global-cookie-message"
+  title ||= t("components.cookie_banner.title")
+  text ||= t("components.cookie_banner.text")
+  if text.kind_of?(Array)
+    newtext = ""
+    text.each do |t|
+      newtext += "<p class='govuk-body'>#{t}</p>"
+    end
+    text = newtext
+  else
+    text = "<p class='govuk-body'>#{text}</p>"
+  end
+  text = raw(text)
+
+  cookie_preferences_href ||= "/help/cookies"
+  confirmation_message ||= raw(t("components.cookie_banner.confirmation_message.html",
+                                link: link_to(
+                                  t("components.cookie_banner.confirmation_message.link"),
+                                  cookie_preferences_href,
+                                  class: "govuk-link",
+                                )))
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.set_id(id)
+  component_helper.add_class("gem-c-cookie-banner govuk-clearfix govuk-cookie-banner js-banner-wrapper")
+
+  component_helper.add_data_attribute({ module: "cookie-banner", nosnippet: "" })
+  component_helper.add_role("region")
+  component_helper.add_aria_attribute(label: title)
+  component_helper.set_hidden("hidden")
+
+  disable_ga4 ||= false
+%>
+
+<%= tag.div(**component_helper.all_attributes) do %>
+  <div class="govuk-cookie-banner__message govuk-width-container">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-cookie-banner__heading govuk-heading-m"><%= title %></h2>
+        <div tabindex="-1" class="govuk-cookie-banner__content gem-c-cookie-banner__confirmation">
+          <div class="gem-c-cookie-banner__content"><%= text %></div>
+          <p class="gem-c-cookie-banner__confirmation-message--accepted govuk-body" hidden
+          <% unless disable_ga4 %>
+            data-ga4-cookie-banner <%# GA4 pageview JS looks for data-ga4-cookie-banner %>
+            data-module="ga4-link-tracker"
+            data-ga4-set-indexes
+            data-ga4-link="<%= { event_name: "navigation", type: "cookie banner", section: t("components.cookie_banner.confirmation_message.accepted", locale: :en) }.to_json %>"
+          <% end %>><%= t("components.cookie_banner.confirmation_message.accepted") %>. <span class="gem-c-cookie-banner__confirmation-message"><%= confirmation_message %></span></p>
+          <p class="gem-c-cookie-banner__confirmation-message--rejected govuk-body" hidden><%= t("components.cookie_banner.confirmation_message.rejected") %>. <span class="gem-c-cookie-banner__confirmation-message"><%= confirmation_message %></span></p>
+        </div>
+      </div>
+    </div>
+    <div class="js-confirmation-buttons govuk-button-group">
+      <%= render "govuk_publishing_components/components/button", {
+          name: "cookies",
+          text: t("components.cookie_banner.buttons.accept_cookies"),
+          data_attributes: {
+            "accept-cookies": "true",
+            "cookie-types": "all",
+          },
+      } %>
+      <%= render "govuk_publishing_components/components/button", {
+          name: "cookies",
+          text: t("components.cookie_banner.buttons.reject_cookies"),
+          data_attributes: {
+            "reject-cookies": "true",
+          },
+      } %>
+      <a class="govuk-link" href="<%= cookie_preferences_href %>"><%= t("components.cookie_banner.buttons.view_cookies") %></a>
+    </div>
+    <div hidden class="js-hide-button govuk-button-group">
+      <%
+        ga4_event = {
+          event_name: "select_content",
+          type: "cookie banner",
+          action: "closed",
+          section: t("components.cookie_banner.confirmation_message.accepted", locale: :en),
+        }.to_json unless disable_ga4
+      %>
+      <button
+        class="gem-c-cookie-banner__hide-button govuk-button"
+        data-hide-cookie-banner="true"
+        data-module="<%= "ga4-event-tracker" unless disable_ga4 %>"
+        <% unless disable_ga4 %> data-ga4-event="<%= ga4_event %>" <% end %>>
+          <%= t("components.cookie_banner.hide") %>
+        </button>
+    </div>
+  </div>
+<% end %>

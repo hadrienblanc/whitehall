@@ -1,0 +1,34 @@
+name: Phase banner
+description: |
+  A banner that indicates content is in a certain phase (usually alpha or beta), with an optional explanation
+accessibility_criteria: |
+  The label must:
+
+  - have a text contrast ratio higher than 4.5:1 against the background colour to meet WCAG AA
+uses_component_wrapper_helper: true
+shared_accessibility_criteria:
+  - link
+examples:
+  default:
+    data:
+      phase: alpha
+  beta_banner:
+    data:
+      phase: beta
+  with_message:
+    data:
+      phase: beta
+      message: This is an optional different message to explain what the state means in this
+        context which can take <a class="govuk-link" href='https://www.gov.uk'>HTML</a>
+  inverse_for_blue_background:
+    data:
+      phase: beta
+      inverse: true
+    context:
+      dark_background: true
+  without_ga4_tracking:
+    description: |
+      Disables GA4 tracking on the banner. Tracking is enabled by default. This includes link tracking on the component itself, and allows pageviews to record the presence of the banner on page load.
+    data:
+      phase: beta
+      disable_ga4: true

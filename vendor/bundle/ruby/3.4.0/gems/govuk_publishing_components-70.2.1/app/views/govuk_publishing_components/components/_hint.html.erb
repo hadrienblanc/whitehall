@@ -1,0 +1,12 @@
+<%
+  local_assigns[:id] ||= "hint-#{SecureRandom.hex(4)}"
+  is_radio_label_hint ||= false
+  right_to_left ||= false
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-hint govuk-hint")
+  component_helper.add_class("govuk-radios__hint") if is_radio_label_hint
+%>
+<%= tag.div(**component_helper.all_attributes, dir: right_to_left ? "rtl" : nil) do %>
+  <%= text %>
+<% end %>

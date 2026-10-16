@@ -1,0 +1,9 @@
+@import "govuk/components/pagination";
+
+// stylelint-disable declaration-no-important
+@include govuk-media-query($media-type: print) {
+  .gem-c-pagination * {
+    color: govuk-functional-colour(print-text) !important;
+  }
+}
+// stylelint-enable declaration-no-important

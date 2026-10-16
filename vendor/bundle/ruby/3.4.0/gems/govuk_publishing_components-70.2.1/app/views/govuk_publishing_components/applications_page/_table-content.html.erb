@@ -1,0 +1,48 @@
+<% content.each do |app| %>
+  <tr class="govuk-table__row" data-filter-item>
+    <td class="govuk-table__cell">
+      <a href="<%= app[:link] %>" class="govuk-link"><%= app[:name] %></a>
+    </td>
+    <td class="govuk-table__cell">
+      <%= type %>
+    </td>
+    <td class="govuk-table__cell">
+      <% if app[:source] %>
+        <%= app[:source] %>
+      <% else %>
+        not found
+      <% end %>
+    </td>
+    <td class="govuk-table__cell">
+      <% if app[:gem_version] %>
+        <%= render "govuk_publishing_components/components/tag", {
+          text: app[:gem_version],
+          colour: app[:gem_version_status],
+        } %>
+      <% end %>
+    </td>
+    <td class="govuk-table__cell">
+      <% if app[:sass_version] %>
+        <%= render "govuk_publishing_components/components/tag", {
+          text: app[:sass_version],
+        } %>
+      <% end %>
+    </td>
+    <td class="govuk-table__cell">
+      <% if app[:ruby_version] %>
+        <%= render "govuk_publishing_components/components/tag", {
+          text: app[:ruby_version],
+          colour: app[:ruby_version_status],
+        } %>
+      <% end %>
+    </td>
+    <td class="govuk-table__cell">
+      <% if app[:yarn_version] %>
+        <%= render "govuk_publishing_components/components/tag", {
+          text: app[:yarn_version],
+          colour: app[:yarn_version_status],
+        } %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

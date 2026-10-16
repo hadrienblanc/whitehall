@@ -1,0 +1,96 @@
+name: Details
+description: Make a page easier to scan by letting users reveal more detailed information only if they need it
+uses_component_wrapper_helper: true
+shared_accessibility_criteria:
+  - link
+accessibility_criteria: |
+  The component must:
+
+  * accept focus
+  * be focusable with a keyboard
+  * be usable with a keyboard
+  * be usable with touch
+  * indicate when it has focus
+  * toggle the visibility of the details element's content when interacted with
+  * indicate the expanded state when details' content is visible
+  * indicate the collapsed state when details' content is hidden
+govuk_frontend_components:
+  - details
+examples:
+  default:
+    data:
+      title: Help with nationality
+      block: |
+        We need to know your nationality so we can work out which elections you’re entitled to vote in. If you can’t provide your nationality, you’ll have to send copies of identity documents through the post.
+  basic_rtl:
+    data:
+      direction: rtl
+      title: Help with nationality
+      block: |
+        We need to know your nationality so we can work out which elections you’re entitled to vote in. If you can’t provide your nationality, you’ll have to send copies of identity documents through the post.
+  with_aria_attributes:
+    description: |
+      Aria attributes can be applied to the summary element of the component.
+    data:
+      title: Works with 2 agencies and public bodies
+      summary_aria_attributes:
+        label: Attorney General's office
+      block: |
+        <ul>
+          <li>Department 1</li>
+          <li>Department 2</li>
+        </ul>
+    embed: |
+      <div>
+        <p class="govuk-body">Attorney General's office</p>
+        <%= component %>
+      </div>
+  with_ga4_tracking:
+    description: |
+      GA4 tracking is mostly handled internally by the component, apart from the required attribute `index_section_count`. This records the number of details components on the page and must be passed by the hosting application. Other GA4 attributes can also be passed if required, including to override attributes set by the component (for some reason this doesn't work in the component guide but works in applications).
+
+      The tracking automatically includes `index_section` as the index of the component on the page compared with other instances of the component that are also being tracked, e.g. the first details component on a page will be `index_section` 1, the second `index_section` 2, etc.
+
+      Link tracking for the contents of the details component is not included due to varying tracking requirements. If you need to track links in the component, wrap it in the application with the [GA4 link tracker](https://github.com/alphagov/govuk_publishing_components/blob/main/docs/analytics-ga4/ga4-link-tracker.md).
+    data:
+      title: What did the ground say to the train?
+      ga4_attributes: {
+        index_section_count: 6,
+        type: "not the default"
+      }
+      block: |
+        Between you and me, I've been tracked.
+  disable_ga4_tracking:
+    description: Disables GA4 tracking on the component. Tracking is enabled by default.
+    data:
+      title: No tracking here
+      disable_ga4: true
+      block: Or here, but thanks for looking.
+  open:
+    data:
+      title: Help with nationality
+      open: true
+      block: |
+        We need to know your nationality so we can work out which elections you’re entitled to vote in. If you can’t provide your nationality, you’ll have to send copies of identity documents through the post.
+  with_black_theme:
+    description: Used against our light blue header colour.
+    data:
+      title: Help with nationality
+      theme: black
+      block: |
+        We need to know your nationality so we can work out which elections you’re entitled to vote in. If you can’t provide your nationality, you’ll have to send copies of identity documents through the post. <a href="#" class="govuk-link">Example link</a>
+  on_a_dark_background:
+    description: For use against a dark background.
+    context:
+      dark_background: true
+    data:
+      title: Help with nationality
+      inverse: true
+      block: |
+        We need to know your nationality so we can work out which elections you’re entitled to vote in. If you can’t provide your nationality, you’ll have to send copies of identity documents through the post. <a href="#" class="govuk-link">Example link</a>
+  small:
+    data:
+      small: true
+      title: Help with nationality
+      block: |
+        We need to know your nationality so we can work out which elections you’re entitled to vote in. If you can’t provide your nationality, you’ll have to send copies of identity documents through the post.

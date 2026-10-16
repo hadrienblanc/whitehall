@@ -1,0 +1,233 @@
+name: Attachment
+description: Displays a link to download an attachment and metadata about the file
+body: |
+  This component shows a link to a document that is attached to GOV.UK content
+  along with a thumbnail and relevant file data.
+
+  It is intended to be rendered in Govspeak.
+
+  It is not as rich in features as the [attachment rendering][Whitehall]
+  provided by Whitehall, it lacks support for multiple languages, CSV previews
+  and publication fields
+
+  [Whitehall]: https://github.com/alphagov/whitehall/blob/5c760eea912320c5a80ef59791df47161d889f2f/app/helpers/document_helper.rb
+shared_accessibility_criteria:
+- link
+accessibility_criteria: |
+  The thumbnail image, and the link wrapping it, must not focusable or shown to
+  screenreaders.
+uses_component_wrapper_helper: true
+examples:
+  default:
+    data:
+      attachment:
+        title: "Department for Transport information asset register"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/747661/department-for-transport-information-asset-register.csv
+        filename: department-for-transport-information-asset-register.csv
+        content_type: text/csv
+        file_size: 20000
+  with_number_of_pages:
+    data:
+      attachment:
+        title: "Department for Transport, temporary snow ploughs: guidance note"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/259634/temporary-snow-ploughs.pdf
+        filename: temporary-snow-ploughs.pdf
+        content_type: application/pdf
+        file_size: 20000
+        number_of_pages: 7
+  opendocument:
+    data:
+      attachment:
+        title: "BEIS Information Asset Register"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/744083/BEIS_Information_Asset_Register_.ods
+        filename: BEIS_Information_Asset_Register_.ods
+        content_type: application/vnd.oasis.opendocument.spreadsheet
+        file_size: 20000
+  help_text_disabled:
+    data:
+      attachment:
+        title: "Attitudes in Iraq: June 2005 wave 1"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/137879/20130110_Iraq_wave01.txt
+        filename: 20130110_Iraq_wave01.txt
+        content_type: text/plain
+        file_size: 108515
+      hide_opendocument_metadata: true
+  embedded_in_govspeak:
+    description: |
+      This component can be embedded in Govspeak with the `[Attachment:]` code.
+    embed: |
+      <%= render "govuk_publishing_components/components/govspeak" do %>
+        <p>Some text.</p>
+        <%= component %>
+      <% end %>
+    data:
+      attachment:
+        title: "BEIS Information Asset Register"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/744083/BEIS_Information_Asset_Register_.ods
+        filename: BEIS_Information_Asset_Register_.ods
+        content_type: application/vnd.oasis.opendocument.spreadsheet
+        file_size: 20000
+  with_contact_email:
+    data:
+      attachment:
+        title: "Department for Transport information asset register"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/747661/department-for-transport-information-asset-register.csv
+        filename: department-for-transport-information-asset-register.csv
+        content_type: application/pdf
+        file_size: 20000
+        alternative_format_contact_email: defra.helpline@defra.gsi.gov.uk
+  with_contact_email_and_ga4_tracking:
+    description: The attachment component can contain the details component as shown. The details component provides all of its own GA4 tracking, but in most situations also requires an `index_section_count` attribute to be passed manually. This can be done via the attachment component as shown (along with any other needed GA4 attributes).
+    data:
+      attachment:
+        title: "Department for Transport information asset register"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/747661/department-for-transport-information-asset-register.csv
+        filename: department-for-transport-information-asset-register.csv
+        content_type: application/pdf
+        file_size: 20000
+        alternative_format_contact_email: defra.helpline@defra.gsi.gov.uk
+      details_ga4_attributes: {
+        index_section_count: 4
+      }
+  with_data_attributes_on_url:
+    data:
+      attachment:
+        title: "Department for Transport information asset register"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/747661/department-for-transport-information-asset-register.csv
+        filename: department-for-transport-information-asset-register.csv
+        content_type: application/pdf
+        file_size: 20000
+      url_data_attributes:
+        gtm: "attachment-preview"
+  with_margin_bottom:
+    description: The component accepts a number for margin bottom from `0` to `9` (`0px` to `60px`) using the [GOV.UK Frontend spacing scale](https://design-system.service.gov.uk/styles/spacing/#the-responsive-spacing-scale). It defaults to no margin bottom.
+    data:
+      attachment:
+        title: "Department for Transport information asset register"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/747661/department-for-transport-information-asset-register.csv
+        filename: department-for-transport-information-asset-register.csv
+        content_type: application/pdf
+        file_size: 20000
+      margin_bottom: 9
+  command_paper_numbered:
+    description: |
+      Command paper, numbered
+    data:
+      attachment:
+        title: "The government financial reporting review"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/791567/the_government_financial_reporting_review_web.pdf
+        filename: department-for-transport-information-asset-register.csv
+        content_type: application/pdf
+        file_size: 20000
+        number_of_pages: 7
+        isbn: "978-1-5286-1173-2"
+        unique_reference: "2259"
+        command_paper_number: "67"
+  command_paper_unnumbered:
+    description: |
+      Command paper, unnumbered
+    data:
+      attachment:
+        title: "The government financial reporting review"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/791567/the_government_financial_reporting_review_web.pdf
+        filename: the_government_financial_reporting_review_web.pdf
+        content_type: application/pdf
+        file_size: 20000
+        number_of_pages: 7
+        isbn: "978-1-5286-1173-2"
+        unique_reference: "2259"
+        unnumbered_command_paper: true
+  act_paper_numbered:
+    description: |
+      Act paper (House of Commons paper), numbered
+    data:
+      attachment:
+        title: "Budget 2020"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/871799/Budget_2020_Web_Accessible_Complete.pdf
+        filename: Budget_2020_Web_Accessible_Complete.pdf
+        content_type: application/pdf
+        file_size: 20000
+        number_of_pages: 12
+        isbn: "978-1-913635-01-5"
+        unique_reference: "2942"
+        hoc_paper_number: "121"
+        parliamentary_session: "2019-20"
+  act_paper_unnumbered:
+    description: |
+      Act paper (House of Commons paper), unnumbered
+    data:
+      attachment:
+        title: "Budget 2020"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/871799/Budget_2020_Web_Accessible_Complete.pdf
+        filename: Budget_2020_Web_Accessible_Complete.pdf
+        content_type: application/pdf
+        file_size: 20000
+        number_of_pages: 12
+        isbn: "978-1-913635-01-5"
+        unique_reference: "2942"
+        unnumbered_hoc_paper: true
+  hide_order_a_copy:
+    description: |
+      With 'Order a copy' hidden
+    data:
+      attachment:
+        title: "Budget 2020"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/871799/Budget_2020_Web_Accessible_Complete.pdf
+        filename: Budget_2020_Web_Accessible_Complete.pdf
+        content_type: application/pdf
+        file_size: 20000
+        number_of_pages: 12
+        isbn: "978-1-913635-01-5"
+        unique_reference: "2942"
+        unnumbered_hoc_paper: true
+      hide_order_copy_link: true
+  with_custom_heading_level:
+    description: Default is `h2`.
+    data:
+      heading_level: 3
+      attachment:
+        title: "Department for Transport information asset register"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/747661/department-for-transport-information-asset-register.csv
+        filename: department-for-transport-information-asset-register.csv
+        content_type: text/csv
+        file_size: 20000
+  with_custom_thumbnail:
+    data:
+      attachment:
+        title: "Department for Transport, temporary snow ploughs: guidance note"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/259634/temporary-snow-ploughs.pdf
+        filename: temporary-snow-ploughs.pdf
+        content_type: application/pdf
+        file_size: 20000
+        thumbnail_url: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/791567/thumbnail_the_government_financial_reporting_review_web.pdf.png"
+  pdf_attachment:
+    data:
+      attachment:
+        title: "Department for Transport, temporary snow ploughs: guidance note"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/259634/temporary-snow-ploughs.pdf
+        filename: temporary-snow-ploughs.pdf
+        content_type: application/pdf
+        file_size: 20000
+  with_preview_link:
+    data:
+      attachment:
+        title: "Consular data: February 2018"
+        url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/687542/February_2018_Consular_MI.csv
+        filename: February_2018_Consular_MI.csv
+        content_type: text/csv
+        file_size: 51496
+        preview_url: https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/687542/February_2018_Consular_MI.csv/preview
+  html_attachment:
+    data:
+      attachment:
+        title: "Smart meters: unlocking the future"
+        url: https://www.gov.uk/government/publications/smart-meters-unlocking-the-future/smart-meters-unlocking-the-future
+        type: html
+  external_attachment:
+    description: |
+      The word break helper (`govuk-text-break-word`) is used from the design system to forcibly break URLs across multiple lines when they wouldn't otherwise fit.
+    data:
+      attachment:
+        title: "Architects Registration Board annual report 2021"
+        url: https://arb.org.uk/wpcontent/uploads/ARBAnnualReportandFinancialStatement2021published.pdf
+        type: external

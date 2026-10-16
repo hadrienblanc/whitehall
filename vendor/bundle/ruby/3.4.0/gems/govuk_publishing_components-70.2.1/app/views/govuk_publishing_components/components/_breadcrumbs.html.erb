@@ -1,0 +1,43 @@
+<%
+  border ||= false
+  breadcrumbs ||= []
+  collapse_on_mobile ||= false
+  inverse ||= false
+  local_assigns[:aria] ||= {}
+  local_assigns[:aria][:label] ||= "Breadcrumb"
+
+  breadcrumb_presenter = GovukPublishingComponents::Presenters::Breadcrumbs.new(breadcrumbs)
+
+  classes = %w[gem-c-breadcrumbs govuk-breadcrumbs govuk-!-display-none-print]
+  classes << "govuk-breadcrumbs--collapse-on-mobile" if collapse_on_mobile
+  classes << "govuk-breadcrumbs--inverse" if inverse
+  classes << "gem-c-breadcrumbs--border-bottom" if border == "bottom"
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class(classes.join(" "))
+  component_helper.add_data_attribute({ module: "ga4-link-tracker" })
+%>
+
+<script type="application/ld+json">
+  <%= raw JSON.pretty_generate(breadcrumb_presenter.structured_data) %>
+</script>
+
+<%= tag.nav(**component_helper.all_attributes) do %>
+  <ol class="govuk-breadcrumbs__list">
+    <% breadcrumbs.each_with_index do |crumb, index| %>
+      <% breadcrumb = GovukPublishingComponents::Presenters::Breadcrumb.new(crumb, index) %>
+        <li class="govuk-breadcrumbs__list-item">
+        <% if breadcrumb.is_link? %>
+          <%= link_to(
+            breadcrumb[:title],
+            breadcrumb.path,
+            data: breadcrumb.tracking_data(breadcrumbs.length),
+            class: "govuk-breadcrumbs__link",
+          ) %>
+        <% else %>
+          <%= breadcrumb[:title] %>
+        <% end %>
+        </li>
+    <% end %>
+  </ol>
+<% end %>

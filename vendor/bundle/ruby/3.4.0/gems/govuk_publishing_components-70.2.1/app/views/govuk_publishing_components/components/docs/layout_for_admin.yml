@@ -1,0 +1,61 @@
+name: Admin layout
+description: A layout to be used by admin applications
+body: |
+  Typically you'll use this together with the
+  [layout header component](/component-guide/layout_header) and the
+  [layout footer component](/component-guide/layout_footer).
+
+  Because it is an entire HTML document, this component can only be [previewed on a separate page](/admin).
+
+display_preview: false
+display_html: true
+accessibility_criteria: |
+  The layout template must:
+
+    * have a `lang` attribute
+    * contain a [skip link](/component-guide/skip_link)
+    * have a sensible page `<title>`
+examples:
+  default:
+    data:
+      environment: production
+      product_name: Publishing
+      browser_title: 'A page title'
+      block: |
+        <!-- You probably want to use the header, main & footer components here -->
+  with_custom_js_filename:
+    description: An alternative JS filename can be used in place of the default `application.js` if required (note that this cannot easily be demonstrated here).
+    data:
+      environment: production
+      product_name: Publishing
+      browser_title: 'A page title'
+      js_filename: "application"
+      block: |
+        <!-- You probably want to use the header, main & footer components here -->
+  with_custom_js_filename_for_es6_components:
+    description: An alternative JS filename can be used in place of the default `es6-components.js` if required (note that this cannot easily be demonstrated here).
+    data:
+      environment: production
+      product_name: Publishing
+      browser_title: 'A page title'
+      js_module_filename: "es6-bundle"
+      block: |
+        <!-- You probably want to use the header, main & footer components here -->
+  with_custom_css_filename:
+    description: An alternative JS filename can be used in place of the default `application.scss` if required (note that this cannot easily be demonstrated here).
+    data:
+      environment: production
+      product_name: Publishing
+      browser_title: 'A page title'
+      css_filename: "application"
+      block: |
+        <!-- You probably want to use the header, main & footer components here -->
+  with_type_module:
+    description: Adds 'type=module' to the javascript_include_tag. By default, use_type_module is false.
+    data:
+      environment: production
+      product_name: Publishing
+      browser_title: 'A page title'
+      use_type_module: true
+      block: |
+        <!-- You probably want to use the header, main & footer components here -->
