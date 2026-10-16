@@ -1,0 +1,37 @@
+v1.5.0 - September 30, 2026
+
+* Relax JSON version constraint /#26 (luizkowalski)
+
+v1.4.0
+
+* Replace multi_json gem with standard Ruby json gem
+
+v1.3.0
+
+* fix deprecated multijson usage
+
+v1.2.0
+
+* Fix time parsing issue
+* Remove duplicated software licence
+* Remove `fog-core` version dependency
+
+v1.1.0
+
+* bump fog-core dependency
+
+v1.0.2
+
+Changes:
+
+* bump multi-json dependency
+
+v1.0.1
+
+Changes:
+
+* Use a relative require path
+
+v1.0.0
+
+Initial release.

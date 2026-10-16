@@ -1,0 +1,64 @@
+.gem-c-subscription-links {
+  color: govuk-functional-colour(text);
+  @include govuk-font(19, $weight: bold);
+}
+
+.gem-c-subscription-links__hidden-header {
+  @include govuk-visually-hidden;
+}
+
+.gem-c-subscription-links__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gem-c-subscription-links__list--small {
+  @include govuk-font(16);
+}
+
+.gem-c-subscription-links__list-item {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: govuk-spacing(4);
+  margin-bottom: govuk-spacing(3);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.gem-c-subscription-links__list-item--small {
+  display: inline-block;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: govuk-spacing(2);
+
+  &:first-child {
+    margin-right: govuk-spacing(2);
+  }
+
+  &:only-child {
+    margin-right: 0;
+  }
+}
+
+.gem-c-subscription-links__item {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 0 20%;
+
+  @include govuk-media-query($from: tablet) {
+    background-position: 0 35%;
+  }
+}
+
+.gem-c-subscription-links__icon {
+  margin-right: govuk-spacing(1);
+  color: govuk-colour("black");
+}
+
+.gem-c-subscription-links__list-item--small .gem-c-subscription-links__icon {
+  transform: scale(.9);
+  transform-origin: bottom left;
+}

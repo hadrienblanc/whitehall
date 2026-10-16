@@ -1,0 +1,149 @@
+name: Layout footer
+description: The footer provides copyright, licensing and other information
+govuk_frontend_components:
+  - footer
+uses_component_wrapper_helper: true
+capture_full_width_screenshot: true
+accessibility_criteria: |
+  Text and links in the Footer must:
+
+  - have a text contrast ratio higher than 4.5:1 against the background colour to meet [WCAG AA](https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast)
+
+  Images in the Footer must:
+
+  - be presentational when linked to from accompanying text "Open Government Licence (OGL) icon".
+
+  Landmarks and Roles in the Footer should:
+
+  - avoid navigation landmarks or roles
+
+    The footer element alone is sufficient for such cases; while a [`nav` element](https://www.w3.org/TR/html52/sections.html#the-nav-element) can be used, it is usually unnecessary.
+
+    Note: This decision has been made based on prior experience seeing removal of overuse of `<nav>` elements from www.GOV.UK, which made it confusing for users of assistive technologies to know what were the most important navigation aspects of GOV.UK.
+    Should be challenged if user research indicates this is an issue.
+shared_accessibility_criteria:
+  - link
+examples:
+  default:
+    data: {}
+
+  with_meta:
+    data:
+      meta:
+        items:
+          - href: '/help'
+            text: Help
+          - href: '/help/privacy-notice'
+            text: Privacy
+          - href: '/help/cookies'
+            text: Cookies
+          - href: '/contact'
+            text: Contact
+          - href: '/help/accessibility-statement'
+            text: Accessibility statement
+          - href: '/help/terms-conditions'
+            text: Terms and conditions
+          - href: '/cymraeg'
+            text: Rhestr o Wasanaethau Cymraeg
+          - href: '/government/organisations/government-digital-service'
+            text: Government Digital Service
+
+  with_navigation:
+    data:
+      navigation:
+        - title: Services and information
+          columns: 2
+          items:
+            - href: '/browse/benefits'
+              text: Benefits
+            - href: '/browse/births-deaths-marriages'
+              text: Births, deaths, marriages and care
+            - href: '/browse/business'
+              text: Business and self-employed
+            - href: '/browse/childcare-parenting'
+              text: Childcare and parenting
+            - href: '/browse/citizenship'
+              text: Citizenship and living in the UK
+            - href: '/browse/justice'
+              text: Crime, justice and the law
+            - href: '/browse/disabilities'
+              text: Disabled people
+            - href: '/browse/driving'
+              text: Driving and transport
+            - href: '/browse/education'
+              text: Education and learning
+            - href: '/browse/employing-people'
+              text: Employing people
+            - href: '/browse/environment-countryside'
+              text: Environment and countryside
+            - href: '/browse/housing-local-services'
+              text: Housing and local services
+            - href: '/browse/tax'
+              text: Money and tax
+            - href: '/browse/abroad'
+              text: Passports, travel and living abroad
+            - href: '/browse/visas-immigration'
+              text: Visas and immigration
+            - href: '/browse/working'
+              text: Working, jobs and pensions
+        - title: Departments and policy
+          items:
+            - href: '/government/how-government-works'
+              text: How government works
+            - href: '/government/organisations'
+              text: Departments
+            - href: '/world'
+              text: Worldwide
+            - href: '/government/policies'
+              text: Policies
+            - href: '/news-and-communications'
+              text: News and communications
+      meta:
+        items:
+          - href: '/help'
+            text: Help
+          - href: '/help/privacy-notice'
+            text: Privacy
+          - href: '/help/cookies'
+            text: Cookies
+          - href: '/contact'
+            text: Contact
+          - href: '/help/accessibility-statement'
+            text: Accessibility statement
+          - href: '/help/terms-conditions'
+            text: Terms and conditions
+          - href: '/cymraeg'
+            text: Rhestr o Wasanaethau Cymraeg
+          - href: '/government/organisations/government-digital-service'
+            text: Government Digital Service
+
+  with_attributes_links:
+    data:
+      navigation:
+        - title: Test Links
+          columns: 1
+          items:
+            - href: 'https://www.gov.uk/government/collections/organisation'
+              text: Shows a page in a new window
+              attributes:
+                target: _blank
+                rel: noopener
+            - href: 'https://www.gov.uk/corporation-tax'
+              text: Shows page in the same window
+              attributes:
+                data:
+                  tracking: GTM-123AB
+      meta:
+        items:
+          - href: '/cymraeg'
+            text: Rhestr o Wasanaethau Cymraeg
+            attributes:
+              lang: en
+              hreflang: en
+
+  without_licence_details:
+    description: |
+      In some limited circumstances (for example, in backend-facing admin systems) it doesn't make
+      sense to show the licence information. This can be hidden by setting `hide_licence` to `true`.
+    data:
+      hide_licence: true

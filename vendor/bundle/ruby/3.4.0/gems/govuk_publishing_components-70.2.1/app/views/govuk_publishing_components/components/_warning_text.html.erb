@@ -1,0 +1,38 @@
+<%
+  id ||= "warning-text-#{SecureRandom.hex(4)}"
+  text_assistive ||= "Warning"
+  text_icon ||= "!"
+  large_font ||= false
+  highlight_text ||= false
+  heading_level ||= 0
+
+  shared_helper = GovukPublishingComponents::Presenters::SharedHelper.new(local_assigns)
+
+  text_classes = %w(govuk-warning-text__text)
+  text_classes << "gem-c-warning-text__text--no-indent" if text_icon.empty?
+  text_classes << "gem-c-warning-text__text--large" if large_font
+  text_classes << "gem-c-warning-text__text--highlight" if highlight_text
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.set_id(id)
+  component_helper.add_class("gem-c-warning-text govuk-warning-text")
+%>
+
+<%= tag.div(**component_helper.all_attributes) do %>
+  <% unless text_icon.empty? %>
+    <%= tag.span text_icon, class: "govuk-warning-text__icon", "aria-hidden": "true" %>
+  <% end %>
+  <% inner_text = capture do %>
+    <%= tag.span text_assistive, class: "govuk-visually-hidden" %>
+    <%= text %>
+  <% end %>
+  <% if heading_level > 0 %>
+    <%= content_tag(shared_helper.get_heading_level, class: text_classes) do %>
+      <%= inner_text %>
+    <% end %>
+  <% else %>
+    <%= tag.strong class: text_classes do %>
+      <%= inner_text %>
+    <% end %>
+  <% end %>
+<% end %>

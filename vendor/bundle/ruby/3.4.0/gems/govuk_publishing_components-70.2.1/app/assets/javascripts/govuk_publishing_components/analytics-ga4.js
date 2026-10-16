@@ -1,0 +1,20 @@
+// The following modules are imported in a specific order
+//= require ./analytics-ga4/ga4-core
+//= require ./analytics-ga4/ga4-schemas
+//= require ./analytics-ga4/pii-remover
+//= require ./analytics-ga4/ga4-page-views
+//= require ./analytics-ga4/ga4-print-intent-tracker
+//= require ./analytics-ga4/ga4-copy-tracker
+//= require ./analytics-ga4/ga4-specialist-link-tracker
+//= require ./analytics-ga4/ga4-link-tracker
+//= require ./analytics-ga4/ga4-event-tracker
+//= require ./analytics-ga4/ga4-ecommerce-tracker
+//= require ./analytics-ga4/ga4-finder-tracker
+//= require ./analytics-ga4/ga4-form-tracker
+//= require ./analytics-ga4/ga4-auto-tracker
+//= require ./analytics-ga4/ga4-smart-answer-results-tracker
+//= require ./analytics-ga4/ga4-scroll-tracker
+//= require ./analytics-ga4/ga4-search-tracker
+//= require ./analytics-ga4/ga4-video-tracker
+//= require ./analytics-ga4/ga4-focus-loss-tracker
+//= require ./analytics-ga4/init-ga4

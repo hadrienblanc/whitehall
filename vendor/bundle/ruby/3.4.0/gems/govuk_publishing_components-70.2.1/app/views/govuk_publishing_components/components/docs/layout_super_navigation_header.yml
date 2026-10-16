@@ -1,0 +1,41 @@
+name: Layout super navigation header
+description: The super navigation header provides a consistent header across GOV.UK.
+body: |
+shared_accessibility_criteria:
+  - link
+accessibility_criteria: |
+  The component must:
+
+  * have a text contrast ratio higher than 4.5:1 against the background colour to meet WCAG AA
+  * follow the expected tabbing border
+  * allow menus to be closed when the escape key is pressed
+
+  Images in the super navigation header must:
+
+  * be presentational when linked to from accompanying text (crown icon).
+
+  Landmarks and Roles in the super navigation header should:
+
+  * sit within the primary header element (<header>) provided by the page layout
+accessibility_excluded_rules:
+  # Banners will be duplicated in component examples list.
+  - duplicate-id-aria
+  - landmark-no-duplicate-banner
+  - landmark-unique
+uses_component_wrapper_helper: true
+capture_full_width_screenshot: true
+examples:
+  default:
+  with_custom_logo_link:
+    description: |
+      The header logo links to root by default. This option allows us to override that in certain instances.
+
+      Remember to update the title, as the default is "Go to the GOV.UK homepage".
+    data:
+      logo_link: "https://www.example.com"
+      logo_link_title: "Go to example"
+  homepage:
+    description: |
+      This variant is used only on the homepage. It adds extra spacing to the logo to align it with other content on the page that also includes additional spacing
+    data:
+      homepage: true

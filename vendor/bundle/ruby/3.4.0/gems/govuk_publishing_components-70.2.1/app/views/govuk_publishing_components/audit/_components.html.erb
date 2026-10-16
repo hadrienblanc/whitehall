@@ -1,0 +1,123 @@
+<% if @other_applications %>
+  <%= render "govuk_publishing_components/components/heading", {
+    text: "Components",
+    font_size: "l",
+    margin_bottom: 6,
+  } %>
+<% end %>
+
+<% if @components.any? %>
+  <% component_items = [] %>
+
+  <% component_files = capture do %>
+    <div data-module="audit-filter">
+      <%= render "component_contents", passed_components: @components, show_application_name: true %>
+    </div>
+  <% end %>
+
+  <%
+    component_items << {
+      heading: {
+        text: "Component files",
+      },
+      summary: {
+        text: "Lists what files each component has",
+      },
+      content: {
+        html: component_files,
+      },
+    }
+  %>
+
+  <% components_within_components = capture do %>
+    <dl class="govuk-summary-list">
+      <% @components[:components_containing_components].each do |component| %>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            <a href="<%= component[:link] %>" class="govuk-link"><%= component[:component] %></a>
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <%= component[:sub_components].join(", ") %>
+          </dd>
+        </div>
+      <% end %>
+    </dl>
+  <% end %>
+
+  <%
+    component_items << {
+      heading: {
+        text: "Components containing other components",
+      },
+      summary: {
+        text: "Shows which components contain other components",
+      },
+      content: {
+        html: components_within_components,
+      },
+    }
+  %>
+
+  <%= render "items_in_applications",
+    heading: "Gem components used by applications",
+    summary: "Shows which applications use gem components",
+    content: @components[:components_by_application],
+    items: component_items %>
+
+  <% helpers_by_component = capture do %>
+    <dl class="govuk-summary-list">
+      <% @components[:helper_usage].each do |helper| %>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            <a href="https://github.com/alphagov/govuk_publishing_components/blob/main/<%= helper[:link] %>" class="govuk-link"><%= helper[:name] %></a>
+          </dt>
+          <dd class="govuk-summary-list__value">
+            <details class="govuk-details" data-module="govuk-details">
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                  Used by <%= helper[:used_by].length %> components
+                </span>
+              </summary>
+              <div class="govuk-details__text">
+                <ul class="govuk-list govuk-list--bullet">
+                  <% helper[:used_by].each do |component| %>
+                    <% github_link = "https://github.com/alphagov/govuk_publishing_components/tree/main/app/views/govuk_publishing_components/components/" %>
+                    <li>
+                      <a href="<%= github_link %><%= component[:link] %>" class="govuk-link"><%= component[:name] %></a>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            </details>
+          </dd>
+        </div>
+      <% end %>
+    </dl>
+  <% end %>
+
+  <%
+    component_items << {
+      heading: {
+        text: "Helpers used by gem components",
+      },
+      summary: {
+        text: "Shows which gem components use common helpers",
+      },
+      content: {
+        html: helpers_by_component,
+      },
+    }
+  %>
+
+  <%= render "items_in_applications",
+    heading: "Gem helpers used by applications",
+    summary: "Shows any applications that use helpers from the components gem",
+    content: @components[:helpers_used_by_applications],
+    items: component_items %>
+
+  <%= render "govuk_publishing_components/components/accordion", {
+    items: component_items,
+  } %>
+<% else %>
+  <p class="govuk-body">No components found.</p>
+<% end %>

@@ -1,0 +1,40 @@
+<% content_for :title, "Component audit" %>
+<% content_for :body_classes, "gem-full-width__container" %>
+
+<%= render "govuk_publishing_components/components/back_link", {
+  href: "/component-guide",
+} %>
+
+<%= render "govuk_publishing_components/components/heading", {
+    text: "Components audit",
+    heading_level: 1,
+    font_size: "xl",
+    margin_bottom: 8,
+  } %>
+
+<% applications = capture do %>
+  <%= render "applications" %>
+<% end %>
+
+<% components = capture do %>
+  <%= render "components" %>
+<% end %>
+
+<% if @in_application or @other_applications %>
+  <%= render "govuk_publishing_components/components/tabs", {
+    tabs: [
+      {
+        id: "applications",
+        label: "Applications",
+        content: applications,
+      },
+      {
+        id: "components-gem",
+        label: "Components",
+        content: components,
+      },
+    ],
+  } %>
+<% else %>
+  <%= render "components" %>
+<% end %>

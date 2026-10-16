@@ -1,0 +1,260 @@
+---
+ky:
+  common:
+    hide: Жашыруу
+    show: Көрсөтүү
+    toggle_less: Азыраак көрсөтүү
+    toggle_less_html:
+    toggle_more: "%{show} %{number} көбүрөөк"
+    toggle_more_html:
+    translations: Которуулар
+  components:
+    accordion:
+      hide_all: Бардык бөлүмдөрдү жашыруу
+      show_all: Бардык бөлүмдөрдү көрсөтүү
+      this_section_visually_hidden: " бул тандоо"
+    app_promo_banner:
+      aria_label:
+      body_text:
+      close:
+      title_text:
+      view:
+    article_schema:
+      scoped_search_description: "%{title} ичинде издөө"
+    attachment:
+      opendocument_html: Бул файл "OpenDocument" форматында
+      order_a_copy: Копиясына буйрутма берүү
+      page:
+        one: 1 барак
+        other: "%{count} барак"
+      preview_aria_label: "%{title} онлайн көрүү"
+      preview_link: Онлайн көрүү
+      reference: 'Маал.: %{reference}'
+      request_format_cta: Жеткиликтүү форматты сураңыз
+      request_format_details_html: Эгер сиз жардамчы технологияны (мисалы, экранды окугуч) колдонсоңуз жана бул документтин жеткиликтүү форматтагы версиясы керек болсо, <a href='mailto:%{alternative_format_contact_email}' target='_blank' class='govuk-link'>%{alternative_format_contact_email}</a> электрондук кат жөнөтүңүз. Сизге кандай формат керек экенин айтыңыз. Кандай жардамчы технологияны колдонуп жатканыңызды айтсаңыз, бул бизге жардам берет.
+      request_format_text: Бул файл жардамчы технологияны колдонуучулар үчүн ылайыктуу эмес.
+    back_link:
+      back: Артка
+    back_to_top_link:
+      contents:
+    character_count:
+      body: "%{number} %{type} чейин киргизе аласыз"
+      type:
+        characters: белги
+        words: сөз
+    chart:
+      accessibility_heading:
+      accessibility_html:
+      accessibility_link:
+      source:
+      table_dropdown:
+    checkboxes:
+      or: же
+    contents_list:
+      contents: Мазмуну
+    contextual_sidebar:
+      pretitle: Ошондой эле бир бөлүгү
+    cookie_banner:
+      buttons:
+        accept_cookies: Кошумча кукилерди кабыл алуу
+        reject_cookies: Кошумча кукилерди четке кагуу
+        view_cookies: Кукилерди көрүү
+      confirmation_message:
+        accepted: Сиз кошумча кукилерди кабыл алдыңыз
+        html: Сиз каалаган убакта %{link}.
+        link: куки жөндөөлөрүңүздү өзгөртүү
+        rejected: Сиз кошумча кукилерди четке кагыңыз
+      hide:
+      text: '["Биз GOV.UK кантип колдонгонуңузду түшүнүү, жөндөөлөрүңүздү эстеп калуу жана мамлекеттик кызматтарды жакшыртуу үчүн кошумча кукилерди орноткубуз келет.", "Ошондой эле биз башка сайттар орноткон кукилерди алардын кызматтарынан мазмунду жеткирүүгө жардам берүү үчүн колдонобуз."]'
+      title: GOV.UK’де кукилер
+    devolved_nations:
+      applies_to: Буга колдонулат
+      aria_label:
+      england:
+        end: " жана Англия"
+        middle: ", Англия"
+        start: Англия
+      northern_ireland:
+        end: " жана Түндүк Ирландия"
+        middle: ", Түндүк Ирландия"
+        start: Түндүк Ирландия
+      scotland:
+        end: " жана Шотландия"
+        middle: ", Шотландия"
+        start: Шотландия
+      type:
+        consultation: "%{nation} үчүн консультация"
+        detailed_guide: "%{nation} үчүн жетекчилик"
+        guidance: "%{nation} үчүн жетекчилик"
+        publication: "%{nation} үчүн жарыялоо"
+      wales:
+        end: " жана Уэльс"
+        middle: ", Уэльс"
+        start: Уэльс
+    feedback:
+      close: Жокко чыгаруу
+      dont_include_personal_info: Улуттук камсыздандыруу номериңиз же кредиттик картанын чоо-жайы сыяктуу жеке же каржылык маалыматты камтыбаңыз.
+      email_address: Электрондук почта дареги
+      help_us_improve_govuk: Бизге GOV.UK жаңыртууга жардам бериңиз
+      is_not_useful: бул баракча пайдалуу эмес
+      is_this_page_useful: Бул баракча пайдалуубу?
+      is_useful: бул баракча пайдалуу
+      maybe: Болушу мүмкүн
+      more_about_visit: GOV.UK'ти жакшыртууга жардам берүү үчүн, бүгүнкү иш сапарыңыз тууралуу көбүрөөк билгибиз келет.
+      'no': Жок
+      send: Жөнөтүү
+      send_me_survey: Мага сурамжылоону жөнөтүңүз
+      something_wrong: Бул баракчада көйгөй боюнча отчет бериңиз
+      thank_you_for_feedback: Пикириңиз үчүн рахмат
+      what_doing: Эмне кылып жаттыңыз эле?
+      what_wrong: Эммне туура эмес кетти?
+      'yes': Ооба
+    figure:
+      image_credit:
+    intervention:
+      accessible_link_text_suffix: " (жаңы таблицада ачат)"
+    layout_footer:
+      copyright_html: Crown copyright
+      licence_html: Эгер башкачасы каралбаса, бардык мазмун "Ачык Өкмөт Лицензиясынын" алкагында жеткиликтүү.
+      navigation_links:
+      support_links: Колдоо байланыштары
+    layout_for_public:
+      account_layout:
+        feedback:
+          banners:
+            phase_banner_html: Бул жаңы кызмат, сиздин "пикириңиз" аны жакшыртууга жардам берет.
+        navigation:
+          menu_bar:
+            account:
+              link_text: Сиздин GOV.UK Бир логиниңиз
+            manage:
+              link_text: Жөндөөлөр
+    layout_header:
+      menu: Меню
+      top_level: Жогорку деңгээл
+    layout_super_navigation_header:
+      logo_link_title: GOV.UK башкы баракчасына барыңыз
+      menu_toggle_label:
+        hide: "%{label} менюсун жашыруу"
+        show: "%{label} менюсун көрсөтүү"
+      navigation_link:
+        href:
+        label: Меню
+      navigation_links_columns:
+      navigation_menu_heading: Навигация менюсу
+      navigation_search_subheading: Издөө
+      search_text: GOV.UK издөө
+    metadata:
+      and: жана
+      from: Мурун
+      history: Тарых
+      last_updated: Акыркы жолу жаңыртылды
+      part_of: Бөлүгү
+      published: Жарыяланды
+      see_all_updates: Бардык жаңыртууларды көрүү
+      hidden_heading:
+      hide_all_updates:
+      show_all_updates:
+    modal_dialogue:
+      close_modal: Модалдык диалогду жабуу
+    notice:
+      banner_title: Маанилүү
+    option_select:
+      found_multiple: табылган параметрлер
+      found_single: табылган параметр
+      selected: тандалган
+    organisation_schema:
+      all_content_search_description: "%{organisation} бардык мазмунду табыңыз"
+    pagination:
+      next: Кийинки
+      pagination: Барактоо
+      previous: Мурунку
+    password_input:
+      button: Көрсөтүү
+      button_aria_hide_label: Сырсөздү жашыруу
+      button_aria_label: Сырсөздү көрсөтүү
+      button_hide: Жашыруу
+      error_text_prefix: Ката
+      label: Сырсөз
+      password_hidden_announcement: Сырсөзүңүз жашырылган
+      password_shown_announcement: Сырсөзүңүз көрсөтүлгөн
+    print_link:
+      text: Бул баракчаны басып чыгаруу
+    published_dates:
+      hidden_heading:
+      hide_all_updates:
+      last_updated:
+      published:
+      see_all_updates:
+      show_all_updates:
+    radio:
+      or: же
+    related_footer_navigation:
+      collections: Жыйнактар
+      policies: Саясаттар
+      statistical_data_sets: Статистикалык дайындардын топтомдору
+      topical_events: Актуалдуу окуялар
+    related_navigation:
+      collections: Жыйнак
+      external_links: Интернетте башка жерде
+      policies: Саясат
+      publishers: Бул тарабынан жарыяланды
+      related_contacts: Башка байланыштар
+      related_content: Байланышкан мазмун
+      related_external_links: Интернетте башка жерде
+      related_guides: Деталдуу жетекчилик
+      statistical_data_sets: Статистикалык дайындардын топтому
+      toggle_visually_hidden_text:
+        collections:
+        related_external_links:
+        related_guides:
+        related_items:
+        statistical_data_sets:
+        topical_events:
+        topics:
+        world_locations:
+      topical_events: Актуалдуу окуя
+      topics: Теманы изилдөө
+      ukraine:
+        links:
+        title: Украинага басып кирүү
+      world_locations: Дүйнөдөгү жайгашкан жерлер
+    search_box:
+      input_title: Издөө
+      label: GOV.UK ичинен издөө
+      search_button: Издөө
+    service_navigation:
+      menu_toggle:
+    share_links:
+      all_opens_in_new_tab: Төмөнкү шилтемелер жаңы өтмөктө ачылат
+      opens_in_new_tab: "(жаңы таблицада ачат)"
+    single_page_notification_button:
+      subscribe_text: Бул барак жөнүндө электрондук каттарды алыңыз
+      unsubscribe_text: Бул баракча тууралуу электрондук каттарды алууну токтотуу
+    skip_link:
+      text: Башкы мазмунга өтүү
+    step_by_step_nav:
+      hide: Жашыруу
+      hide_all: Бардык кадамдарды жашыруу
+      show: Көрсөтүү
+      show_all: Бардык кадамдарды көрсөтүү
+    step_by_step_nav_related:
+      part_of: Бөлүгү
+      this_page_is:
+      this_page_is_part_of_html:
+    subscription_links:
+      email_signup_link_text: Электрондук каттарды алуу
+      feed_link_label: Бул URL'ди көчүрүп, түрмөгүңүздүн окурманына чаптаңыз
+      feed_link_text: Түрмөккө жазылуу
+      subscriptions: Жазылуулар
+    success_alert:
+      success: Ийгилик
+    summary_list:
+      delete: Жок кылуу
+      edit: Өзгөртүү
+    table:
+      filter_count: киргизилген шарт үчүн натыйжалар
+      filter_label: Чыпка
+      filter_message: Бир да дал келген натыйжа жок
+    tabs:
+      contents: Мазмуну

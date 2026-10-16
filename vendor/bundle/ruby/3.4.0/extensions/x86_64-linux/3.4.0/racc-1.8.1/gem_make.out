@@ -1,0 +1,18 @@
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+/home/hadrienblanc/.local/ruby/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20261016-388482-2vh7te sitelibdir\=./.gem.20261016-388482-2vh7te clean
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20261016-388482-2vh7te sitelibdir\=./.gem.20261016-388482-2vh7te
+compiling cparse.c
+linking shared-object racc/cparse.so
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20261016-388482-2vh7te sitelibdir\=./.gem.20261016-388482-2vh7te install
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20261016-388482-2vh7te/racc
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20261016-388482-2vh7te sitelibdir\=./.gem.20261016-388482-2vh7te clean

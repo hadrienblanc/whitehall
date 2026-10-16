@@ -1,0 +1,225 @@
+name: Table
+description: A table component to make information easier to compare and scan for users.
+accessibility_criteria: |
+  Accessible tables need HTML markup that indicates header cells and data cells and defines their relationship. Assistive technologies use this information to provide context to users.
+  Header cells must be marked up with `<th>`, and data cells with `<td>` to make tables accessible.
+  For more complex tables, explicit associations is needed using scope attributes.
+shared_accessibility_criteria:
+  - link
+type: helper
+examples:
+  default:
+    data:
+     rows:
+       -
+         - text: January
+         - text: £85
+           format: numeric
+         - text: £95
+           format: numeric
+       -
+         - text: February
+         - text: £75
+           format: numeric
+         - text: £55
+           format: numeric
+       -
+         - text: March
+         - text: £165
+           format: numeric
+         - text: £125
+           format: numeric
+  with_head:
+    data:
+      head:
+        - text: Month you apply
+        - text: Rate for bicycles
+          format: numeric
+        - text: Rate for vehicles
+          format: numeric
+      rows:
+      -
+        - text: January
+        - text: £85
+          format: numeric
+        - text: £95
+          format: numeric
+      -
+        - text: February
+        - text: £75
+          format: numeric
+        - text: £55
+          format: numeric
+      -
+        - text: March
+        - text: £165
+          format: numeric
+        - text: £125
+          format: numeric
+  with_head_and_caption:
+    data:
+      caption: 'Caption 1: Months and rates'
+      caption_classes: govuk-heading-m
+      first_cell_is_header: true
+      head:
+        - text: Month you apply
+        - text: Rate for bicycles
+          format: numeric
+        - text: Rate for vehicles
+          format: numeric
+      rows:
+      -
+        - text: January
+        - text: £85
+          format: numeric
+        - text: £95
+          format: numeric
+      -
+        - text: February
+        - text: £75
+          format: numeric
+        - text: £55
+          format: numeric
+      -
+        - text: March
+        - text: £165
+          format: numeric
+        - text: £125
+          format: numeric
+  with_sortable_head:
+    description: |
+      This option allows links to be added to the table headers for sorting. Sorting must be handled server side, it is not done by the component.
+
+      The example shown applies a data attribute too.
+
+      Other data attributes can also be applied as required. Note that the component does not include built in tracking. If this is required consider using the [GA4 link tracker](https://github.com/alphagov/govuk_publishing_components/blob/main/docs/analytics-ga4/trackers/ga4-link-tracker.md).
+    data:
+      sortable: true
+      head:
+        - text: Month you apply
+        - text: Rate for bicycles
+          format: numeric
+          sort_direction: descending
+          href: /?sort_direction=desc
+          data_attributes:
+            hello: world
+        - text: Rate for vehicles
+          format: numeric
+          href: /?sort_direction=desc
+          data_attributes:
+            tracking: "UTM-123B"
+      rows:
+      -
+        - text: January
+        - text:
+          format: numeric
+        - text: £95
+          format: numeric
+      -
+        - text: February
+        - text: £75
+          format: numeric
+        - text: £55
+          format: numeric
+      -
+        - text: March
+        - text: £125
+          format: numeric
+        - text: £60
+          format: numeric
+      -
+        - text: April
+        - text: £135
+          format: numeric
+        - text: £62
+          format: numeric
+      -
+        - text: May
+        - text: £150
+          format: numeric
+        - text: £80
+          format: numeric
+  with_filter:
+    description: This option allows table rows to be filtered by user input. Since this filtering is implemented client-side the filter section is not displayed by default but displays only when JavaScript is enabled. The label for the input field can be set when the component is rendered via the `label` key. If this is not set a fallback value will display.
+    data:
+      filterable: true
+      label: Filter months
+      head:
+        - text: Month you apply
+        - text: Rate for bicycles
+          format: numeric
+        - text: Rate for vehicles
+          format: numeric
+      rows:
+      -
+        - text: January
+        - text: £85
+          format: numeric
+        - text: £95
+          format: numeric
+      -
+        - text: February
+        - text: £75
+          format: numeric
+        - text: £55
+          format: numeric
+      -
+        - text: March
+        - text: £165
+          format: numeric
+        - text: £125
+          format: numeric
+  with_custom_margin_bottom:
+    description: The component accepts a number for margin bottom from `0` to `9` (`0px` to `60px`) using the [GOV.UK Frontend spacing scale](https://design-system.service.gov.uk/styles/spacing/#the-responsive-spacing-scale). By default, this component has a margin bottom of `30px`, as determined by the design system styles.
+    data:
+      margin_bottom: 0
+      filterable: true
+      label: Filter months
+      head:
+        - text: Month you apply
+        - text: Rate for bicycles
+          format: numeric
+        - text: Rate for vehicles
+          format: numeric
+      rows:
+      -
+        - text: January
+        - text: £85
+          format: numeric
+        - text: £95
+          format: numeric
+      -
+        - text: February
+        - text: £75
+          format: numeric
+        - text: £55
+          format: numeric
+      -
+        - text: March
+        - text: £165
+          format: numeric
+        - text: £125
+          format: numeric
+  with_custom_width:
+    description: >
+      You can use `width` on a header cell to set the width of a table column if you do not want the
+      width to be inferred by the browser based on the content of its cells.
+    data:
+      head:
+        - text: Phrase
+        - text: Rating
+          width: one-half
+      rows:
+      -
+        - text: Lorem ipsum
+        - text: good
+      -
+        - text: dolor sit amet, consectetur adipiscing elit
+        - text: okay
+      -
+        - text: >
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua duis aute irure dolor
+            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur
+            molestiae non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
+            quaerat voluptatem!!!
+        - text: bad

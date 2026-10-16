@@ -1,0 +1,46 @@
+name: Success alert
+description: Used at the top of the page, to summarise a successful user action.
+govuk_frontend_components:
+  - notification-banner
+accessibility_criteria: |
+  - should be focused on page load, to ensure the message is noticed by
+    assistive tech
+  - Should have a role of ‘alert’ to communicate that is a important and
+    time sensitive message
+uses_component_wrapper_helper: true
+examples:
+  default:
+    data:
+      message: Message to alert the user to a successful action goes here
+  with_message_and_description:
+    description: Descriptions can be passed as plain text but it is strongly recommended that you pass these as html, cleaned using `raw` or `sanitize`.
+    data:
+      message: Message to alert the user to a successful action goes here
+      description: <p class="govuk-body">A further description</p>
+  with_custom_title_id:
+    description: |
+      This is for the heading element at the head of the component (reading "Success" by default) where the id is used by an `aria-labelledby` on screen reader focus of the element.
+
+      Please ensure that this id is unique across the view you are building.
+    data:
+      message: Message to alert the user to a successful action goes here
+      title_id: my-custom-success-id
+  with_styled_link:
+    description: If you need to include a link in your success alert, you need to specify the `govuk-link` and `govuk-notification-banner__link` classes on that link element. This is in line with GOV.UK Design System guidance that the colour of the link in success notification banners can look jarring if any links are a different colour to the principal colour used by the success banner.
+    data:
+      message: Message to alert the user to a successful action goes here
+      description: <p class="govuk-body">A further description with <a href="/a-cool-page" class="govuk-link govuk-notification-banner__link">a link</a></p>
+  long_example:
+    data:
+      message: |
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquet
+        dignissim dui, ac laoreet tortor vulputate nec. Aenean quis turpis
+        orci. Proin semper porttitor ipsum, vel maximus justo rutrum vel.
+        Morbi volutpat facilisis libero. Donec posuere eget odio non egestas.
+        Nullam sed neque quis turpis.
+  with_custom_margin_bottom:
+    description: |
+      The component accepts a number for margin bottom from `0` to `9` (`0px` to `60px`) using the [GOV.UK Frontend spacing scale](https://design-system.service.gov.uk/styles/spacing/#the-responsive-spacing-scale). The default margins for the component are inherited from the [notification-banner](https://github.com/alphagov/govuk-frontend/blob/main/package/govuk/components/notification-banner/_index.scss) styles defined in the Design System.
+    data:
+      message: Message to alert the user to a successful action goes here
+      margin_bottom: 3

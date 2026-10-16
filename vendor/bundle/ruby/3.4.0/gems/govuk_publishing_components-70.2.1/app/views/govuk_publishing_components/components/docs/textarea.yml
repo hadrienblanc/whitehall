@@ -1,0 +1,148 @@
+name: Form textarea
+description: A textarea field and an associated label
+govuk_frontend_components:
+  - textarea
+accessibility_criteria: |
+  The component must:
+
+  - accept focus
+  - be focusable with a keyboard
+  - be usable with a keyboard
+  - be usable with touch
+  - indicate when they have focus
+  - be recognisable as form textarea elements
+  - have correctly associated labels
+
+  Labels use the [label component](/component-guide/label).
+uses_component_wrapper_helper: true
+examples:
+  default:
+    data:
+      label:
+        text: "Can you provide more detail?"
+      name: "more-detail"
+  with_id_attribute:
+    description: An id can be passed for the textarea. By default one is randomly generated.
+    data:
+      label:
+        text: "What is the nature of your medical emergency?"
+      name: "emergency-name"
+      textarea_id: "emergency-id"
+  specific_rows:
+    description: Textarea with 10 rows
+    data:
+      label:
+        text: "Can you provide more detail?"
+      name: "more-detail-rows"
+      rows: 10
+  with_hint:
+    data:
+      label:
+        text: "Can you provide more detail?"
+      name: "with-hint"
+      hint: "Please include as much information as possible."
+  with_error:
+    data:
+      label:
+        text: "Can you provide more detail?"
+      name: "more-detail-error"
+      error_message: "Please could you provide more detail"
+  with_error_items:
+    data:
+      label:
+        text: "Can you provide more detail?"
+      name: "more-detail-error"
+      error_items:
+      - text: Descriptive link to the question with an error 1
+        href: '#example-error-1'
+      - text: Descriptive link to the question with an error 2
+        href: '#example-error-2'
+  with bold_label:
+    data:
+      label:
+        text: "Can you provide more detail?"
+        bold: true
+      name: "more-detail"
+  with_label_as_page_heading:
+    data:
+      label:
+        is_page_heading: true
+        heading_size: "xl"
+        text: "Can you provide more detail?"
+      hint: "Please include as much information as possible."
+      name: "more-detail-error"
+  with_value:
+    data:
+      label:
+        text: "Can you provide more detail?"
+      name: "more-detail-value"
+      value: "More detail"
+  with_extra_elements:
+    data:
+      label:
+        text: "How about a hint below?"
+      name: "more-elements"
+      block: |
+        <div class="govuk-hint">Here's a hint</div>
+  with_maxlength:
+    data:
+      label:
+        text: "A textarea that doesn't allow many characters"
+      name: "maxlength"
+      value: "You can't type more"
+      maxlength: 19
+  with_aria_attributes:
+    description: Use `describedby` when the textarea is described by an element outside the component; for example, when used in conjunction with a [contextual guidance](/component-guide/contextual_guidance).
+    embed: |
+      <%= render "govuk_publishing_components/components/contextual_guidance", {
+          html_for: "contextual-guidance-id",
+          guidance_id: "contextual-guidance",
+          content: sanitize("<p>The title must make clear what the content offers users. Use the words your users do to help them find this. Avoid wordplay or teases.</p>")
+        } do %>
+        <%= component %>
+      <% end %>
+    data:
+      textarea_id: "contextual-guidance-id"
+      label:
+        text: "Title"
+      name: "described"
+      rows: 2
+      describedby: "contextual-guidance"
+  with_data_attributes:
+    data:
+      label:
+        text: "This textarea has a data attribute"
+      name: "with_data_attrbutes"
+      data:
+        module: "some-awesome-module-here"
+  with_dir_attribute:
+    description: |
+      Allows the correct display of right to left languages.
+
+      By default the textarea element and the label both display text in a left to right direction.
+
+      When the `right_to_left` parameter of the textarea component is set to `true` all text desplays in a right to left direction.
+    data:
+      label:
+        text: "Some textarea text that displays right to left with a label that displays in the same direction"
+      hint: "Some hint text that displays in the same text direction as the label"
+      error_message: "An error message that displays in the same text direction as the label"
+      name: "rtl-textarea-text"
+      value: "العربيَّة"
+      right_to_left: true
+  with_separate_dir_attributes_for_field_and_help_text:
+    description: |
+      Allows the correct display of right to left languages.
+
+      By default the textarea element and the label both display text in a left to right direction.
+
+      If the textarea field and the help text (label, hint and error messages) are required to display in different directions the right_to_left_help attribute can be set as false to override the right_to_left attribute.
+    data:
+      label:
+        text: "Some textarea text that displays right to left with a label that displays left to right"
+      hint: "Some hint text that displays in the same text direction as the label"
+      error_message: "An error message that displays in the same text direction as the label"
+      name: rtl-textarea-text
+      value: "العربيَّة"
+      right_to_left: true
+      right_to_left_help: false

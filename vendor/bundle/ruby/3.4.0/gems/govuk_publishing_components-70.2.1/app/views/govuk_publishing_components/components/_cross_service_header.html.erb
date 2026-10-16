@@ -1,0 +1,15 @@
+<%
+  service_name ||= nil
+  one_login_navigation_items ||= []
+  service_navigation_items ||= []
+%>
+
+<div class="gem-c-cross-service-header gem-c-rebranded-cross-service-header" data-module="cross-service-header">
+  <%= render "govuk_publishing_components/components/cross_service_header/one_login_header", {
+    one_login_navigation_items: one_login_navigation_items,
+  } %>
+  <%= render "govuk_publishing_components/components/service_navigation", {
+    service_name: service_name,
+    navigation_items: service_navigation_items,
+  } %>
+</div>

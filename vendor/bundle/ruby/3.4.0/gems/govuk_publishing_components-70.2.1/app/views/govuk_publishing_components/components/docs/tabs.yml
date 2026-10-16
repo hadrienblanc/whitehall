@@ -1,0 +1,121 @@
+name: "Tabs (experimental)"
+description: "The tabs component lets users toggle between related sections of content."
+body: |
+  This component is based on the [GOV.UK Design System tabs component](https://design-system.service.gov.uk/components/tabs/)
+  and is currently experimental. If using this component, please feed back any research findings to the [GOV.UK Design System team](https://design-system.service.gov.uk/contact/).
+
+  The tabs component lets users navigate between related sections of content on a single page,
+  displaying one section at a time. Note that they are not intended to be used to navigate
+  between different pages.
+
+  The content block MUST be passed as a block to avoid the risk of unsanitised HTML.
+accessibility_criteria: |
+  Tabs must:
+
+  * accept focus
+  * be usable with a keyboard
+  * indicate when they have focus
+  * be usable with touch
+  * be usable with voice commands
+  * have visible text
+uses_component_wrapper_helper: true
+examples:
+  default:
+    data:
+      tabs:
+        - id: "tab1"
+          label: "First section"
+          content: |
+            <p class="govuk-body-m">Fusce at dictum tellus, ac accumsan est. Nulla vitae turpis in nulla gravida tincidunt. Duis lectus felis, tempus id bibendum sit amet, posuere ut elit. Donec enim odio, eleifend in urna a, sagittis egestas est. Proin id ex ultricies, porta eros id, vehicula quam. Morbi non sagittis velit.</p>
+        - id: "tab2"
+          label: "Second section"
+          content: |
+            <p class="govuk-body-m">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam congue elementum commodo. Vestibulum elit turpis, efficitur quis posuere vitae, commodo vitae augue. Donec ut pharetra ligula. Phasellus ac mauris eu felis bibendum dapibus rutrum sed quam. Pellentesque posuere ante id consequat pretium.</p>
+  as_links:
+    description: With this option the tabs operate as links, rather than switching between elements within a single page.
+    data:
+      as_links: true
+      tabs:
+        - href: "link1"
+          label: "Page one"
+          active: true
+        - href: "link2"
+          label: "Page two"
+          active: false
+  without_panel_border:
+    data:
+      panel_border: false
+      tabs:
+        - id: "tab-no-border-1"
+          label: "First section"
+          content: |
+            <p class="govuk-body-m">Fusce at dictum tellus, ac accumsan est. Nulla vitae turpis in nulla gravida tincidunt. Duis lectus felis, tempus id bibendum sit amet, posuere ut elit. Donec enim odio, eleifend in urna a, sagittis egestas est. Proin id ex ultricies, porta eros id, vehicula quam. Morbi non sagittis velit.</p>
+        - id: "tab-no-border-2"
+          label: "Second section"
+          content: |
+            <p class="govuk-body-m">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam congue elementum commodo. Vestibulum elit turpis, efficitur quis posuere vitae, commodo vitae augue. Donec ut pharetra ligula. Phasellus ac mauris eu felis bibendum dapibus rutrum sed quam. Pellentesque posuere ante id consequat pretium.</p>
+  with_title:
+    data:
+      tabs:
+        - id: "tab-with-title-1"
+          label: "First section"
+          title: "First section"
+          content: |
+            <p class="govuk-body-m">Fusce at dictum tellus, ac accumsan est. Nulla vitae turpis in nulla gravida tincidunt. Duis lectus felis, tempus id bibendum sit amet, posuere ut elit. Donec enim odio, eleifend in urna a, sagittis egestas est. Proin id ex ultricies, porta eros id, vehicula quam. Morbi non sagittis velit.</p>
+        - id: "tab-with-title-2"
+          label: "Second section"
+          title: "Second section"
+          content: |
+            <p class="govuk-body-m">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam congue elementum commodo. Vestibulum elit turpis, efficitur quis posuere vitae, commodo vitae augue. Donec ut pharetra ligula. Phasellus ac mauris eu felis bibendum dapibus rutrum sed quam. Pellentesque posuere ante id consequat pretium.</p>
+  single_item:
+    description: If only an individual item is supplied to the component (if the list is created dynamically, for example) it will be rendered without tabs.
+    data:
+      tabs:
+        - id: "singletab"
+          label: "Single piece of content"
+          content: |
+            <p class="govuk-body-m">Here is a single piece of content, there should be no tabs.</p>
+  with_data_attributes:
+    data:
+      tabs:
+        - id: "tab-with-data-attributes-1"
+          label: "First section"
+          title: "First section"
+          tab_data_attributes:
+            hello: world
+          content: |
+            <p class="govuk-body-m">Fusce at dictum tellus, ac accumsan est. Nulla vitae turpis in nulla gravida tincidunt. Duis lectus felis, tempus id bibendum sit amet, posuere ut elit. Donec enim odio, eleifend in urna a, sagittis egestas est. Proin id ex ultricies, porta eros id, vehicula quam. Morbi non sagittis velit.</p>
+        - id: "tab-with-data-attributes-2"
+          label: "Second section"
+          title: "Second section"
+          tab_data_attributes:
+            hello: world
+          content: |
+            <p class="govuk-body-m">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam congue elementum commodo. Vestibulum elit turpis, efficitur quis posuere vitae, commodo vitae augue. Donec ut pharetra ligula. Phasellus ac mauris eu felis bibendum dapibus rutrum sed quam. Pellentesque posuere ante id consequat pretium.</p>
+  without_ga4_tracking_on_tabs:
+    description: Disables GA4 tracking on tabs. Tracking is enabled by default. This includes the event tracker and required data attributes. See the [ga4-event-tracker documentation](https://github.com/alphagov/govuk_publishing_components/blob/main/docs/analytics-ga4/ga4-event-tracker.md) for more information.
+    data:
+      disable_ga4: true
+      tabs:
+        - id: "tab-with-ga4-tracking-1"
+          label: "First section"
+          title: "First section"
+          content: |
+            <p class="govuk-body-m">Fusce at dictum tellus, ac accumsan est. Nulla vitae turpis in nulla gravida tincidunt. Duis lectus felis, tempus id bibendum sit amet, posuere ut elit. Donec enim odio, eleifend in urna a, sagittis egestas est. Proin id ex ultricies, porta eros id, vehicula quam. Morbi non sagittis velit.</p>
+        - id: "tab-with-ga4-tracking-2"
+          label: "Second section"
+          title: "Second section"
+          content: |
+            <p class="govuk-body-m">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam congue elementum commodo. Vestibulum elit turpis, efficitur quis posuere vitae, commodo vitae augue. Donec ut pharetra ligula. Phasellus ac mauris eu felis bibendum dapibus rutrum sed quam. Pellentesque posuere ante id consequat pretium.</p>
+  without_ga4_tracking_on_tabs_as_links:
+    description: Disables GA4 tracking on tabs as links. Tracking is enabled by default.
+    data:
+      as_links: true
+      disable_ga4: true
+      tabs:
+        - href: "/page1"
+          label: "Link 1"
+          active: true
+        - href: "/page2"
+          label: "Link 2"
+          active: false

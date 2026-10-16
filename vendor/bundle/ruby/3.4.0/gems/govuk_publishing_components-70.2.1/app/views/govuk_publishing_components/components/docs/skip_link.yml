@@ -1,0 +1,27 @@
+name: Skip link
+description: Skip link component helps keyboard-only users skip to the main content on a page
+govuk_frontend_components:
+  - skip-link
+accessibility_criteria: |
+  - accept focus
+  - be focusable with a keyboard
+  - be usable with a keyboard
+  - indicate when they have focus
+  - becomes visible when pressing tab
+  - is the first items that screen readers hear and that keyboard users tab to
+accessibility_excluded_rules:
+  - skip-link # This component is creating a reference to #content which is part of the layout
+uses_component_wrapper_helper: true
+examples:
+  default:
+    data:
+  with_different_text:
+    data:
+      text: 'Skip to results'
+  with_different_href:
+    data:
+      href: '#somewhere-on-the-page'
+  custom_title_and_href:
+    data:
+      text: 'Skip to my content'
+      href: '#my-content'

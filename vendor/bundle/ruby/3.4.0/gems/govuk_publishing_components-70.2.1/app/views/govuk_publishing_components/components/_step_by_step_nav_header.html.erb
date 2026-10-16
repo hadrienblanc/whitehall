@@ -1,0 +1,45 @@
+<%
+  title ||= false
+  path ||= false
+  disable_ga4 ||= false
+  breadcrumbs = [
+    { title: "Home", url: "/" },
+    { title: title, url: path },
+  ]
+  breadcrumb_presenter = GovukPublishingComponents::Presenters::Breadcrumbs.new(breadcrumbs)
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-step-nav-header")
+
+  unless disable_ga4
+    component_helper.add_data_attribute({ module: "ga4-link-tracker" })
+    ga4_data = {
+      event_name: "navigation",
+      type: "super breadcrumb",
+      index_link: "1",
+      index_total: "1",
+    }.to_json
+  end
+%>
+<% if title %>
+  <script type="application/ld+json">
+    <%= raw JSON.pretty_generate(breadcrumb_presenter.structured_data) %>
+  </script>
+
+  <%= tag.div(**component_helper.all_attributes) do %>
+    <strong class="gem-c-step-nav-header__part-of">Part of</strong>
+    <% if path %>
+      <a href="<%= path %>"
+        class="gem-c-step-nav-header__title govuk-link gem-print-force-link-styles"
+        <% unless disable_ga4 %>
+          data-ga4-link='<%= ga4_data %>'
+        <% end %>>
+        <%= title %>
+      </a>
+    <% else %>
+      <span class="gem-c-step-nav-header__title">
+        <%= title %>
+      </span>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,146 @@
+<%
+  shared_helper = GovukPublishingComponents::Presenters::SharedHelper.new(local_assigns)
+
+  autocomplete ||= nil
+  controls ||= nil
+  data ||= nil
+  describedby ||= nil
+  enterkeyhint ||= nil
+  id ||= "input-#{SecureRandom.hex(4)}"
+  spellcheck ||= "false"
+  type ||= "text"
+  value ||= nil
+  inputmode ||= nil
+  pattern ||= nil
+
+  label ||= nil
+  hint ||= nil
+  error_message ||= nil
+  error_items ||= []
+  grouped ||= nil
+  autofocus ||= nil
+  tabindex ||= nil
+  readonly ||= nil
+  maxlength ||= nil
+  width ||= nil
+  has_error ||= error_message || error_items.any?
+  hint_id = "hint-#{SecureRandom.hex(4)}"
+  error_id = "error-#{SecureRandom.hex(4)}"
+  search_icon ||= nil
+  heading_size = false unless shared_helper.valid_heading_size?(heading_size)
+  heading_level ||= nil
+  prefix ||= nil
+  suffix ||= nil
+  right_to_left ||= false
+  right_to_left_help = right_to_left_help.nil? ? right_to_left : right_to_left_help
+
+  css_classes = %w(gem-c-input govuk-input)
+  css_classes << "govuk-input--error" if has_error
+  css_classes << "govuk-input--width-#{width}" if [2, 3, 4, 5, 10, 20, 30].include?(width)
+  css_classes << "gem-c-input--with-search-icon" if search_icon
+
+  form_group_css_classes = %w(govuk-form-group)
+  form_group_css_classes << "govuk-form-group--error" if has_error && !grouped
+
+  aria_described_by ||= nil
+  if hint || has_error || describedby
+    aria_described_by = []
+    aria_described_by << hint_id if hint
+    aria_described_by << error_id if has_error && !grouped
+    aria_described_by << describedby if describedby
+    aria_described_by = aria_described_by.join(" ")
+  end
+
+  checked_enterkeyhint = enterkeyhint if %w[
+    done
+    enter
+    go
+    next
+    previous
+    search
+    send
+  ].include?(enterkeyhint)
+
+  if type == "number"
+    type = "text"
+    inputmode = "numeric"
+  end
+%>
+
+<%= content_tag :div, class: form_group_css_classes do %>
+  <% if label %>
+    <% label_markup = capture do %>
+      <%= render "govuk_publishing_components/components/label", {
+        html_for: id,
+        heading_size: heading_size,
+        right_to_left: right_to_left_help,
+      }.merge(label.symbolize_keys) %>
+    <% end %>
+
+    <% if heading_level %>
+      <%= content_tag(shared_helper.get_heading_level, class: "govuk-label-wrapper") do %>
+        <%= label_markup %>
+      <% end %>
+    <% else %>
+      <%= label_markup %>
+    <% end %>
+  <% end %>
+
+  <% if hint %>
+    <%= render "govuk_publishing_components/components/hint", {
+      id: hint_id,
+      text: hint,
+      right_to_left: right_to_left_help,
+    } %>
+  <% end %>
+
+  <% if has_error %>
+    <%= render "govuk_publishing_components/components/error_message", {
+      id: error_id,
+      text: error_message,
+      items: error_items,
+      right_to_left: right_to_left_help,
+    } %>
+  <% end %>
+
+  <% input_tag = tag.input(
+    aria: {
+      describedby: aria_described_by,
+      controls: controls,
+    },
+    autocomplete: autocomplete,
+    autofocus: autofocus,
+    class: css_classes,
+    data: data,
+    dir: right_to_left ? "rtl" : nil,
+    enterkeyhint: checked_enterkeyhint,
+    id: id,
+    inputmode: inputmode,
+    maxlength: maxlength,
+    name: name,
+    pattern: pattern,
+    readonly: readonly,
+    spellcheck: spellcheck,
+    tabindex: tabindex,
+    type: type,
+    value: value,
+  ) %>
+
+  <% if prefix && suffix %>
+    <%= tag.div class: "govuk-input__wrapper" do %>
+      <%# The line below relies on in-line styling for legacy browsers and it's whitespace-sensitive %>
+      <%= tag.span prefix, class: "govuk-input__prefix", aria: { hidden: true } %><%= input_tag %><%= tag.span suffix, class: "govuk-input__suffix", aria: { hidden: true } %>
+    <% end %>
+  <% elsif prefix %>
+    <%= tag.div class: "govuk-input__wrapper" do %>
+      <%= tag.span prefix, class: "govuk-input__prefix", aria: { hidden: true } %><%= input_tag %>
+    <% end %>
+  <% elsif suffix %>
+    <%= tag.div class: "govuk-input__wrapper" do %>
+      <%= input_tag %><%= tag.span suffix, class: "govuk-input__suffix", aria: { hidden: true } %>
+    <% end %>
+  <% else %>
+    <%= tag.span class: "gem-c-input__search-icon" if search_icon %>
+    <%= input_tag %>
+  <% end %>
+<% end %>

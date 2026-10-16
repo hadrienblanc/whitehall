@@ -1,0 +1,269 @@
+---
+lt:
+  common:
+    hide: Slėpti
+    show: Rodyti
+    toggle_less: Rodyti mažiau
+    toggle_less_html:
+    toggle_more: "%{show}% {number} daugiau"
+    toggle_more_html:
+    translations: Vertimai
+  components:
+    accordion:
+      hide_all: Slėpti visas skiltis
+      show_all: Rodyti visas skiltis
+      this_section_visually_hidden: " ši skiltis"
+    app_promo_banner:
+      aria_label:
+      body_text:
+      close:
+      title_text:
+      view:
+    article_schema:
+      scoped_search_description: Ieškoti %{title}
+    attachment:
+      opendocument_html: Šis failas yra <a href='https://www.gov.uk/guidance/using-open-document-formats-odf-in-your-organisation' target=%{target} class='govuk-link'>OpenDocument</a> formato
+      order_a_copy: Užsisakyti kopiją
+      page:
+        few:
+        one: 1 puslapis
+        other: "%{count} puslapių"
+      preview_aria_label:
+      preview_link:
+      reference: 'Nuoroda: %{reference}'
+      request_format_cta: Prašyti prieinamo formato
+      request_format_details_html: Jei naudojate pagalbinę technologiją (pvz., ekrano skaitytuvą) ir jums reikia labiau prieinamo šio dokumento formato, susisiekite el. paštu <a href='mailto:%{alternative_format_contact_email}' target='_blank' class='govuk-link'>%{alternative_format_contact_email}</a>. Nurodykite, koks formatas jums reikalingas. Taip pat mums pagelbėtų, jei nurodytumėte, kokias pagalbines technologijas naudojate.
+      request_format_text: Šis failas gali būti netinkamas pagalbinių technologijų naudotojams.
+    back_link:
+      back: Atgal
+    back_to_top_link:
+      contents: Turinys
+    character_count:
+      body: Galite naudoti iki %{number} %{type}
+      type:
+        characters: spaudos ženklų
+        words: žodžių
+    chart:
+      accessibility_heading:
+      accessibility_html:
+      accessibility_link:
+      source:
+      table_dropdown:
+    checkboxes:
+      or: arba
+    contents_list:
+      contents: Turinys
+    contextual_sidebar:
+      pretitle: Taip pat dalis
+    cookie_banner:
+      buttons:
+        accept_cookies: Priimti papildomus slapukus
+        reject_cookies: Atmesti papildomus slapukus
+        view_cookies:
+      confirmation_message:
+        accepted:
+        html: Galite %{link} bet kuriuo metu.
+        link: keisti slapukų nustatymus
+        rejected:
+      hide:
+      text:
+      - Naudojame kai kuriuos būtinus slapukus
+      - kad ši interneto svetainė galėtų veikti.
+      - Norėtume nustatyti papildomus slapukus
+      - kad suprastumėme
+      - kaip jūs naudojatės GOV.UK
+      - kad įsimintumėme jūsų nustatymus ir galėtumėme gerinti valstybines paslaugas.
+      - Taip pat naudojame kitų interneto svetainių nustatytus slapukus
+      - kad galėtume teikti jų paslaugų turinį.
+      title: GOV.UK slapukai
+    devolved_nations:
+      applies_to:
+      aria_label:
+      england:
+        end:
+        middle:
+        start:
+      northern_ireland:
+        end:
+        middle:
+        start:
+      scotland:
+        end:
+        middle:
+        start:
+      type:
+        consultation:
+        detailed_guide:
+        guidance:
+        publication:
+      wales:
+        end:
+        middle:
+        start:
+    feedback:
+      close: Uždaryti
+      dont_include_personal_info: Nenurodykite savo asmeninės ar finansinės informacijos, tokios kaip jūsų valstybinio draudimo numeris arba kredito kortelės duomenys.
+      email_address: El. pašto adresas
+      help_us_improve_govuk: Padėkite mums tobulinti GOV.UK
+      is_not_useful: šis puslapis nenaudingas
+      is_this_page_useful: Ar šis puslapis naudingas?
+      is_useful: šis puslapis naudingas
+      maybe: Galbūt
+      more_about_visit:
+      'no': Ne
+      send: Siųsti
+      send_me_survey: Atsiųsti man apklausą
+      something_wrong: Pranešti apie problemas su šiuo puslapiu
+      thank_you_for_feedback: Dėkojame už jūsų atsiliepimą
+      what_doing: Ką darėte?
+      what_wrong: Kas nutiko?
+      'yes': Taip
+    figure:
+      image_credit: 'Nuotrauka: %{credit}'
+    intervention:
+      accessible_link_text_suffix:
+    layout_footer:
+      copyright_html: <a class="govuk-footer__link govuk-footer__copyright-logo" href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">© Crown copyright</a>
+      licence_html: Visą turinį rasite <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, nebent nurodyta kitaip
+      navigation_links:
+      support_links: Palaikymo nuorodos
+    layout_for_public:
+      account_layout:
+        feedback:
+          banners:
+            phase_banner_html:
+        navigation:
+          menu_bar:
+            account:
+              link_text:
+            manage:
+              link_text:
+    layout_header:
+      menu: Meniu
+      top_level: Aukščiausias lygis
+    layout_super_navigation_header:
+      logo_link_title:
+      menu_toggle_label:
+        hide:
+        show:
+      navigation_link:
+        href:
+        label:
+      navigation_links_columns:
+      navigation_menu_heading:
+      navigation_search_subheading:
+      search_text:
+    metadata:
+      and:
+      from: Nuo
+      history: Istorija
+      last_updated: Paskutinį kartą naujinta
+      part_of: Dalis
+      published: Publikuota
+      see_all_updates: Matyti visą naujausią informaciją
+      hidden_heading:
+      hide_all_updates: slėpti visą naują informacij
+      show_all_updates: rodyti visą naują informaciją
+    modal_dialogue:
+      close_modal: Uždaryti modalinį dialogo langą
+    notice:
+      banner_title:
+    option_select:
+      found_multiple:
+      found_single:
+      selected:
+    organisation_schema:
+      all_content_search_description: Rasti visą turinį iš %{organisation}
+    pagination:
+      next:
+      pagination: Suskirstymas puslapiais
+      previous:
+    password_input:
+      button:
+      button_aria_hide_label:
+      button_aria_label:
+      button_hide:
+      error_text_prefix:
+      label:
+      password_hidden_announcement:
+      password_shown_announcement:
+    print_link:
+      text: Spausdinti šį puslapį
+    published_dates:
+      hidden_heading:
+      hide_all_updates: slėpti visą naują informacij
+      last_updated: Paskutinį kartą naujinta %{date}
+      published: Publikuota %{date}
+      see_all_updates: matyti visą naują informaciją
+      show_all_updates: rodyti visą naują informaciją
+    radio:
+      or: arba
+    related_footer_navigation:
+      collections: Serijos
+      policies: Strategijos
+      statistical_data_sets: Statistinių duomenų rinkiniai
+      topical_events: Aktualūs įvykiai
+    related_navigation:
+      collections: Serijos
+      external_links: Kitur internete
+      policies: Strategija
+      publishers: Paskelbė
+      related_contacts: Kiti kontaktai
+      related_content: Susijęs turinys
+      related_external_links: Kitur internete
+      related_guides: Detali informacija
+      statistical_data_sets: Statistinių duomenų rinkinys
+      toggle_visually_hidden_text:
+        collections:
+        related_external_links:
+        related_guides:
+        related_items:
+        statistical_data_sets:
+        topical_events:
+        topics:
+        world_locations:
+      topical_events: Aktualus įvykis
+      topics: Išnagrinėti temą
+      ukraine:
+        links:
+        title:
+      world_locations: Pasaulio vietos
+    search_box:
+      input_title: Ieškoti
+      label: Ieškoti GOV.UK
+      search_button: Ieškoti
+    service_navigation:
+      menu_toggle:
+    share_links:
+      all_opens_in_new_tab:
+      opens_in_new_tab:
+    single_page_notification_button:
+      subscribe_text:
+      unsubscribe_text:
+    skip_link:
+      text: Praleisti ir pereiti prie pagrindinio turinio
+    step_by_step_nav:
+      hide: Slėpti
+      hide_all: Slėpti visus etapus
+      show: Rodyti
+      show_all: Rodyti visus etapus
+    step_by_step_nav_related:
+      part_of: Dalis
+      this_page_is:
+      this_page_is_part_of_html:
+    subscription_links:
+      email_signup_link_text: Gauti el. laiškus
+      feed_link_label: Nukopijuokite ir įklijuokite šį URL į savo srauto skaitytuvą
+      feed_link_text: Prenumeruoti srautą
+      subscriptions: Prenumeratos
+    success_alert:
+      success: Sėkmingai
+    summary_list:
+      delete: Ištrinti
+      edit: Keisti
+    table:
+      filter_count:
+      filter_label:
+      filter_message:
+    tabs:
+      contents: Turinys

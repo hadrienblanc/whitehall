@@ -1,0 +1,66 @@
+.gem-c-emergency-banner {
+  background-color: govuk-colour("black", $variant: "tint-80");
+  color: govuk-colour("white");
+  margin-top: 2px;
+  padding: govuk-spacing(3) 0;
+  @include govuk-font(19);
+
+  @include govuk-media-query($from: tablet) {
+    padding: govuk-spacing(6) 0;
+  }
+}
+
+.gem-c-emergency-banner--homepage {
+  border-bottom: govuk-spacing(1) solid govuk-colour("white");
+  border-top: govuk-spacing(1) solid govuk-colour("white");
+  margin-bottom: govuk-spacing(-2);
+  margin-top: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.gem-c-emergency-banner__heading {
+  margin: 0;
+  @include govuk-font(24, $weight: bold);
+}
+
+.gem-c-emergency-banner__heading--homepage {
+  @include govuk-font(48, $weight: bold);
+
+  @include govuk-media-query($from: tablet) {
+    margin-bottom: govuk-spacing(4);
+  }
+}
+
+.gem-c-emergency-banner__description {
+  color: govuk-colour("white");
+  margin-top: 0;
+  margin-bottom: govuk-spacing(4);
+  @include govuk-font(19);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.gem-c-emergency-banner__description--homepage {
+  margin: govuk-spacing(4) 0;
+}
+
+.gem-c-emergency-banner--notable-death {
+  background-color: govuk-colour("black");
+}
+
+.gem-c-emergency-banner--national-emergency {
+  background-color: govuk-colour("red", $variant: "shade-25");
+}
+
+.gem-c-emergency-banner--local-emergency {
+  background-color: govuk-colour("teal", $variant: "shade-25");
+}
+
+@include govuk-media-query($media-type: print) {
+  .gem-c-emergency-banner {
+    display: none;
+  }
+}

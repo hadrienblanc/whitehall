@@ -1,0 +1,87 @@
+<%
+  name ||= ""
+  dismiss_text ||= false
+  suggestion_link_text ||= false
+  suggestion_link_url ||= false
+  suggestion_text ||= nil
+  hide ||= false
+  new_tab ||= false
+  image ||= nil
+
+  suggestion_data_attributes = {}
+  dismiss_data_attributes = {}
+  dismiss_link_data_attributes = {}
+
+  options = {
+    name: name,
+    dismiss_text: dismiss_text,
+    params: request.params,
+    query_string: request.query_string,
+    suggestion_text: suggestion_text,
+    suggestion_link_text: suggestion_link_text,
+    suggestion_link_url: suggestion_link_url,
+  }
+
+  intervention_helper = GovukPublishingComponents::Presenters::InterventionHelper.new(options)
+  dismiss_href = intervention_helper.dismiss_link
+
+  disable_ga4 ||= false
+  suggestion_data_attributes[:module] = "#{suggestion_data_attributes[:module]} ga4-link-tracker".strip unless disable_ga4
+  suggestion_data_attributes[:ga4_link] = { event_name: "navigation", type: "intervention", section: suggestion_text, index_link: 1, index_total: 1 }.to_json unless disable_ga4
+
+  suggestion_tag_options = {
+    class: "govuk-link gem-print-force-link-styles",
+    href: suggestion_link_url,
+    data: suggestion_data_attributes,
+  }
+
+  if new_tab && (suggestion_link_text && suggestion_link_url)
+    target = "_blank"
+    rel = intervention_helper.security_attr
+
+    suggestion_tag_options.merge!({ target: target, rel: rel })
+
+    suggestion_link_text = intervention_helper.accessible_text
+  end
+
+  dismiss_link_data_attributes[:module] = "#{dismiss_link_data_attributes[:module]} ga4-event-tracker".strip unless disable_ga4
+  dismiss_link_data_attributes[:ga4_event] = { event_name: "select_content", type: "intervention", section: suggestion_text, action: "closed" }.to_json unless disable_ga4
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-intervention")
+  component_helper.add_class("gem-c-intervention--image") if image
+  component_helper.add_role("region")
+  component_helper.add_aria_attribute({ label: "Intervention"})
+  component_helper.add_data_attribute({ module: "intervention", intervention_name: name })
+  component_helper.add_data_attribute({ ga4_intervention_banner: "" }) unless disable_ga4 # Added to the parent element for the GA4 pageview object to use
+  component_helper.set_hidden("hidden") if hide
+%>
+<% if intervention_helper.show? %>
+  <%= tag.section(**component_helper.all_attributes) do %>
+    <% valid_image = %w[hmrc].include? image %>
+    <%= tag.span(class: "gem-c-intervention__image-container gem-c-intervention__image-container--#{image}") if valid_image %>
+
+    <%= tag.p(class: "govuk-body") do %>
+      <%= tag.span suggestion_text, class: "gem-c-intervention__textwrapper" if suggestion_text %>
+      <% if suggestion_link_text && suggestion_link_url %>
+        <%= tag.a suggestion_link_text, **suggestion_tag_options %>
+      <% end %>
+    <% end %>
+
+    <% if dismiss_text %>
+      <%= tag.p class: "govuk-body govuk-!-display-none-print", data: dismiss_data_attributes do %>
+        <%= tag.a class: "govuk-link govuk-link--no-underline gem-c-intervention__dismiss-link js-dismiss-link", href: dismiss_href, data: dismiss_link_data_attributes do %>
+          <svg class="gem-c-intervention__dismiss-icon"
+            width="19" height="19" viewBox="0 0 19 19"
+            aria-hidden="true"
+            fill="none" stroke="currentColor">
+            <path d="M0.499997 9.5C0.499997 4.52944 4.52944 0.499999 9.5 0.499999C14.4706 0.5 18.5 4.52944 18.5 9.5C18.5 14.4706 14.4706 18.5 9.5 18.5C4.52943 18.5 0.499997 14.4706 0.499997 9.5Z" />
+            <path d="M13.3477 5.4209L9.67383 9.09473L6 5.4209" />
+            <path d="M6 13.4209L9.67383 9.74707L13.3477 13.4209" />
+          </svg>
+          <span class="gem-c-intervention__dismiss-link-text"><%= dismiss_text %></span>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

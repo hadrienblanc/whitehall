@@ -1,0 +1,266 @@
+---
+uz:
+  common:
+    hide: Яшириш
+    show: Кўрсатиш
+    toggle_less: Камроқ кўрсатиш
+    toggle_less_html:
+    toggle_more: "%{show} %{number} кўпроқ"
+    toggle_more_html:
+    translations: Таржималар
+  components:
+    accordion:
+      hide_all: Бўлимларни барчасини яшириш
+      show_all: Бўлимларни барчасини кўрсатиш
+      this_section_visually_hidden: " ушбу бўлим"
+    app_promo_banner:
+      aria_label:
+      body_text:
+      close:
+      title_text:
+      view:
+    article_schema:
+      scoped_search_description: "%{title} да излаш"
+    attachment:
+      opendocument_html: Ушбу файл <a href='https://www.gov.uk/guidance/using-open-document-formats-odf-in-your-organisation' target=%{target} class='govuk-link'>да OpenDocument</a> форматда тақдим этилган
+      order_a_copy: Нусхага буюртма бериш
+      page:
+        one: 1 саҳифа
+        other: "%{count} саҳифа"
+      preview_aria_label:
+      preview_link:
+      reference: 'Ҳавола:  %{reference}'
+      request_format_cta: Мақбул форматни олишга сўров
+      request_format_details_html: Агар сиз ёрдамчи технологияларни (масалан, экрандан ўқиш воститаларини) жалб қилсангиз ва сизга ушбу ҳужжатнинг версияси анча эришимли форматда зарур бўлса, қуйидаги электрон почта орқали юборинг <a href='mailto:%{alternative_format_contact_email}' target='_blank' class='govuk-link'>%{alternative_format_contact_email}</a>. Сизга қандай формат кераклигини хабар қилинг. Сиз қайси ёрдамчи технологиялардан фойдаланаётганлигингизни билишимиз зарур.
+      request_format_text: Ушбу файл ёрдамчи технологиялардан фойдаланаётган шахслар учун мос келмаслиги мумкин.
+    back_link:
+      back: Орқага
+    back_to_top_link:
+      contents: Мундарижа
+    character_count:
+      body: Сиз %{number} %{type} гача киритишингиз мумкин
+      type:
+        characters: белгилар
+        words: сўзлар
+    chart:
+      accessibility_heading:
+      accessibility_html:
+      accessibility_link:
+      source:
+      table_dropdown:
+    checkboxes:
+      or: ёки
+    contents_list:
+      contents: Мундарижа
+    contextual_sidebar:
+      pretitle: Шу билан бирга қисм
+    cookie_banner:
+      buttons:
+        accept_cookies: cookie қўшимча файлларини қабул қилиш
+        reject_cookies: cookie қўшимча файлларини бекор қилиш
+        view_cookies:
+      confirmation_message:
+        accepted:
+        html: Сиз %{link} исталган вақтда қилишингиз мумкин.
+        link: cookie файлларини созламаларини ўзгариши
+        rejected:
+      hide:
+      text:
+      - Биз ушбу веб-сайтни ишини таъминлаш учун cookieнинг муайян файлларини қўллаймиз.
+      - Сиз қай тарзда GOV.UKдан фойдаланаётганлигингизни тушуниш
+      - сизнинг созламаларингизни эслаб қолиш ва давлат хизматларини кўрсатиш жараёнини такомиллаштириш учун
+      - биз cookieнинг қўшимча файлларини ўрнатиш истагидамиз.
+      - Биз бошқа сайтлар томонидан ўрнатилган cookie файлларидан ҳам фойдаланамиз
+      - улар уларнинг сервисларидан контентни олишда ёрдам беради.
+      title: GOV.UKда cookie файллари
+    devolved_nations:
+      applies_to:
+      aria_label:
+      england:
+        end:
+        middle:
+        start:
+      northern_ireland:
+        end:
+        middle:
+        start:
+      scotland:
+        end:
+        middle:
+        start:
+      type:
+        consultation:
+        detailed_guide:
+        guidance:
+        publication:
+      wales:
+        end:
+        middle:
+        start:
+    feedback:
+      close: Ёпиш
+      dont_include_personal_info: Шахсий ёки молиявий маълумотларни, масалан, давлат суғуртаси рақами ёки кредит карта маълумотларини, кўрсатиш керак эмас.
+      email_address: Электрон почта манзили
+      help_us_improve_govuk: GOV.UKни такомиллаштиришда бизга ёрдам беринг
+      is_not_useful: ушбу саҳифадаги маълумот фойдали ҳисобланмайди
+      is_this_page_useful: Ушбу саҳифадаги маълумот фойдалими?
+      is_useful: ушбу саҳифадаги маълумот фойдали ҳисобланади
+      maybe: Балки
+      more_about_visit:
+      'no': Йўқ
+      send: Жўнатиш
+      send_me_survey: Менга қисқача маълумот жўнатиш
+      something_wrong: Ушбу саҳифа билан муаммолар ҳақида хабар бериш
+      thank_you_for_feedback: Ўз мулоҳазангиз учун раҳмат
+      what_doing: Сиз нима қилаётган эдингиз?
+      what_wrong: Қандай хатолик бўлди?
+      'yes': Ҳа
+    figure:
+      image_credit: 'График материаллар тақдим этилган: %{credit}'
+    intervention:
+      accessible_link_text_suffix:
+    layout_footer:
+      copyright_html: <a class="govuk-footer__link govuk-footer__copyright-logo" href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">© Британия миллатлар ҳамдўстлигининг муаллифлик ҳуқуқи</a>
+      licence_html: Бутун таркиб <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">“Очиқ давлат лицензияси, версия 3.0” дастурида эришимли</a>, агар бошқаси кўрсатилмаган бўлса
+      navigation_links:
+      support_links: Қўллаб-қувватлашга ҳавола
+    layout_for_public:
+      account_layout:
+        feedback:
+          banners:
+            phase_banner_html:
+        navigation:
+          menu_bar:
+            account:
+              link_text:
+            manage:
+              link_text:
+    layout_header:
+      menu: Меню
+      top_level: Юқори даража
+    layout_super_navigation_header:
+      logo_link_title:
+      menu_toggle_label:
+        hide:
+        show:
+      navigation_link:
+        href:
+        label:
+      navigation_links_columns:
+      navigation_menu_heading:
+      navigation_search_subheading:
+      search_text:
+    metadata:
+      and:
+      from: дан
+      history: Тарих
+      last_updated: Сўнгги янгиланиш
+      part_of: Қисм
+      published: Нашр қилинган
+      see_all_updates: Барча янгиланишларни кўриш
+      hidden_heading:
+      hide_all_updates: Барча янгиланишларни яшириш
+      show_all_updates: янгиланишларни барчасини кўрсатиш
+    modal_dialogue:
+      close_modal: Модал мулоқотни ёпиш
+    notice:
+      banner_title:
+    option_select:
+      found_multiple:
+      found_single:
+      selected:
+    organisation_schema:
+      all_content_search_description: "%{organization}  дан бутун контентни топиш"
+    pagination:
+      next:
+      pagination: Саҳифаларнинг рақамланиши
+      previous:
+    password_input:
+      button:
+      button_aria_hide_label:
+      button_aria_label:
+      button_hide:
+      error_text_prefix:
+      label:
+      password_hidden_announcement:
+      password_shown_announcement:
+    print_link:
+      text: Ушбу саҳифани чоп этиш
+    published_dates:
+      hidden_heading:
+      hide_all_updates: Барча янгиланишларни яшириш
+      last_updated: Сўнгги янгиланиш %{date}
+      published: Нашр қилинган %{date}
+      see_all_updates: Барча янгиланишларни кўриш
+      show_all_updates: янгиланишларни барчасини кўрсатиш
+    radio:
+      or: ёки
+    related_footer_navigation:
+      collections: Йиғимлар
+      policies: Сиёсатлар
+      statistical_data_sets: Статистик маълумотларнинг жамланмалари
+      topical_events: Долзарб воқеалар
+    related_navigation:
+      collections: Йиғиш
+      external_links: Интернет кенглигида исталган жойда
+      policies: Сиёсат
+      publishers: Нашр қилинган
+      related_contacts: Контакт маълумотларнинг бошқалари
+      related_content: Мувофиқ контент
+      related_external_links: Интернет кенглигида исталган жойда
+      related_guides: Батафсил қўлланма
+      statistical_data_sets: Статистик маълумотлар жамланмаси
+      toggle_visually_hidden_text:
+        collections:
+        related_external_links:
+        related_guides:
+        related_items:
+        statistical_data_sets:
+        topical_events:
+        topics:
+        world_locations:
+      topical_events: Долзарб воқеа
+      topics: Мавзуни тадқиқот қилиш
+      ukraine:
+        links:
+        title:
+      world_locations: Жаҳондаги жойлашиш жойи
+    search_box:
+      input_title: Излаш
+      label: GOV.UKда излаш
+      search_button: Излаш
+    service_navigation:
+      menu_toggle:
+    share_links:
+      all_opens_in_new_tab:
+      opens_in_new_tab:
+    single_page_notification_button:
+      subscribe_text:
+      unsubscribe_text:
+    skip_link:
+      text: Асосий мундарижага ўтиш
+    step_by_step_nav:
+      hide: Яшириш
+      hide_all: Босқичларни барчасини яшириш
+      show: Кўрсатиш
+      show_all: Босқичларни барчасини кўрсатиш
+    step_by_step_nav_related:
+      part_of: Қисм
+      this_page_is:
+      this_page_is_part_of_html:
+    subscription_links:
+      email_signup_link_text: Электрон манзилларни олиш
+      feed_link_label: RSS-лентани ўқиш учун мижозга ушбу URLни нусхалаш ва ўрнатиш
+      feed_link_text: Лентага обуна бўлиш
+      subscriptions: Обуналар
+    success_alert:
+      success: Муваффақиятли
+    summary_list:
+      delete: Ўчириб юбориш
+      edit: Ўзгартириш
+    table:
+      filter_count:
+      filter_label:
+      filter_message:
+    tabs:
+      contents: Мундарижа

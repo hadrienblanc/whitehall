@@ -1,0 +1,13 @@
+@import "govuk/components/tag";
+
+.gem-c-tag {
+  max-width: none;
+}
+
+@include govuk-media-query($media-type: print) {
+  .gem-c-tag.govuk-tag {
+    color: govuk-functional-colour(print-text);
+    background: none;
+    border: 2px solid govuk-colour("black");
+  }
+}

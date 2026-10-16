@@ -1,0 +1,71 @@
+<%
+  service_name ||= nil
+  service_name_url ||= nil
+  navigation_items ||= []
+  navigation_aria_label ||= t("components.layout_header.menu")
+  toggle_text ||= t("components.service_navigation.menu_toggle")
+  inverse ||= false
+  hide_service_name_on_mobile ||= false
+  collapse_navigation_on_mobile = local_assigns.fetch(:collapse_navigation_on_mobile, navigation_items.length > 1)
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-service-navigation govuk-service-navigation")
+  component_helper.add_class("govuk-service-navigation--inverse") if inverse
+  component_helper.add_class("gem-c-service-navigation--hide-service-name-on-mobile") if hide_service_name_on_mobile
+  component_helper.add_aria_attribute({ label: "Service information" }) if service_name.present?
+  component_helper.add_data_attribute({ module: "govuk-service-navigation" })
+
+  full_width ||= false
+  nav_id = "navigation-#{SecureRandom.hex(4)}"
+%>
+<% if service_name.present? || navigation_items.present? %>
+  <% service_navigation_content = capture do %>
+    <div class="<%= full_width ? "gem-c-service-navigation--full-width" : "govuk-width-container" %>">
+      <div class="govuk-service-navigation__container">
+        <% if service_name %>
+          <% if service_name_url %>
+            <%= tag.span(class: "govuk-service-navigation__service-name") do %>
+              <%= link_to(service_name, service_name_url, class: "govuk-service-navigation__link") %>
+            <% end %>
+          <% else %>
+            <%= tag.span(service_name, class: "govuk-service-navigation__service-name") %>
+          <% end %>
+        <% end %>
+
+        <% if navigation_items.present? %>
+          <nav aria-label="<%= navigation_aria_label %>" class="govuk-service-navigation__wrapper">
+            <% if collapse_navigation_on_mobile %>
+              <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle" aria-controls="<%= nav_id %>" hidden aria-hidden="true">
+                <%= toggle_text %>
+              </button>
+            <% end %>
+            <ul class="govuk-service-navigation__list" id="<%= nav_id %>">
+              <% navigation_items.each do |nav| %>
+                <%
+                  nav_classes = %w(govuk-service-navigation__item)
+                  nav_classes << "govuk-service-navigation__item--active" if nav[:active]
+                  aria_current = nav[:active]
+                %>
+                <%= tag.li nav[:text], class: nav_classes do %>
+                  <% if nav[:active] %>
+                    <%= link_to(nav[:href], class: "govuk-service-navigation__link", aria: { current: aria_current }, data: nav[:data]) do %>
+                      <%= tag.strong(nav[:text], class: "govuk-service-navigation__active-fallback") %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to nav[:text], nav[:href], class: "govuk-service-navigation__link", data: nav[:data] %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </ul>
+          </nav>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if service_name.present? %>
+    <%= tag.section(service_navigation_content, **component_helper.all_attributes) %>
+  <% else %>
+    <%= tag.div(service_navigation_content, **component_helper.all_attributes) %>
+  <% end %>
+<% end %>

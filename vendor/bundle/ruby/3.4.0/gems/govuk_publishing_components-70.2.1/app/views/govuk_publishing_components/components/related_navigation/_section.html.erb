@@ -1,0 +1,91 @@
+<nav class="gem-c-related-navigation__nav-section"
+     aria-labelledby="related-nav-<%= section_title %>-<%= random %>"
+     data-module="gem-toggle">
+
+  <% if section_title === "related_items" %>
+   <%
+      heading_text = related_nav_helper.construct_section_text("related_content", true)
+      ga4_heading_text = related_nav_helper.construct_ga4_section_text("related_content")
+   %>
+  <% else %>
+    <%=
+      heading_class = related_nav_helper.section_css_class("gem-c-related-navigation__sub-heading", section_title)
+      heading_data = { "track-count" => related_nav_helper.section_data_track_count(:related_item_section) }
+      heading_id = "related-nav-#{section_title}-#{random}"
+      heading_level = related_nav_helper.section_heading_level
+      heading_text = related_nav_helper.construct_section_text(section_title, true)
+      ga4_heading_text = related_nav_helper.construct_ga4_section_text(section_title)
+
+      content_tag(heading_level, id: heading_id, class: heading_class, data: heading_data) do
+        heading_text
+      end
+    %>
+  <% end %>
+
+  <ul class="gem-c-related-navigation__link-list">
+    <%
+      constructed_link_array = []
+      section_link_limit = related_nav_helper.calculate_section_link_limit(links)
+      index_total = links.length
+    %>
+    <% links.each.with_index(1) do |link, index| %>
+      <%
+        link_class = "govuk-link #{related_nav_helper.section_css_class("govuk-link gem-c-related-navigation__section-link", section_title, link: link, link_is_inline: (index >= section_link_limit))}"
+        ga4_attributes = {
+          event_name: "navigation",
+          type: ga4_type,
+          index_section: "#{section_index}",
+          index_link: "#{index}",
+          index_section_count: "#{section_count}",
+          index_total: "#{index_total}",
+          section: ga4_heading_text,
+        } unless disable_ga4
+        link_element = link_to(
+          link[:text],
+          link[:path],
+          class: link_class,
+          rel: link[:rel],
+          lang: shared_helper.t_locale_check(link[:locale]),
+          data: {
+            ga4_link: ga4_attributes,
+          },
+        )
+      %>
+      <% if index <= section_link_limit %>
+        <li class="gem-c-related-navigation__link"><%= link_element %></li>
+      <% else %>
+        <% constructed_link_array.push(link_element) %>
+      <% end %>
+    <% end %>
+
+    <% if links.length > section_link_limit %>
+      <%
+        classes = "gem-c-related-navigation__link toggle-wrap"
+        data_attributes_li = { module: "ga4-event-tracker" } unless disable_ga4
+        data_attributes_link = {
+          controls: "toggle_#{section_title}",
+          expanded: "false",
+          toggled_text: t("common.toggle_less_html",
+            visually_hidden_text: t("components.related_navigation.toggle_visually_hidden_text.#{section_title}"),
+          ),
+        }
+        data_attributes_link[:ga4_event] = { "event_name": "select_content", "type": "related content" } unless disable_ga4
+      %>
+      <%= tag.li(class: classes, data: data_attributes_li) do %>
+        <%= link_to("#", class: "gem-c-related-navigation__toggle", data: data_attributes_link) do %>
+          <%= t("common.toggle_more_html",
+            show: t("common.show"),
+            number: related_nav_helper.remaining_link_count(links),
+            visually_hidden_text: t("components.related_navigation.toggle_visually_hidden_text.#{section_title}"),
+          ) %>
+        <% end %>
+      <% end %>
+
+      <li class="gem-c-related-navigation__link gem-c-related-navigation__link--truncated-links">
+        <span id="toggle_<%= section_title %>" class="gem-c-related-navigation__toggle-more js-hidden">
+          <%= to_sentence(constructed_link_array) %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+</nav>

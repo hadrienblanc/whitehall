@@ -1,0 +1,13 @@
+<%
+  text ||= ""
+  inverse ||= false
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-lead-paragraph")
+  component_helper.add_class("gem-c-lead-paragraph--inverse") if inverse
+%>
+<% if text.present? %>
+  <%= tag.p(**component_helper.all_attributes) do %>
+    <%= text %>
+  <% end %>
+<% end %>

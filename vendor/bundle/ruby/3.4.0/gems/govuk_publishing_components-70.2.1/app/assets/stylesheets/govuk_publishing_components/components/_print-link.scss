@@ -1,0 +1,16 @@
+$gem-c-print-link-background-width: 16px;
+$gem-c-print-link-background-height: 18px;
+
+.gem-c-print-link {
+  display: none;
+}
+
+.gem-c-print-link.gem-c-print-link--show-without-js {
+  display: block;
+}
+
+.govuk-frontend-supported {
+  .gem-c-print-link {
+    display: block;
+  }
+}

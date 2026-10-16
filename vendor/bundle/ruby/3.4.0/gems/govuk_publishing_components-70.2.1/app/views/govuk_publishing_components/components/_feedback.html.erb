@@ -1,0 +1,18 @@
+<%
+  email_regex = /[^\s=\/?&]+(?:@|%40)[^\s=\/?&]+/
+  url_without_pii = request.original_url.gsub(email_regex, "[email]").encode
+  path_without_pii = request.fullpath.gsub(email_regex, "[email]").encode
+
+  disable_ga4 ||= false
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-feedback govuk-!-display-none-print")
+  component_helper.add_data_attribute({ module: "feedback" })
+  component_helper.add_data_attribute({ module: "ga4-event-tracker" }) unless disable_ga4
+%>
+
+<%= tag.div(**component_helper.all_attributes) do %>
+  <%= render "govuk_publishing_components/components/feedback/yes_no_banner", disable_ga4: disable_ga4 %>
+  <%= render "govuk_publishing_components/components/feedback/problem_form", url_without_pii: url_without_pii, disable_ga4: disable_ga4 %>
+  <%= render "govuk_publishing_components/components/feedback/survey_signup_form", path_without_pii: path_without_pii, disable_ga4: disable_ga4 %>
+<% end %>

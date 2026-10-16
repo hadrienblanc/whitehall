@@ -1,0 +1,34 @@
+<%
+  colour_map = {
+    "production" => "red",
+    "staging" => "yellow",
+    "integration" => "yellow",
+    "example" => "purple",
+    "development" => "grey",
+  }
+
+  environment_exists = environment.present?
+  signout_link ||= false
+%>
+
+<div class="govuk-header__logo gem-c-header__logo">
+  <a href="<%= logo_link %>" class="govuk-header__homepage-link">
+    <%= render "govuk_publishing_components/components/govuk_logo/govuk_logo" %>
+    <% if product_name %>
+      <span class="govuk-header__product-name gem-c-header__product-name">
+        <%= product_name %>
+      </span>
+    <% end %>
+  </a>
+  <% if environment_exists %>
+    <div class="gem-c-header__environment">
+      <%= render "govuk_publishing_components/components/tag", { text: environment, colour: colour_map[environment.downcase] } %>
+    </div>
+  <% end %>
+</div>
+
+<% if signout_link %>
+  <div class="gem-c-layout-header__signout">
+    <a class="gem-c-layout-header__signout-link govuk-!-font-weight-bold" href="/auth/gds/sign_out">Sign out</a>
+  </div>
+<% end %>

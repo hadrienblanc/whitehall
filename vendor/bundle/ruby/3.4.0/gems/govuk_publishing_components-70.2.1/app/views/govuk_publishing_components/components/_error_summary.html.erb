@@ -1,0 +1,47 @@
+<%
+  id ||= "error-summary-#{SecureRandom.hex(4)}"
+  title ||= false
+  description ||= false
+  data_attributes ||= {}
+  items ||= []
+  if items.empty? && !title
+    raise ArgumentError, "The error_summary component needs at least one item or a title in order to render."
+  end
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.set_id(id)
+  component_helper.add_class("gem-c-error-summary govuk-error-summary")
+  component_helper.add_data_attribute({ module: "govuk-error-summary" })
+%>
+
+<%= tag.div(**component_helper.all_attributes) do %>
+  <%= tag.div(
+    role: "alert",
+  ) do %>
+    <% if title %>
+      <h2 class="govuk-error-summary__title">
+        <%= title %>
+      </h2>
+    <% end %>
+    <div class="govuk-error-summary__body">
+      <% if description %>
+        <p><%= description %></p>
+      <% end %>
+      <% if items.present? %>
+        <ul class="govuk-list govuk-error-summary__list">
+          <% items.each_with_index do |item, index| %>
+            <li class="gem-c-error-summary__list-item">
+              <% if item[:href] %>
+                <%= link_to item[:text], item[:href], target: item[:target], data: item[:data_attributes] %>
+              <% else %>
+                <%= tag.span data: item[:data_attributes] do %>
+                  <%= item[:text] %>
+                <% end %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

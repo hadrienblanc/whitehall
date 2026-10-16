@@ -1,0 +1,220 @@
+# GOV.UK Config
+
+Adds the basics of a GOV.UK application:
+
+- Puma as a web server
+- Error reporting with Sentry
+- Prometheus monitoring for EKS
+- Statsd client for reporting stats (deprecated; use Prometheus instead)
+- Rails logging
+- Content Security Policy generation for frontend apps
+- Sets the time zone to London
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem "govuk_app_config"
+```
+
+Then run `bundle`.
+
+
+## Puma
+
+### Configuration
+
+Create a file `config/puma.rb` in the app, containing:
+
+```rb
+require "govuk_app_config/govuk_puma"
+GovukPuma.configure_rails(self)
+```
+
+### Usage
+
+To run an app locally with Puma, run: `bundle exec puma` or `bundle exec rails s`.
+
+
+## Error reporting
+
+### Automatic error reporting
+
+If you include `govuk_app_config` in your `Gemfile` and set the following environment variables, your application will automatically log errors to Sentry.
+
+- `SENTRY_DSN` - the [Data Source Name (DSN)][dsn] for Sentry
+- `SENTRY_CURRENT_ENV` - the `environment` tag to pass to Sentry, for example `production`
+- `GOVUK_STATSD_PREFIX` - a Statsd prefix like `govuk.apps.application-name.hostname` (deprecated; statsd functionality will be removed in a future release)
+
+[dsn]: https://docs.sentry.io/quickstart/#about-the-dsn
+
+### Manual error reporting
+
+Report something to Sentry manually:
+
+```rb
+GovukError.notify("Something went terribly wrong")
+```
+
+```rb
+GovukError.notify(ArgumentError.new("Or some exception object"))
+```
+
+Extra parameters are:
+
+```rb
+GovukError.notify(
+  "Oops",
+  extra: { offending_content_id: "123" }, # Additional context for this event. Must be a hash. Children can be any native JSON type.
+  level: "debug", # debug, info, warning, error, fatal
+  tags: { key: "value" } # Tags to index with this event. Must be a mapping of strings.
+)
+```
+
+### Error configuration
+
+You can exclude certain errors from being reported using this:
+
+```ruby
+GovukError.configure do |config|
+  config.excluded_exceptions << "RetryableError"
+end
+```
+
+And you can exclude errors from being reported if they occur during the nightly data sync (on integration and staging):
+
+```ruby
+GovukError.configure do |config|
+  config.data_sync_excluded_exceptions << "PG::Error"
+end
+```
+
+Finally, you can pass your own callback to evaluate whether or not to capture the exception.
+Note that if an exception is on the `excluded_exceptions` list, or on the `data_sync_excluded_exceptions`
+and occurs at the time of a data sync, then it will be excluded even if the custom
+`before_send` callback doesn't return `nil`.
+
+```ruby
+GovukError.configure do |config|
+  config.before_send = ->(event, hint) {
+    hint[:exception].is_a?(ErrorWeWantToIgnore) ? nil : event
+  }
+end
+```
+
+`GovukError.configure` has the same options as the Sentry client, Raven. See [the Raven docs for all configuration options](https://docs.sentry.io/clients/ruby/config).
+
+## Open Telemetry
+
+To enable Open Telemetry instrumentation for Rails set the ENABLE_OPEN_TELEMETRY="true" environment variable.
+
+## Prometheus monitoring
+
+Create a `/config/initializers/prometheus.rb` file in the app and add the following
+
+```ruby
+require "govuk_app_config/govuk_prometheus_exporter"
+GovukPrometheusExporter.configure
+```
+
+## Statsd (deprecated)
+
+⚠️ Statsd support is deprecated and will be removed in a future major release of govuk_app_config.
+
+Use `GovukStatsd` to send stats to graphite. It has the same interface as [the Ruby Statsd client](https://github.com/reinh/statsd).
+
+Examples:
+
+```ruby
+GovukStatsd.increment "garets"
+GovukStatsd.timing "glork", 320
+GovukStatsd.gauge "bork", 100
+
+# Use {#time} to time the execution of a block
+GovukStatsd.time("account.activate") { @account.activate! }
+```
+
+## Health Checks
+
+This Gem provides a common "health check" framework for apps. See [the health
+check docs](docs/healthchecks.md) for more information on how to use it.
+
+
+## Rails logging
+
+To enable production-like logging, an env variable `GOVUK_RAILS_JSON_LOGGING`
+is set in the `govuk-helm-charts` and then checked in `railtie.rb`. This will
+allow JSON format logs and `Govuk-Request-Id` to be visible.
+
+For development logs, in order to see the production style logs, developers should
+set `GOVUK_RAILS_JSON_LOGGING`in `govuk-docker` -> `docker-compose` files.
+
+### Logger configuration
+
+To include additional custom fields in your Rails logs, you can declare them
+within a `GovukJsonLogging.configure` block in a `config/initializers/` file.
+
+Example of adding a key/value to log entries based on a request header:
+
+```ruby
+GovukJsonLogging.configure do
+  add_custom_fields do |fields|
+    fields[:govuk_custom_field] = request.headers["GOVUK-Custom-Header"]
+  end
+end
+```
+
+## Content Security Policy generation
+
+For frontend apps, configuration can be added to generate and serve a
+content security policy header. The policy is report only when the
+environment variable `GOVUK_CSP_REPORT_ONLY` is set, and enforced otherwise.
+
+To enable this feature, create a file at `config/initializers/csp.rb` in the
+app with the following content:
+
+```ruby
+GovukContentSecurityPolicy.configure
+```
+
+## Internationalisation
+
+Some frontend apps support languages that are not yet defined in the [rails-i18n](https://github.com/svenfuchs/rails-i18n) gem that is bundled with Rails.
+
+The missing translations can be added to a locale file in the folder [`lib/govuk_app_config/govuk_i8n`](lib/govuk_app_config/govuk_i18n/). The [`:en`](https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/en-GB.yml) locale file in the Rails repo  can be used as a guide to key names, as it contains all the keys that Rails uses for a fully internationalised language. It is not necessary to add all of these keys to your file.
+
+See [example.yml](lib/govuk_app_config/govuk_i18n/docs/example.yml) for the most likely structure.
+
+The translations can be enabled in the frontend application by creating a file at `config/initializers/govuk_i18n.rb` with the following content:
+
+```ruby
+GovukI18n.configure
+```
+
+## Environment
+
+This gem provides a canonical way of querying the current environment as a string:
+
+```ruby
+GovukEnvironment.current
+# returns "production", "staging", "integration" or "development"
+```
+
+## Time zone
+
+This gem sets `config.time_zone` to `"London"` by default.
+
+If you require a different time zone, you can set it with `config.govuk_time_zone`:
+
+```ruby
+config.govuk_time_zone = "UTC"
+```
+
+Note that we've introduced a new config field (`govuk_time_zone`) here, because
+it's otherwise not possible to distinguish between an app using UTC as the
+default and an app explicitly asking for UTC.
+
+## License
+
+[MIT License](LICENCE)

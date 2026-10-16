@@ -1,0 +1,265 @@
+---
+ro:
+  common:
+    hide: Ascundeți
+    show: Afișați
+    toggle_less: Afișați mai puține
+    toggle_less_html:
+    toggle_more: "%{show} încă %{number}"
+    toggle_more_html:
+    translations: Traduceri
+  components:
+    accordion:
+      hide_all: Ascundeți toate secțiunile
+      show_all: Afișați toate secțiunile
+      this_section_visually_hidden: " această secțiune"
+    app_promo_banner:
+      aria_label:
+      body_text:
+      close:
+      title_text:
+      view:
+    article_schema:
+      scoped_search_description: Căutați în %{title}
+    attachment:
+      opendocument_html: Acest fișier este în format <a href='https://www.gov.uk/guidance/using-open-document-formats-odf-in-your-organisation' target=%{target} class='govuk-link'>OpenDocument</a>
+      order_a_copy: Comandați o copie
+      page:
+        few:
+        one: 1 pagină
+        other: "%{count} pagini"
+      preview_aria_label:
+      preview_link:
+      reference: 'Referință: %{reference}'
+      request_format_cta: Solicitați un format accesibil
+      request_format_details_html: Dacă folosiți tehnologia de asistență (precum un cititor de ecran) și aveți nevoie de o versiune a acestui document într-un format mai accesibil, trimiteți un e-mail la <a href='mailto:%{alternative_format_contact_email}' target='_blank' class='govuk-link'>%{alternative_format_contact_email}</a>. Spuneți-ne de ce format aveți nevoie. Ne va ajuta dacă ne spuneți ce tehnologie de asistență folosiți.
+      request_format_text: Este posibil ca acest fișier să nu fie potrivit pentru utilizatorii de tehnologie de asistență.
+    back_link:
+      back: Înapoi
+    back_to_top_link:
+      contents: Conținut
+    character_count:
+      body: Puteți introduce cel mult %{number} %{type}
+      type:
+        characters: caractere
+        words: cuvinte
+    chart:
+      accessibility_heading:
+      accessibility_html:
+      accessibility_link:
+      source:
+      table_dropdown:
+    checkboxes:
+      or: sau
+    contents_list:
+      contents: Conținut
+    contextual_sidebar:
+      pretitle: Face parte și din
+    cookie_banner:
+      buttons:
+        accept_cookies: Acceptați cookie-urile suplimentare
+        reject_cookies: Respingeți cookie-urile suplimentare
+        view_cookies:
+      confirmation_message:
+        accepted:
+        html: Puteți să %{link} în orice moment.
+        link: modificați setările pentru cookie-uri
+        rejected:
+      hide:
+      text:
+      - Utilizăm unele cookie-uri esențiale pentru ca acest website să poată funcționa.
+      - Dorim să setăm cookie-uri suplimentare ca să înțelegem cum utilizați GOV.UK
+      - să ținem minte setările dvs. și să îmbunătățim serviciile guvernamentale.
+      - Folosim și cookie-uri setate de alte site-uri pentru a ne ajuta să livrăm conținut din serviciile acestora.
+      title: Cookie-uri pe GOV.UK
+    devolved_nations:
+      applies_to:
+      aria_label:
+      england:
+        end:
+        middle:
+        start:
+      northern_ireland:
+        end:
+        middle:
+        start:
+      scotland:
+        end:
+        middle:
+        start:
+      type:
+        consultation:
+        detailed_guide:
+        guidance:
+        publication:
+      wales:
+        end:
+        middle:
+        start:
+    feedback:
+      close: Închideți
+      dont_include_personal_info: Nu includeți informații cu caracter personal sau financiar, precum numărul de asigurări sociale sau datele cardului de credit.
+      email_address: Adresa de e-mail
+      help_us_improve_govuk: Ajutați-ne să îmbunătățim GOV.UK
+      is_not_useful: această pagină nu este utilă
+      is_this_page_useful: Este această pagină utilă?
+      is_useful: această pagină este utilă
+      maybe: Poate
+      more_about_visit:
+      'no': Nu
+      send: Trimiteți
+      send_me_survey: Trimiteți-mi chestionarul
+      something_wrong: Raportați o problemă cu această pagină
+      thank_you_for_feedback: Mulțumim pentru feedback
+      what_doing: Ce făceați?
+      what_wrong: Ce eroare a survenit?
+      'yes': Da
+    figure:
+      image_credit: 'Autor imagine: %{credit}'
+    intervention:
+      accessible_link_text_suffix:
+    layout_footer:
+      copyright_html: <a class="govuk-footer__link govuk-footer__copyright-logo" href="http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/">© Crown copyright</a>
+      licence_html: Tot conținutul este disponibil conform <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, cu excepția cazurilor în care s-a specificat altceva
+      navigation_links:
+      support_links: Linkuri către asistență
+    layout_for_public:
+      account_layout:
+        feedback:
+          banners:
+            phase_banner_html:
+        navigation:
+          menu_bar:
+            account:
+              link_text:
+            manage:
+              link_text:
+    layout_header:
+      menu: Meniu
+      top_level: Nivel superior
+    layout_super_navigation_header:
+      logo_link_title:
+      menu_toggle_label:
+        hide:
+        show:
+      navigation_link:
+        href:
+        label:
+      navigation_links_columns:
+      navigation_menu_heading:
+      navigation_search_subheading:
+      search_text:
+    metadata:
+      and:
+      from: De la
+      history: Istoric
+      last_updated: Ultima actualizare
+      part_of: Parte din
+      published: Publicat
+      see_all_updates: Vedeți toate actualizările
+      hidden_heading:
+      hide_all_updates: ascundeți toate actualizările
+      show_all_updates: afișați toate actualizările
+    modal_dialogue:
+      close_modal: Închideți dialogul modal
+    notice:
+      banner_title:
+    option_select:
+      found_multiple:
+      found_single:
+      selected:
+    organisation_schema:
+      all_content_search_description: Găsiți tot conținutul de la %{organisation}
+    pagination:
+      next:
+      pagination: Paginație
+      previous:
+    password_input:
+      button:
+      button_aria_hide_label:
+      button_aria_label:
+      button_hide:
+      error_text_prefix:
+      label:
+      password_hidden_announcement:
+      password_shown_announcement:
+    print_link:
+      text: Imprimați această pagină
+    published_dates:
+      hidden_heading:
+      hide_all_updates: ascundeți toate actualizările
+      last_updated: Ultima actualizare %{date}
+      published: Publicat pe %{date}
+      see_all_updates: vedeți toate actualizările
+      show_all_updates: afișați toate actualizările
+    radio:
+      or: sau
+    related_footer_navigation:
+      collections: Colecții
+      policies: Politici
+      statistical_data_sets: Seturi de date statistice
+      topical_events: Evenimente pe anumite teme
+    related_navigation:
+      collections: Colecție
+      external_links: Altundeva pe web
+      policies: Politică
+      publishers: Publicat de
+      related_contacts: Alte persoane de contact
+      related_content: Conținut asociat
+      related_external_links: Altundeva pe web
+      related_guides: Îndrumări detaliate
+      statistical_data_sets: Set de date statistice
+      toggle_visually_hidden_text:
+        collections:
+        related_external_links:
+        related_guides:
+        related_items:
+        statistical_data_sets:
+        topical_events:
+        topics:
+        world_locations:
+      topical_events: Eveniment pe o temă dată
+      topics: Explorați tema
+      ukraine:
+        links:
+        title:
+      world_locations: Locații pe glob
+    search_box:
+      input_title: Căutați
+      label: Căutați pe GOV.UK
+      search_button: Căutați
+    service_navigation:
+      menu_toggle:
+    share_links:
+      all_opens_in_new_tab:
+      opens_in_new_tab:
+    single_page_notification_button:
+      subscribe_text:
+      unsubscribe_text:
+    skip_link:
+      text: Accesați direct conținutul principal
+    step_by_step_nav:
+      hide: Ascundeți
+      hide_all: Ascundeți toți pașii
+      show: Afișați
+      show_all: Afișați toți pașii
+    step_by_step_nav_related:
+      part_of: Parte din
+      this_page_is:
+      this_page_is_part_of_html:
+    subscription_links:
+      email_signup_link_text: Primiți e-mailuri
+      feed_link_label: Copiați și inserați această adresă URL în cititorul de fluxuri
+      feed_link_text: Abonați-vă la flux
+      subscriptions: Abonamente
+    success_alert:
+      success: Succes
+    summary_list:
+      delete: Ștergeți
+      edit: Modificați
+    table:
+      filter_count:
+      filter_label:
+      filter_message:
+    tabs:
+      contents: Conținut

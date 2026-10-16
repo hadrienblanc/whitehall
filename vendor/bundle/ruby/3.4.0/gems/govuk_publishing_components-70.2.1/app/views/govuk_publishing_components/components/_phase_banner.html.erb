@@ -1,0 +1,38 @@
+<%
+phase ||= nil
+message ||= nil
+inverse ||= false
+disable_ga4 ||= false
+
+if message.blank?
+  if phase == "beta"
+    message = raw("This part of GOV.UK is being rebuilt &ndash; <a class=\"govuk-link\" href=\"/help/beta\">find out what beta means</a>")
+  elsif phase == "alpha"
+    message = raw("This part of GOV.UK is being built &ndash; <a class=\"govuk-link\" href=\"/service-manual/agile-delivery/how-the-alpha-phase-works\">find out what alpha means</a>")
+  end
+end
+
+component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+component_helper.add_class("gem-c-phase-banner govuk-phase-banner")
+component_helper.add_class("gem-c-phase-banner--inverse") if inverse
+
+unless disable_ga4
+  component_helper.add_data_attribute({
+    ga4_phase_banner: phase,
+    module: "ga4-link-tracker",
+    ga4_set_indexes: "",
+    ga4_link: {
+      event_name: "navigation",
+      type: "phase banner",
+      section: Nokogiri::HTML(message).text,
+    }.to_json,
+  })
+end
+%>
+
+<%= tag.div(**component_helper.all_attributes) do %>
+  <%= tag.p class: "govuk-phase-banner__content" do %>
+    <%= tag.strong phase.titleize, class: "govuk-tag govuk-phase-banner__content__tag" if phase %>
+    <%= tag.span message, class: "govuk-phase-banner__text" if message %>
+  <% end %>
+<% end %>

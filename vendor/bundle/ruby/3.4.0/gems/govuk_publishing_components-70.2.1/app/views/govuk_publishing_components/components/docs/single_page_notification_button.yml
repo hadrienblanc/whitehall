@@ -1,0 +1,67 @@
+name: Single page notification button
+description: A button that subscribes the user to email notifications to a page
+body: |
+  By default, the component displays with the "Get emails about this page" state.
+  If the `js-enhancement` flag is present, the component uses JavaScript to check if the user has already subscribed to email notifications on the current page. If yes, the state of the component updates accordingly.
+
+  The component does not render without the `base_path` parameter. The `base_path` is necessary for [checking if an email subscription is active on page load](https://github.com/alphagov/account-api/blob/main/docs/api.md#get-apipersonalisationcheck-email-subscriptiontopic_slug) and the creation/deletion of an email notification subscription.
+
+  When the button is clicked, the `base_path` is submitted to an endpoint which proceeds to check the user's authentication status and whether they are already subscribed to the page or not. Depending on these factors, they will be routed accordingly.
+accessibility_criteria: |
+  - The bell icon must be presentational and ignored by screen readers.
+uses_component_wrapper_helper: true
+examples:
+  default:
+    description: By default this component prompts the user to subscribe to email notifications to this page.
+    data:
+      base_path: '/current-page-path'
+  already_subscribed:
+    description: If the user has already subscribed to email notifications about the current page, display the "Stop getting emails about this page" state.
+    data:
+      base_path: '/current-page-path'
+      already_subscribed: true
+  with_ga4_tracking:
+    description: To add GA4 tracking, pass a `ga4_data_attributes` object with the necessary properties to the component. For example:-
+    data:
+      base_path: '/current-page-path'
+      ga4_data_attributes:
+        module: "ga4-link-tracker"
+        ga4_link:
+          event_name: "navigation"
+          type: "subscribe"
+          index:
+            index_link: 1
+          index_total: 1
+          section: "Top"
+  with_js_enhancement:
+    description: |
+      If the `js-enhancement` flag is present, the component uses JavaScript to check if the user has already subscribed to email notifications on the current page and accordingly updates its tracking attribute and (optionally) button text.
+
+    data:
+      base_path: '/current-page-path'
+      js_enhancement: true
+  with_button_location:
+    description: |
+      When there is more than one button on a page, we should specify their location so that Analytics can differentiate between them.
+
+      The location should have one of two values: `top` or `bottom`.
+
+      When this parameter is passed, its value is reflected in the `data-action` attribute (i.e "Unsubscribe-button-top"). When the flag is not present, `data-action` defaults to "Subscribe-button" or "Unsubscribe-button", depending on the state of the button.
+    data:
+      base_path: '/current-page-path'
+      js_enhancement: true
+      button_location: 'top'
+  with_custom_button_text:
+    description: The component accepts custom button text, provided that both subscribe and unsubscribe text is provided.
+    data:
+      base_path: '/current-page-path'
+      js_enhancement: true
+      button_text:
+        subscribe: 'Subscribe to this page of things'
+        unsubscribe: 'Unsubscribe to this page of things'
+  with_skip_account:
+    description: If the skip_account flag is present, the button action will be set to the non GOV.UK One Login signup endpoint of /email-signup.
+    data:
+      base_path: '/current-page-path'
+      js_enhancement: true
+      skip_account: true

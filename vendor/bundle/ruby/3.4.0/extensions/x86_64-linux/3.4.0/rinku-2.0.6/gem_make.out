@@ -1,0 +1,22 @@
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/rinku-2.0.6/ext/rinku
+/home/hadrienblanc/.local/ruby/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/rinku-2.0.6/ext/rinku
+make DESTDIR\= sitearchdir\=./.gem.20261016-388482-7in9o6 sitelibdir\=./.gem.20261016-388482-7in9o6 clean
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/rinku-2.0.6/ext/rinku
+make DESTDIR\= sitearchdir\=./.gem.20261016-388482-7in9o6 sitelibdir\=./.gem.20261016-388482-7in9o6
+compiling autolink.c
+compiling buffer.c
+compiling rinku.c
+compiling rinku_rb.c
+compiling utf8.c
+linking shared-object rinku.so
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/rinku-2.0.6/ext/rinku
+make DESTDIR\= sitearchdir\=./.gem.20261016-388482-7in9o6 sitelibdir\=./.gem.20261016-388482-7in9o6 install
+/usr/bin/install -c -m 0755 rinku.so ./.gem.20261016-388482-7in9o6
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/rinku-2.0.6/ext/rinku
+make DESTDIR\= sitearchdir\=./.gem.20261016-388482-7in9o6 sitelibdir\=./.gem.20261016-388482-7in9o6 clean

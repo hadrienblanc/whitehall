@@ -1,0 +1,85 @@
+name: Big number
+description: A big number, with a label if needed, for visualising quantitative values such as the number of government departments or historical prime ministers.
+body: |
+  This component requires at least a non-falsey `number` attribute value passed to it, otherwise it will not render.
+accessibility_criteria: |
+  This component must:
+
+  - communicate number value and label (if present) in a single dictation when read with a screen reader
+  - convey the meaning of the number shown
+shared_accessibility_criteria:
+- link
+uses_component_wrapper_helper: true
+examples:
+  default:
+    data:
+      number: 119
+  with_labels:
+    description: Labels for numbers are given inline styling but stacked using pseudo elements with display block. This is to bypass an issue with NVDA where block level elements are dictated separately.
+    data:
+      number: 119
+      label: Open consultations
+  with_plus_symbol:
+    description: "In some cases, we want to communicate more than just the flat numeric value eg: `400+`. This is why we allow values to be passed as flat strings."
+    data:
+      number: "400+"
+      label: Other agencies and public bodies
+  with_percentage_symbol:
+    description: "In some cases, we want to communicate more than just the flat numeric value eg: `90%`. This is why we allow values to be passed as flat strings."
+    data:
+      number: "90%"
+      label: is a large percentage of something
+  with_negative_symbol:
+    description: "In some cases, we want to communicate more than just the flat numeric value eg: `-20`. This is why we allow values to be passed as flat strings."
+    data:
+      number: "-20"
+      label: is a negative number
+  with_unit_symbol:
+    description: "In some cases, we want to communicate more than just the flat numeric value eg: `1M`. This is why we allow values to be passed as flat strings."
+    data:
+      number: "1M"
+      label: is a shorter way of saying one million
+  with_link:
+    data:
+      number: 23
+      label: Ministerial departments
+      href: "/government/organisations#ministerial_departments"
+  with_link_but_no_label:
+    description: Numbers that are links are underlined unless a label is provided, in which case the label is given the underline.
+    data:
+      number: 23
+      href: "/government/organisations#ministerial_departments"
+  with_nested_data_attributes:
+    description: |
+      If a `href` attribute is present, `nested_data_attributes` will apply to the `a` containing the number value (see below). If a `href` is not present, it will apply to the `span` containing the number value.
+
+      For parent level data attributes, use `data_attributes` which comes from this component having the component wrapper.
+
+      Note that the component does not include built in tracking. If this is required consider using the [GA4 link tracker](https://github.com/alphagov/govuk_publishing_components/blob/main/docs/analytics-ga4/trackers/ga4-link-tracker.md).
+    data:
+      number: 23
+      label: Ministerial departments
+      href: "/government/organisations#ministerial_departments"
+      nested_data_attributes:
+        department-count: true
+  with_nested_data_attributes_but_no_link:
+    description: |
+      If a `href` is not present, the data attributes will be applied to the `span` containing the big number. For parent level data attributes, use `data_attributes` which comes from this component having the component wrapper.
+    data:
+      number: 23
+      label: Ministerial departments
+      nested_data_attributes:
+        department-count: true
+  with_aria_attributes:
+    description: Aria attributes are applied to the whole component instance
+    data:
+      number: 23
+      label: Ministerial departments
+      aria:
+        hidden: true
+  with_bottom_margin:
+    description: The component accepts a number for margin bottom from `0` to `9` (`0px` to `60px`) using the [GOV.UK Frontend spacing scale](https://design-system.service.gov.uk/styles/spacing/#the-responsive-spacing-scale). The default big number margin bottom is `15px` (`govuk-spacing(3)`).
+    data:
+      number: 119
+      label: Open consultations
+      margin_bottom: 9

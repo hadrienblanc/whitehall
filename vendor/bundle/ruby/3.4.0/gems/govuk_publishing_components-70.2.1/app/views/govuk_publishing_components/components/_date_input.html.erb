@@ -1,0 +1,90 @@
+<%
+  id ||= "input-#{SecureRandom.hex(4)}"
+  name ||= nil
+  items ||= [
+    { :name => "day", :width => 2 },
+    { :name => "month", :width => 2 },
+    { :name => "year", :width => 4 },
+  ]
+  autocomplete_date_of_birth ||= nil
+  legend_text ||= nil
+  legend_heading_level ||= nil
+  legend_size ||= nil
+  hint ||= nil
+  error_message ||= nil
+  error_items ||= []
+  error_id ||= nil
+  has_error ||= error_message || error_items.any? || error_id
+
+  css_classes = %w(gem-c-date-input govuk-date-input)
+  form_group_css_classes = %w(govuk-form-group)
+  form_group_css_classes << "govuk-form-group--error" if has_error
+
+  hint_id = "hint-#{SecureRandom.hex(4)}"
+  error_id = error_id || "error-#{SecureRandom.hex(4)}"
+
+  aria_described_by = nil
+  if hint || has_error
+    aria_described_by = []
+    aria_described_by << hint_id if hint && !has_error
+    aria_described_by << error_id if has_error
+    aria_described_by = aria_described_by.join(" ")
+  end
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class(form_group_css_classes.join(" "))
+%>
+
+<%= tag.div(**component_helper.all_attributes) do %>
+  <% fieldset_content = capture do %>
+    <% if hint %>
+      <%= render "govuk_publishing_components/components/hint", {
+        id: hint_id,
+        text: hint,
+        margin_bottom: 2,
+      } %>
+    <% end %>
+
+    <% if error_message || error_items.any? %>
+      <%= render "govuk_publishing_components/components/error_message", {
+        id:  error_id,
+        text: error_message,
+        items: error_items,
+      } %>
+    <% end %>
+
+    <%= tag.div class: css_classes, id: id do %>
+      <% items.each do |item| %>
+        <%= tag.div class: "govuk-date-input__item" do %>
+          <%= render "govuk_publishing_components/components/input", {
+            label: {
+              text: item[:label] || item[:name].capitalize,
+            },
+            grouped: true,
+            has_error: has_error,
+            name: name ? (name + "[" + item[:name] + "]") : item[:name],
+            value: item[:value],
+            width: item[:width],
+            id: item[:id],
+            describedby: aria_described_by,
+            type: "number",
+            data: item[:data],
+            autocomplete: autocomplete_date_of_birth ? "bday-#{item[:name]}" : nil,
+          } %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% if legend_text %>
+    <%= render "govuk_publishing_components/components/fieldset", {
+      legend_text: legend_text,
+      heading_level: legend_heading_level,
+      heading_size: legend_size,
+      text: fieldset_content,
+      role: "group",
+    } %>
+  <% else %>
+    <%= fieldset_content %>
+  <% end %>
+<% end %>

@@ -1,0 +1,123 @@
+require 'base64'
+
+module Playwright
+  class DisposableStub
+    def initialize(&block)
+      @block = block
+    end
+
+    def dispose
+      return unless @block
+
+      block = @block
+      @block = nil
+      block.call
+    rescue TargetClosedError
+      nil
+    end
+  end
+
+  module Utils
+    module ClearCookiesParameters
+      private def clear_cookies_params(domain:, name:, path:)
+        params = {}
+        { domain: domain, name: name, path: path }.each do |key, value|
+          case value
+          when String
+            params[key] = value
+          when Regexp
+            regex = JavaScript::Regex.new(value)
+            params["#{key}RegexSource".to_sym] = regex.source
+            params["#{key}RegexFlags".to_sym] = regex.flag
+          end
+        end
+        params
+      end
+    end
+
+    module PrepareHttpCredentials
+      private def prepare_http_credentials(credentials)
+        return nil unless credentials
+
+        list = credentials.is_a?(Array) ? credentials : [credentials]
+        list.empty? ? nil : list
+      end
+    end
+
+    module PrepareBrowserContextOptions
+      include PrepareHttpCredentials
+
+      # @see https://github.com/microsoft/playwright/blob/5a2cfdbd47ed3c3deff77bb73e5fac34241f649d/src/client/browserContext.ts#L265
+      private def prepare_browser_context_options(params)
+        params[:httpCredentials] = prepare_http_credentials(params[:httpCredentials])
+        if params[:noViewport] == 0
+          params.delete(:noViewport)
+          params[:noDefaultViewport] = true
+        end
+        if params[:extraHTTPHeaders]
+          params[:extraHTTPHeaders] = ::Playwright::HttpHeaders.new(params[:extraHTTPHeaders]).as_serialized
+        end
+        if params[:record_video_dir]
+          params[:recordVideo] = {
+            dir: params.delete(:record_video_dir)
+          }
+          if params[:record_video_size]
+            params[:recordVideo][:size] = params.delete(:record_video_size)
+          end
+          unless params[:record_video_fps].nil?
+            params[:recordVideo][:fps] = params.delete(:record_video_fps)
+          end
+          if params[:record_video_show_actions]
+            params[:recordVideo][:showActions] = params.delete(:record_video_show_actions)
+          end
+        end
+        if params[:storageState].is_a?(String)
+          params[:storageState] = JSON.parse(File.read(params[:storageState]))
+        end
+
+        %i[colorScheme reducedMotion forcedColors contrast].each do |key|
+          if params[key] == 'null'
+            params[key] = 'no-override'
+          end
+        end
+
+        if params[:acceptDownloads] || params[:acceptDownloads] == false
+          params[:acceptDownloads] = params[:acceptDownloads] ? 'accept' : 'deny'
+        end
+
+        if params[:clientCertificates].is_a?(Array)
+          params[:clientCertificates] = params[:clientCertificates].filter_map do |item|
+            out_record = {
+              origin: item[:origin],
+              passphrase: item[:passphrase],
+            }
+
+            { pfxPath: 'pfx', certPath: 'cert', keyPath: 'key' }.each do |key, out_key|
+              if (filepath = item[key])
+                out_record[out_key] = Base64.encode64(File.read(filepath)) rescue ''
+              elsif (value = item[out_key.to_sym])
+                out_record[out_key] = value
+              end
+            end
+
+            out_record.compact!
+            next nil if out_record.empty?
+
+            out_record
+          end
+        end
+
+        params
+      end
+    end
+
+    module Errors
+      module TargetClosedErrorMethods
+        # @param err [Exception]
+        private def target_closed_error?(err)
+          err.is_a?(TargetClosedError)
+        end
+      end
+    end
+  end
+end

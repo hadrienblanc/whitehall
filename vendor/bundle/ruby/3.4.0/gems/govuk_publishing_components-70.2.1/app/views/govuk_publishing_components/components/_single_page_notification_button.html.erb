@@ -1,0 +1,36 @@
+<%
+  local_assigns[:margin_bottom] ||= 3
+  js_enhancement ||= false
+
+  spnb_helper = GovukPublishingComponents::Presenters::SinglePageNotificationButtonHelper.new(local_assigns)
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-single-page-notification-button")
+  component_helper.add_class("js-personalisation-enhancement") if local_assigns[:js_enhancement]
+  component_helper.add_data_attribute({ module: "single-page-notification-button" }) if js_enhancement
+  component_helper.add_data_attribute({ button_location: spnb_helper.button_location })
+  component_helper.add_data_attribute({ button_text_subscribe: spnb_helper.button_text_subscribe })
+  component_helper.add_data_attribute({ button_text_unsubscribe: spnb_helper.button_text_unsubscribe })
+
+  ga4_data_attributes = ga4_data_attributes ||= nil
+  ga4_link_data_attributes = ga4_data_attributes[:ga4_link] if ga4_data_attributes
+  ga4_link_data_attributes[:url] = spnb_helper.form_action if ga4_link_data_attributes
+
+  component_helper.add_class("govuk-!-display-none-print")
+  component_helper.add_data_attribute({ module: ga4_data_attributes[:module] }) if ga4_data_attributes
+%>
+<%= tag.div(**component_helper.all_attributes) do %>
+  <%= tag.form action: spnb_helper.form_action, method: "POST" do %>
+    <input type="hidden" name="base_path" value="<%= spnb_helper.base_path %>">
+    <% if spnb_helper.skip_the_gov_uk_account? %>
+      <input type="hidden" name="<%= spnb_helper.skip_account_param %>" value="true">
+      <input type="hidden" name="link" value="<%= spnb_helper.base_path %>">
+    <% end %>
+    <%= render "govuk_publishing_components/components/button", {
+      text: spnb_helper.button_text,
+      notification_button: true,
+      data_attributes: {
+        ga4_link: ga4_link_data_attributes,
+      },
+    } %>
+  <% end %>
+<% end if spnb_helper.base_path %>

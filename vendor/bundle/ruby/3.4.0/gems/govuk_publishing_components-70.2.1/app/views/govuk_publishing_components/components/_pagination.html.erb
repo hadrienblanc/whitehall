@@ -1,0 +1,20 @@
+<%
+  disable_ga4 ||= false
+  items ||= nil
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-pagination govuk-pagination")
+  component_helper.add_class("govuk-pagination--block") if items.blank?
+  component_helper.add_aria_attribute({ label: t("components.pagination.pagination") })
+  component_helper.add_data_attribute({ module: "ga4-link-tracker" }) unless disable_ga4
+
+  pagination_helper = GovukPublishingComponents::Presenters::PaginationHelper.new(local_assigns)
+
+  if pagination_helper.has_links?
+%>
+  <%= tag.nav(**component_helper.all_attributes) do %>
+    <%= pagination_helper.prev_link %>
+    <%= pagination_helper.page_links %>
+    <%= pagination_helper.next_link %>
+  <% end %>
+<% end %>

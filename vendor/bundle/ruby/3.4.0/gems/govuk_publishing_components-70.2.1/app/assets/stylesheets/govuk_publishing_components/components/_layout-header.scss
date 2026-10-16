@@ -1,0 +1,102 @@
+@import "govuk/components/header";
+
+.gem-c-layout-header.gem-c-layout-header--no-bottom-border,
+.gem-c-layout-header.gem-c-layout-header--no-bottom-border .govuk-header__container {
+  border-bottom: 0;
+}
+
+.gem-c-layout-header--search-left {
+  .gem-c-header__content {
+    position: relative;
+    width: 100%;
+    padding-bottom: govuk-spacing(2);
+  }
+
+  @include govuk-media-query($from: desktop) {
+    .gem-c-header__logo {
+      margin-top: 0;
+    }
+  }
+}
+
+.gem-c-layout-header__logo {
+  @include govuk-media-query($until: "tablet") {
+    margin-bottom: govuk-spacing(3);
+  }
+
+  &:has(.gem-c-layout-header__signout) {
+    @include govuk-media-query($from: desktop) {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .gem-c-header__logo {
+      width: 75%;
+    }
+  }
+}
+
+.gem-c-header__environment {
+  padding-top: 2px;
+  padding-bottom: 3px;
+}
+
+.gem-c-header__logo {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: govuk-spacing(2);
+}
+
+.gem-c-layout-header__signout {
+  white-space: nowrap;
+  padding-bottom: 15px;
+
+  @include govuk-media-query($from: desktop) {
+    padding: 22px 0 0;
+  }
+}
+
+.gem-c-layout-header__signout-link {
+  @include govuk-link-style-inverse;
+
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: $govuk-link-underline-offset;
+  }
+
+  &:focus {
+    @include govuk-focused-text;
+  }
+}
+
+.gem-c-header__product-name {
+  display: none;
+
+  @include govuk-media-query($from: tablet) {
+    display: inline-block;
+  }
+}
+
+@include govuk-media-query($media-type: print) {
+  .gem-c-layout-header .govuk-header__container {
+    border-color: govuk-functional-colour(print-text);
+
+    .govuk-grid-column-two-thirds {
+      width: auto;
+      float: none;
+    }
+
+    .govuk-header__logo {
+      margin: 0;
+      padding: 0 2mm 2mm 0;
+    }
+
+    .gem-c-header__product-name {
+      color: govuk-functional-colour(print-text);
+      background: none;
+    }
+  }
+}

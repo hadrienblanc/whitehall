@@ -1,0 +1,102 @@
+[![Gem Version](https://badge.fury.io/rb/capybara-playwright-driver.svg)](https://badge.fury.io/rb/capybara-playwright-driver)
+
+# 🎭 Playwright driver for Capybara
+
+Make it easy to introduce Playwright into your Rails application.
+
+```ruby
+gem 'capybara-playwright-driver'
+```
+
+**NOTE**: If you want to use Playwright-native features (such as auto-waiting, various type of locators, ...), [consider using playwright-ruby-client directly](https://playwright-ruby-client.vercel.app/docs/article/guides/rails_integration_with_null_driver).
+
+## Examples
+
+```ruby
+require 'capybara-playwright-driver'
+
+# setup
+Capybara.register_driver(:playwright) do |app|
+  Capybara::Playwright::Driver.new(app, browser_type: :firefox, headless: false)
+end
+Capybara.default_max_wait_time = 15
+Capybara.default_driver = :playwright
+Capybara.save_path = 'tmp/capybara'
+
+# run
+Capybara.app_host = 'https://github.com'
+visit '/'
+find('button[aria-label^="Search or jump to"]').click
+search_field = find('input[aria-label="Search or jump to"]')
+search_field.fill_in(with: 'Capybara')
+
+## [REMARK] We can use Playwright-native selector and action, instead of Capybara DSL.
+# search_field.send_keys(:enter)
+page.driver.with_playwright_page do |page|
+  page.get_by_label('Search or jump to', exact: true).press('Enter')
+end
+
+all('[data-testid="results-list"] h3').each do |li|
+  #puts "#{li.all('a').first.text} by Capybara"
+  puts "#{li.with_playwright_element_handle { |handle| handle.text_content }} by Playwright"
+end
+```
+
+Refer the [documentation](https://playwright-ruby-client.vercel.app/docs/article/guides/rails_integration) for more detailed configuration.
+
+## Selenium compatibility
+
+Visible text for ordinary HTML elements follows the browser's
+[`innerText` behavior](https://html.spec.whatwg.org/multipage/dom.html#the-innertext-idl-attribute). This preserves
+meaningful blank lines, but paragraph and rich-text-editor boundaries can differ from Selenium's WebDriver text
+algorithm. When exact whitespace is not part of an assertion, use Capybara's `normalize_ws: true` option:
+
+```ruby
+expect(message).to have_text('Hello Regards', normalize_ws: true)
+```
+
+This driver delegates keyboard focus and caret behavior to Playwright rather than overriding it with JavaScript. One
+observable difference is that when a `contenteditable` element loses focus between `send_keys` calls, Playwright may
+place the caret differently from Selenium when the element is focused again. Specify the caret movement explicitly
+when the test depends on it:
+
+```ruby
+editor.send_keys(:end, '@') # The page moves focus to an autocomplete control.
+editor.send_keys(:end, 'alice')
+```
+
+For text inputs and textareas, `fill_in` uses Playwright's typing behavior for every character regardless of the value
+length. Playwright sends `keydown`, `keypress`/`input`, and `keyup` for characters on a US keyboard, but sends only
+`input` for other characters, including Japanese text. This follows
+[Playwright's documented keyboard behavior](https://playwright.dev/docs/api/class-keyboard#keyboard-type). Typing very
+large values is slower than Playwright's native `fill`, which does not send per-character keyboard events. When input
+speed matters more than those events, consider using `fill` directly:
+
+```ruby
+page.driver.with_playwright_page { |playwright_page| playwright_page.get_by_label('Body').fill(large_value) }
+```
+
+## Development
+
+Prepare to run tests:
+
+```bash
+bundle install
+export PLAYWRIGHT_CLI_VERSION=$(bundle exec ruby -e 'require "playwright"; puts Playwright::COMPATIBLE_PLAYWRIGHT_VERSION.strip')
+npm install playwright@${PLAYWRIGHT_CLI_VERSION}
+./node_modules/.bin/playwright install --with-deps
+```
+
+Now, run tests: note that they are run in a virtual framebuffer (Xvfb).
+
+```bash
+PLAYWRIGHT_CLI_EXECUTABLE_PATH=./node_modules/.bin/playwright xvfb-run bundle exec rspec
+```
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Code of Conduct
+
+Everyone interacting in the Capybara::Playwright project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/YusukeIwaki/capybara-playwright-driver/blob/main/CODE_OF_CONDUCT.md).

@@ -1,0 +1,135 @@
+name: Public layout
+description: A layout to be used by public-facing applications
+body: |
+  Because it is an entire HTML document, this component can only be [previewed on a separate page](/public).
+
+capture_full_width_screenshot: true
+display_preview: false
+display_html: true
+accessibility_criteria: |
+  The layout template must:
+
+    * have a `lang` attribute
+    * contain a [skip link](/component-guide/skip_link)
+    * have a sensible page `<title>`
+    * contain a `<header>` element
+examples:
+  default:
+    data:
+      title: 'Example layout'
+      block: |
+        <h1>Page content goes here</h1>
+  omit_header:
+    description: This allows the header to be omitted which is currently used when rendering CSV previews from Whitehall
+    data:
+      omit_header: true
+  omit_feedback:
+    description: This allows the feedback form to be omitted
+    data:
+      omit_feedback_form: true
+  homepage:
+    description: This variant is used only on the homepage. It adds extra spacing to the logo to align it with other content on the page that also includes additional spacing
+    data:
+      homepage: true
+  omit_footer_navigation:
+    description: This allows the footer navigation to be omitted
+    data:
+      omit_footer_navigation: true
+  navigation:
+    description: Passes the navigation through to the [header component](/component-guide/layout_header/).
+    data:
+      navigation_items:
+      - text: Navigation item 1
+        href: "item-1"
+        active: true
+      - text: Navigation item 2
+        href: "item-2"
+      - text: Hidden on desktop
+        href: "item-3"
+        show_only_in_collapsed_menu: true
+  with_global_banner:
+    description: This allows the HTML for the global banner to be added to the page within the header element. This is only the slot for the global banner - the markup for the banner needs to be passed in.
+    data:
+      global_banner: <div class="govuk-!-padding-top-5 govuk-!-padding-bottom-3">This is the global banner slot</div>
+  with_emergency_banner:
+    description: This allows the HTML for the emergency banner to be added to the page within the header element. This is only the slot for the emergency banner - the markup for the banner needs to be passed in.
+    data:
+      emergency_banner: <div class="govuk-!-padding-top-3 govuk-!-padding-bottom-3">This is the emergency banner slot</div>
+  with_phase_banner:
+    description: This allows the phase banner to be added to the page within the header.
+    data:
+      phase_banner:
+        phase: "beta"
+        message: "This is a custom test message for the public layout phase banner."
+  with_all_banners:
+    description: The phase banner, global banner and emergency banner should be usable together within the header element.
+    data:
+      phase_banner:
+          phase: "beta"
+          message: "This is the phase banner banner"
+      emergency_banner: <div class="govuk-!-padding-top-3 govuk-!-padding-bottom-3">This is the emergency banner slot</div>
+      global_banner: <div class="govuk-!-padding-top-5 govuk-!-padding-bottom-3">This is the global banner slot</div>
+  with_cross_service_header:
+    description: Passes the navigation through to the [cross service header](/component-guide/cross_service_header/).
+    data:
+      show_cross_service_header: true
+      service_name: "My Service Name"
+      one_login_navigation_items:
+        one_login_home:
+          href: "#"
+        one_login_sign_out:
+          href: "#"
+        navigation_items: []
+      service_navigation_items:
+        - text: Navigation item 1
+          href: "item-1"
+          active: true
+        - text: Navigation item 2
+          href: "item-2"
+        - text: Hidden on desktop
+          href: "item-3"
+          show_only_in_collapsed_menu: true
+  with_account_layout_enabled:
+    description: Adds account layout wrapper around the content passed in to the component
+    data:
+      show_account_layout: true
+      block: |
+        <h2 class="govuk-heading-l">This is a title</h2>
+        <p class="govuk-body">This is some body text with <a href="https://example.com">a link</a>.
+  with_current_account_navigation:
+    description: "The account layout renders with an account-specific nav to help users navigate different areas of their account. This flag is here to allow control over which option in the nav is highlighted as `current`. Valid options are currently `your-account` and `manage`."
+    data:
+      show_account_layout: true
+      account_nav_location: "manage"
+      block: |
+        <h2 class="govuk-heading-l">This is a title</h2>
+        <p class="govuk-body">This is a page under the "Manage your account" section, so we must highlight "Manage your account" in the account navigation.</p>
+  with_account_layout_but_without_account_navigation:
+    description: The account layout renders with account navigation by default, this hides it.
+    data:
+      show_account_layout: true
+      omit_account_navigation: true
+      block: |
+        <h2 class="govuk-heading-l">This is a title</h2>
+        <p class="govuk-body">This is some body text with <a href="https://example.com">a link</a>.</p>
+  with_account_layout_but_without_account_phase_banner:
+    description: The account layout renders with a phase banner by default, this hides it.
+    data:
+      show_account_layout: true
+      omit_account_phase_banner: true
+      block: |
+        <h2 class="govuk-heading-l">This is a title</h2>
+        <p class="govuk-body">This is some body text with <a href="https://example.com">a link</a>.</p>
+  with_title_lang_attribute:
+    data:
+      title: 'Example layout'
+      title_lang: 'cy'
+      block: |
+        <h1>Page content goes here</h1>
+  with_body_classes:
+    description: Allows a class to be passed to the body element. Note that this does not work in preview in this guide.
+    data:
+      title: 'Example layout'
+      body_classes: 'example__class'
+      block: |
+        <h1>Page content goes here</h1>

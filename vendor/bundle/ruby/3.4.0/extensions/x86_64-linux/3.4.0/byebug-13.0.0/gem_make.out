@@ -1,0 +1,22 @@
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/byebug-13.0.0/ext/byebug
+/home/hadrienblanc/.local/ruby/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/byebug-13.0.0/ext/byebug
+make DESTDIR\= sitearchdir\=./.gem.20261016-389377-2nanuh sitelibdir\=./.gem.20261016-389377-2nanuh clean
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/byebug-13.0.0/ext/byebug
+make DESTDIR\= sitearchdir\=./.gem.20261016-389377-2nanuh sitelibdir\=./.gem.20261016-389377-2nanuh
+compiling breakpoint.c
+compiling byebug.c
+compiling context.c
+compiling locker.c
+compiling threads.c
+linking shared-object byebug/byebug.so
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/byebug-13.0.0/ext/byebug
+make DESTDIR\= sitearchdir\=./.gem.20261016-389377-2nanuh sitelibdir\=./.gem.20261016-389377-2nanuh install
+/usr/bin/install -c -m 0755 byebug.so ./.gem.20261016-389377-2nanuh/byebug
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/byebug-13.0.0/ext/byebug
+make DESTDIR\= sitearchdir\=./.gem.20261016-389377-2nanuh sitelibdir\=./.gem.20261016-389377-2nanuh clean

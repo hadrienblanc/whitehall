@@ -1,0 +1,37 @@
+sudo: false
+cache: bundler
+language: ruby
+bundler_args: --without local_development
+script:
+  - bundle exec rake
+rvm:
+  - 2.1
+  - 2.2
+  - 2.3.0
+  - 3.0.2
+  - rbx-2
+  - jruby
+matrix:
+  allow_failures:
+    - rvm: rbx-2
+    - rvm: jruby
+  fast_finish: true
+notifications:
+  email:
+    - timo.roessner@googlemail.com
+gemfile:
+  - gemfiles/rails_3_0.gemfile
+  - gemfiles/rails_3_1.gemfile
+  - gemfiles/rails_3_2.gemfile
+  - gemfiles/rails_4_0.gemfile
+  - gemfiles/rails_6_1.gemfile
+jobs:
+  exclude:
+  - rvm: 3.0.2
+    gemfile: gemfiles/rails_3_0.gemfile
+  - rvm: 3.0.2
+    gemfile: gemfiles/rails_3_1.gemfile
+  - rvm: 3.0.2
+    gemfile: gemfiles/rails_3_2.gemfile
+  - rvm: 3.0.2
+    gemfile: gemfiles/rails_4_0.gemfile

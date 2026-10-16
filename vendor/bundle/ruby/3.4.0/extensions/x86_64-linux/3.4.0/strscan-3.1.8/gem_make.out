@@ -1,0 +1,23 @@
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/strscan-3.1.8/ext/strscan
+/home/hadrienblanc/.local/ruby/bin/ruby extconf.rb
+checking for onig_region_memsize(NULL)... no
+checking for rb_reg_onig_match() in ruby/re.h... yes
+checking for rb_deprecate_constant()... yes
+checking for rb_gc_location() in ruby.h... yes
+checking for RUBY_TYPED_EMBEDDABLE in ruby.h... yes
+creating Makefile
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/strscan-3.1.8/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20261016-389377-3voe2o sitelibdir\=./.gem.20261016-389377-3voe2o clean
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/strscan-3.1.8/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20261016-389377-3voe2o sitelibdir\=./.gem.20261016-389377-3voe2o
+compiling strscan.c
+linking shared-object strscan.so
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/strscan-3.1.8/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20261016-389377-3voe2o sitelibdir\=./.gem.20261016-389377-3voe2o install
+/usr/bin/install -c -m 0755 strscan.so ./.gem.20261016-389377-3voe2o
+
+current directory: /home/hadrienblanc/projets/secu-agents/projects/alphagov/whitehall/vendor/bundle/ruby/3.4.0/gems/strscan-3.1.8/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20261016-389377-3voe2o sitelibdir\=./.gem.20261016-389377-3voe2o clean

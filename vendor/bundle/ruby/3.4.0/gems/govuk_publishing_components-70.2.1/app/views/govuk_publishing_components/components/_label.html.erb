@@ -1,0 +1,34 @@
+<%
+  shared_helper = GovukPublishingComponents::Presenters::SharedHelper.new(local_assigns)
+
+  hint_text ||= ""
+  is_radio_label ||= false
+  bold ||= false
+  heading_size = false unless shared_helper.valid_heading_size?(heading_size)
+  is_page_heading ||= false
+  right_to_left ||= false
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-label govuk-label")
+  component_helper.add_class("govuk-label--s") if bold
+  component_helper.add_class("govuk-radios__label") if is_radio_label
+  component_helper.add_class("govuk-label--#{heading_size}") if heading_size
+  component_helper.set_dir("rtl") if right_to_left
+%>
+
+<% if is_page_heading %>
+  <%= tag.h1 text, class: "govuk-label-wrapper" do %>
+    <%= tag.label text, for: html_for, **component_helper.all_attributes %>
+  <% end %>
+<% else %>
+  <%= tag.label text, for: html_for, **component_helper.all_attributes %>
+<% end %>
+
+<% if hint_text.present? %>
+  <%= render "govuk_publishing_components/components/hint", {
+    id: hint_id,
+    text: hint_text,
+    right_to_left: right_to_left ? "rtl" : nil,
+    is_radio_label_hint: is_radio_label,
+  } %>
+<% end %>

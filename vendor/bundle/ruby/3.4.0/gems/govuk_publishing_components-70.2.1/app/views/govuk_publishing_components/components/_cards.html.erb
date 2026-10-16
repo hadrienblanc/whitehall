@@ -1,0 +1,53 @@
+<%
+  heading ||= nil
+  items ||= nil
+  sub_heading_level ||= 3
+  columns ||= false
+
+  ul_classes = %w[gem-c-cards__list]
+  ul_classes << "gem-c-cards__list--one-column" unless columns
+  ul_classes << "gem-c-cards__list--two-column-desktop" if columns == 2
+  ul_classes << "gem-c-cards__list--three-column-desktop" if columns == 3
+
+  shared_helper = GovukPublishingComponents::Presenters::SharedHelper.new(local_assigns)
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-cards")
+  component_helper.add_class("gem-c-cards--auto-layout") if columns == "auto"
+%>
+<% if items.present? %>
+  <%= tag.div(**component_helper.all_attributes) do %>
+    <% if heading %>
+        <%
+          heading_classes = %w[gem-c-cards__heading govuk-heading-m]
+          heading_classes << "gem-c-cards__heading--underline" unless columns
+        %>
+        <%= content_tag(shared_helper.get_heading_level, class: heading_classes) do %>
+        <%= heading %>
+      <% end %>
+    <% end %>
+    <%= content_tag("ul", class: ul_classes ) do %>
+      <%
+        items.each do |item|
+        link = item[:link]
+        if !link[:path].present?
+          raise ArgumentError, "The cards component requires a href for all the links"
+        end
+      %>
+        <li class="gem-c-cards__list-item">
+          <div class="gem-c-cards__list-item-wrapper">
+            <%= content_tag("h#{sub_heading_level}", class: "gem-c-cards__sub-heading govuk-heading-s") do %>
+              <%=
+                link_to link[:text], link[:path],
+                class: "govuk-link gem-c-cards__link gem-print-force-link-styles",
+                data: link[:data_attributes]
+              %>
+            <% end %>
+            <% if item[:description] %>
+              <p class="govuk-body gem-c-cards__description"><%= item[:description] %></p>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

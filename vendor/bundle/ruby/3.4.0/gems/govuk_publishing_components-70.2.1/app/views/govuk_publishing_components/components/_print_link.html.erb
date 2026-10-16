@@ -1,0 +1,28 @@
+<%
+  text ||= t("components.print_link.text")
+  href ||= nil
+  child_data_attributes ||= {}
+  require_js = href.nil?
+  local_assigns[:margin_bottom] ||= 3
+
+  ((child_data_attributes[:module] ||= "") << " " << (require_js ? "print-link" : "button")).strip!
+
+  child_classes = %w[govuk-link]
+  child_classes << "gem-c-print-link__button" if href.nil?
+  child_classes << "gem-c-print-link__link govuk-link--no-visited-state" if href.present?
+
+  component_helper = GovukPublishingComponents::Presenters::ComponentWrapperHelper.new(local_assigns)
+  component_helper.add_class("gem-c-print-link govuk-!-display-none-print")
+  component_helper.add_class("gem-c-print-link--show-without-js") unless require_js
+%>
+<%= tag.div(**component_helper.all_attributes) do %>
+  <%= render "govuk_publishing_components/components/button", {
+    text: text,
+    href: href,
+    type: "button",
+    print_button: true,
+    data_attributes: child_data_attributes,
+    rel: "alternate",
+    margin_bottom: 0,
+  } %>
+<% end %>
